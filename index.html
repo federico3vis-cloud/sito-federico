@@ -52,6 +52,13 @@
     nell'oggetto `portfolioVideos` dentro il tag <script> in fondo al file.
     Se un file video non è ancora presente, la modale mostra un messaggio
     "Video in arrivo" al posto di un player rotto.
+  - AGGIUNGERE PROGETTI AL PORTFOLIO: la sezione scorre in orizzontale come
+    un carosello (swipe su mobile, frecce su desktop) — basta copiare uno dei
+    blocchi <button class="portfolio-card"...> dentro #portfolio-scroll e
+    cambiare data-project/data-title/data-category/data-poster, l'immagine e
+    i tag. Non serve bilanciare colonne o righe: puoi aggiungerne quanti ne
+    vuoi, il carosello si allunga da solo. Aggiungi anche la voce
+    corrispondente in `portfolioVideos` per collegare il video.
   - PIÙ VIDEO PER PROGETTO: ogni voce di `portfolioVideos` è un array — basta
     aggiungere un altro oggetto `{ label: '...', type: 'local', src: '...' }`
     per far comparire un altro pulsante nella modale (vedi ARD Discount,
@@ -221,6 +228,9 @@
   .logo-fade { filter: grayscale(1) brightness(1.6); opacity: .45; transition: opacity .3s ease, filter .3s ease; }
   .logo-fade:hover { filter: grayscale(0) brightness(1); opacity: 1; }
 
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
@@ -360,83 +370,42 @@
       <div data-aos="fade-up" class="max-w-2xl">
         <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Cosa Offro</span>
         <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Servizi pensati per raccontare al meglio ogni momento.</h2>
-        <p class="mt-4 text-white/60">Dalle riprese al montaggio finale, dal matrimonio allo spot commerciale: un percorso unico, senza intermediari.</p>
+        <p class="mt-4 text-white/60">Dalle riprese al montaggio finale, senza intermediari.</p>
       </div>
 
-      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="mt-14 grid sm:grid-cols-2 gap-5">
+
+        <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
+            <i data-lucide="smartphone" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Reel &amp; Contenuti Social</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Contenuti verticali che fermano lo scroll e fanno crescere i tuoi canali.</p>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acidDeep/15 text-acidDeep">
+            <i data-lucide="megaphone" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Video Commerciali &amp; Spot</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Video pensati per vendere, non solo per essere visti.</p>
+        </div>
 
         <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
           <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
             <i data-lucide="heart" class="h-5 w-5"></i>
           </div>
           <h3 class="mt-5 font-display font-bold text-lg">Video Matrimoni</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Ogni matrimonio raccontato con uno sguardo cinematografico, dai preparativi al taglio della torta.</p>
-          <ul class="mt-4 space-y-2 text-sm text-white/60">
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Riprese multi-camera</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Drone incluso su richiesta</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Video highlights + film completo</li>
-          </ul>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Ogni matrimonio raccontato con uno sguardo cinematografico.</p>
         </div>
 
-        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acidDeep/15 text-acidDeep">
-            <i data-lucide="smartphone" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Reel &amp; Contenuti Social</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Contenuti verticali pensati per fermare lo scroll e far crescere i tuoi canali.</p>
-          <ul class="mt-4 space-y-2 text-sm text-white/60">
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Format ottimizzati per Reels &amp; TikTok</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Storytelling orientato al brand</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Consegna rapida, pronta al post</li>
-          </ul>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="160" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
-            <i data-lucide="megaphone" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Video Commerciali &amp; Spot</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Video pensati per vendere, non solo per essere visti.</p>
-          <ul class="mt-4 space-y-2 text-sm text-white/60">
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Brief e sceneggiatura</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Riprese professionali</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Montaggio orientato alla conversione</li>
-          </ul>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acidDeep/15 text-acidDeep">
-            <i data-lucide="sliders-horizontal" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Color Grading &amp; Post-produzione</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">La fase che trasforma le riprese in un'esperienza visiva coerente.</p>
-          <ul class="mt-4 space-y-2 text-sm text-white/60">
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Correzione colore professionale</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Sound design e mix audio</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Grafiche e sottotitoli</li>
-          </ul>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
-            <i data-lucide="plane" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Riprese Drone &amp; Aeree</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Inquadrature aeree che aggiungono respiro e scala a ogni produzione.</p>
-          <ul class="mt-4 space-y-2 text-sm text-white/60">
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Pilota esperto</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Riprese 4K stabilizzate</li>
-            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Integrazione con le riprese a terra</li>
-          </ul>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="160" class="card-hover group rounded-2xl border border-line bg-gradient-to-br from-acid/20 to-acidDeep/10 p-7 flex flex-col justify-between">
+        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-gradient-to-br from-acid/20 to-acidDeep/10 p-7 flex flex-col justify-between">
           <div>
             <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
               <i data-lucide="message-circle" class="h-5 w-5"></i>
             </div>
             <h3 class="mt-5 font-display font-bold text-lg">Non sai da dove iniziare?</h3>
-            <p class="mt-2 text-sm text-white/70 leading-relaxed">Raccontami il tuo progetto: ti dico onestamente cosa serve davvero.</p>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Raccontami il tuo progetto: ti dico onestamente cosa serve.</p>
           </div>
           <a href="#contatti" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:gap-3 transition-all">
             Parliamone <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
@@ -455,161 +424,179 @@
           <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Portfolio</span>
           <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Una selezione dei lavori recenti.</h2>
         </div>
-        <p class="text-sm text-white/50 max-w-xs">Ogni video nasce da un brief diverso: qui trovi un estratto, non il catalogo completo. Clicca una card per guardarlo.</p>
+        <div class="flex items-center justify-between gap-4 sm:flex-col sm:items-end">
+          <p class="text-sm text-white/50 max-w-xs">Ogni video nasce da un brief diverso: qui trovi un estratto, non il catalogo completo. Clicca una card per guardarlo.</p>
+          <div class="flex items-center gap-2 shrink-0">
+            <button type="button" id="portfolio-prev" aria-label="Progetto precedente" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-white hover:border-acid/60 disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white/70 transition-colors">
+              <i data-lucide="chevron-left" class="h-4 w-4"></i>
+            </button>
+            <button type="button" id="portfolio-next" aria-label="Progetto successivo" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-white hover:border-acid/60 disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white/70 transition-colors">
+              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
+      <div class="mt-14 relative -mx-5 sm:-mx-8">
+        <div class="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-primary to-transparent z-10"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-primary to-transparent z-10"></div>
 
-        <!-- Progetto 1 -->
-        <button type="button" data-aos="fade-up"
-          data-project="carmelo-noemi" data-title="Carmelo &amp; Noemi" data-category="Wedding Film"
-          data-poster="assets/images/portfolio-1.jpg"
-          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-0">
-          <div class="relative aspect-video overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-            <img src="assets/images/portfolio-1.jpg" alt="Fermo immagine dal video del matrimonio di Carmelo e Noemi" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
-              </span>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2">
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Video Matrimonio</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
-            </div>
-            <h3 class="mt-4 font-display font-bold text-xl">Carmelo &amp; Noemi</h3>
-            <p class="text-sm text-white/50 mt-1">Wedding Film</p>
-          </div>
-        </button>
+        <div id="portfolio-scroll" class="no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-5 sm:px-8 pb-2">
 
-        <!-- Progetto 2 -->
-        <button type="button" data-aos="fade-up" data-aos-delay="80"
-          data-project="ard-discount" data-title="ARD Discount" data-category="Campagna Reel · Retail"
-          data-poster="assets/images/portfolio-2.jpg"
-          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-12">
-          <div class="relative aspect-video overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-            <img src="assets/images/portfolio-2.jpg" alt="Fermo immagine dalla campagna reel di ARD Discount" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
-              </span>
+          <!-- Progetto 1 -->
+          <button type="button" data-aos="fade-up"
+            data-project="carmelo-noemi" data-title="Carmelo &amp; Noemi" data-category="Wedding Film"
+            data-poster="assets/images/portfolio-1.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="assets/images/portfolio-1.jpg" alt="Fermo immagine dal video del matrimonio di Carmelo e Noemi" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2">
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Social Content</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Copywriting</span>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Video Matrimonio</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
+              </div>
+              <h3 class="mt-4 font-display font-bold text-xl">Carmelo &amp; Noemi</h3>
+              <p class="text-sm text-white/50 mt-1">Wedding Film</p>
             </div>
-            <h3 class="mt-4 font-display font-bold text-xl">ARD Discount</h3>
-            <p class="text-sm text-white/50 mt-1">Campagna Reel · Retail</p>
-          </div>
-        </button>
+          </button>
 
-        <!-- Progetto 3 -->
-        <button type="button" data-aos="fade-up"
-          data-project="brandificio" data-title="Brandificio" data-category="Video Commerciale"
-          data-poster="assets/images/portfolio-3.jpg"
-          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden">
-          <div class="relative aspect-video overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-            <img src="assets/images/portfolio-3.jpg" alt="Fermo immagine dallo spot commerciale di Brandificio" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
-              </span>
+          <!-- Progetto 2 -->
+          <button type="button" data-aos="fade-up"
+            data-project="ard-discount" data-title="ARD Discount" data-category="Campagna Reel · Retail"
+            data-poster="assets/images/portfolio-2.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="assets/images/portfolio-2.jpg" alt="Fermo immagine dalla campagna reel di ARD Discount" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2">
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Spot</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Social Content</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Copywriting</span>
+              </div>
+              <h3 class="mt-4 font-display font-bold text-xl">ARD Discount</h3>
+              <p class="text-sm text-white/50 mt-1">Campagna Reel · Retail</p>
             </div>
-            <h3 class="mt-4 font-display font-bold text-xl">Brandificio</h3>
-            <p class="text-sm text-white/50 mt-1">Video Commerciale</p>
-          </div>
-        </button>
+          </button>
 
-        <!-- Progetto 4 -->
-        <button type="button" data-aos="fade-up" data-aos-delay="80"
-          data-project="despar" data-title="DESPAR" data-category="Contenuti Social · GDO"
-          data-poster="assets/images/portfolio-4.jpg"
-          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-12">
-          <div class="relative aspect-video overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-            <img src="assets/images/portfolio-4.jpg" alt="Fermo immagine dai contenuti social di DESPAR" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
-              </span>
+          <!-- Progetto 3 -->
+          <button type="button" data-aos="fade-up"
+            data-project="brandificio" data-title="Brandificio" data-category="Video Commerciale"
+            data-poster="assets/images/portfolio-3.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="assets/images/portfolio-3.jpg" alt="Fermo immagine dallo spot commerciale di Brandificio" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2">
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Montaggio</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Sound Design</span>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Spot</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
+              </div>
+              <h3 class="mt-4 font-display font-bold text-xl">Brandificio</h3>
+              <p class="text-sm text-white/50 mt-1">Video Commerciale</p>
             </div>
-            <h3 class="mt-4 font-display font-bold text-xl">DESPAR</h3>
-            <p class="text-sm text-white/50 mt-1">Contenuti Social · GDO</p>
-          </div>
-        </button>
+          </button>
 
-        <!-- Progetto 5 -->
-        <button type="button" data-aos="fade-up"
-          data-project="make-pizza" data-title="Makè Pizza" data-category="Reel · Ristorazione"
-          data-poster="assets/images/portfolio-5.jpg"
-          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden">
-          <div class="relative aspect-video overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-            <img src="assets/images/portfolio-5.jpg" alt="Fermo immagine dai contenuti social di Makè Pizza" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
-              </span>
+          <!-- Progetto 4 -->
+          <button type="button" data-aos="fade-up"
+            data-project="despar" data-title="DESPAR" data-category="Contenuti Social · GDO"
+            data-poster="assets/images/portfolio-4.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="assets/images/portfolio-4.jpg" alt="Fermo immagine dai contenuti social di DESPAR" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2">
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Food Content</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Montaggio</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Sound Design</span>
+              </div>
+              <h3 class="mt-4 font-display font-bold text-xl">DESPAR</h3>
+              <p class="text-sm text-white/50 mt-1">Contenuti Social · GDO</p>
             </div>
-            <h3 class="mt-4 font-display font-bold text-xl">Makè Pizza</h3>
-            <p class="text-sm text-white/50 mt-1">Reel · Ristorazione</p>
-          </div>
-        </button>
+          </button>
 
-        <!-- Progetto 6 -->
-        <button type="button" data-aos="fade-up" data-aos-delay="80"
-          data-project="evento-miami" data-title="Evento Miami" data-category="Video Evento"
-          data-poster="assets/images/portfolio-6.jpg"
-          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-12">
-          <div class="relative aspect-video overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-            <img src="assets/images/portfolio-6.jpg" alt="Fermo immagine dalle riprese dell'evento a Miami" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
-              </span>
+          <!-- Progetto 5 -->
+          <button type="button" data-aos="fade-up"
+            data-project="make-pizza" data-title="Makè Pizza" data-category="Reel · Ristorazione"
+            data-poster="assets/images/portfolio-5.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="assets/images/portfolio-5.jpg" alt="Fermo immagine dai contenuti social di Makè Pizza" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2">
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Video Evento</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Multi-camera</span>
-              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Food Content</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
+              </div>
+              <h3 class="mt-4 font-display font-bold text-xl">Makè Pizza</h3>
+              <p class="text-sm text-white/50 mt-1">Reel · Ristorazione</p>
             </div>
-            <h3 class="mt-4 font-display font-bold text-xl">Evento Miami</h3>
-            <p class="text-sm text-white/50 mt-1">Video Evento</p>
-          </div>
-        </button>
+          </button>
 
+          <!-- Progetto 6 -->
+          <button type="button" data-aos="fade-up"
+            data-project="evento-miami" data-title="Evento Miami" data-category="Video Evento"
+            data-poster="assets/images/portfolio-6.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="assets/images/portfolio-6.jpg" alt="Fermo immagine dalle riprese dell'evento a Miami" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <div class="flex flex-wrap gap-2">
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Video Evento</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Multi-camera</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
+              </div>
+              <h3 class="mt-4 font-display font-bold text-xl">Evento Miami</h3>
+              <p class="text-sm text-white/50 mt-1">Video Evento</p>
+            </div>
+          </button>
+
+          <!-- Spaziatore finale: lascia respiro dopo l'ultima card -->
+          <div class="shrink-0 w-px sm:w-2" aria-hidden="true"></div>
+
+        </div>
       </div>
     </div>
   </section>
@@ -795,6 +782,29 @@
     };
     document.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // ===== Carosello portfolio (scorrimento orizzontale) =====
+    const portfolioScroll = document.getElementById('portfolio-scroll');
+    const portfolioPrev = document.getElementById('portfolio-prev');
+    const portfolioNext = document.getElementById('portfolio-next');
+
+    function updatePortfolioArrows() {
+      const maxScroll = portfolioScroll.scrollWidth - portfolioScroll.clientWidth - 1;
+      portfolioPrev.disabled = portfolioScroll.scrollLeft <= 0;
+      portfolioNext.disabled = portfolioScroll.scrollLeft >= maxScroll;
+    }
+
+    function scrollPortfolioBy(direction) {
+      const card = portfolioScroll.querySelector('.portfolio-card');
+      const step = card ? card.offsetWidth + 24 : 320; // larghezza card + gap
+      portfolioScroll.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+
+    portfolioPrev.addEventListener('click', () => scrollPortfolioBy(-1));
+    portfolioNext.addEventListener('click', () => scrollPortfolioBy(1));
+    portfolioScroll.addEventListener('scroll', updatePortfolioArrows, { passive: true });
+    window.addEventListener('resize', updatePortfolioArrows);
+    updatePortfolioArrows();
 
     // ===== Lightbox video portfolio =====
     // Ogni progetto può avere uno o più video. type 'local' = file in assets/videos/,
