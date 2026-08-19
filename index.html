@@ -7,11 +7,16 @@
   /
   ├── index.html                  <- questo file, va nella root del repo
   ├── assets/
+  │   ├── fonts/
+  │   │   ├── benzin-semibold.ttf      <- font A PAGAMENTO per uso commerciale (Supremat)
+  │   │   └── NimbusSanL-Reg.otf       <- font LIBERO/GPL (URW) — nessuna licenza da comprare
   │   ├── images/
   │   │   ├── portfolio-1.jpg     <- copertina progetto 1 (consigliato 1600x900, 16:9)
   │   │   ├── portfolio-2.jpg
   │   │   ├── portfolio-3.jpg
   │   │   ├── portfolio-4.jpg
+  │   │   ├── portfolio-5.jpg
+  │   │   ├── portfolio-6.jpg
   │   │   └── avatar.jpg          <- foto profilo per la sezione "Chi Sono"
   │   ├── videos/
   │   │   ├── carmelo-noemi-highlights.mp4
@@ -20,7 +25,10 @@
   │   │   ├── brandificio-spot-1.mp4
   │   │   ├── brandificio-spot-2.mp4
   │   │   ├── despar-reel-1.mp4
-  │   │   └── despar-reel-2.mp4
+  │   │   ├── despar-reel-2.mp4
+  │   │   ├── make-pizza-reel-1.mp4
+  │   │   ├── make-pizza-reel-2.mp4
+  │   │   └── evento-miami.mp4
   │   └── logos/
   │       ├── logo.svg            <- il TUO logo per la navbar (sostituisce il badge "FG")
   │       ├── ard-discount.svg    <- loghi aziende, preferibilmente SVG monocromatico bianco
@@ -31,6 +39,11 @@
   └── favicon.ico                 <- opzionale, favicon del sito
 
   NOTE:
+  - FONT: i titoli usano Benzin Semibold (a pagamento, serve licenza per uso
+    commerciale — vedi il commento nel tag <style>), il resto del testo usa
+    Nimbus Sans L Regular, che è libero/GPL: nessun acquisto necessario.
+    Finché i file non sono in assets/fonts/, il sito mostra automaticamente
+    Plus Jakarta Sans / Inter senza rotture di layout.
   - Tutte le immagini mancanti in assets/ non rompono il layout: sono previsti
     dei placeholder testuali/gradiente che scompaiono automaticamente appena
     carichi i file reali con lo stesso nome (vedi attributi onerror).
@@ -42,10 +55,10 @@
   - PIÙ VIDEO PER PROGETTO: ogni voce di `portfolioVideos` è un array — basta
     aggiungere un altro oggetto `{ label: '...', type: 'local', src: '...' }`
     per far comparire un altro pulsante nella modale (vedi ARD Discount,
-    Brandificio e DESPAR, già impostati con due video ciascuno come esempio).
-    Il matrimonio ha un solo video (Highlights): per i video molto lunghi
-    (es. il film completo di un matrimonio, spesso 20-40 minuti) evita il
-    self-hosting e usa YouTube "non in elenco" con `type: 'youtube'`.
+    Brandificio, DESPAR e Makè Pizza, già impostati con due video ciascuno
+    come esempio). Il matrimonio e l'evento hanno un solo video: per i video
+    molto lunghi (es. il film completo di un matrimonio, spesso 20-40 minuti)
+    evita il self-hosting e usa YouTube "non in elenco" con `type: 'youtube'`.
   - SPECIFICHE VIDEO CONSIGLIATE (self-hosted su GitHub Pages):
       risoluzione 1280×720 (720p) · durata 30-90 secondi (reel/highlights)
       H.264 + AAC · bitrate video ~2,5 Mbps → un file da 60-90s pesa
@@ -75,7 +88,7 @@
 <!-- favicon (facoltativo, sostituisci con il tuo file) -->
 <link rel="icon" href="data:,">
 
-<!-- Google Fonts -->
+<!-- Google Fonts: usati come fallback finché non carichi Benzin / Nimbus Sans L -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -95,8 +108,8 @@
           acidDeep:  '#7ed321',
         },
         fontFamily: {
-          display: ['"Plus Jakarta Sans"', 'sans-serif'],
-          sans: ['"Inter"', 'sans-serif'],
+          display: ['Benzin', '"Plus Jakarta Sans"', 'sans-serif'],
+          sans: ['"Nimbus Sans L"', '"Inter"', 'sans-serif'],
         },
         boxShadow: {
           glow: '0 0 60px -12px rgba(198,255,46,0.45)',
@@ -116,10 +129,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+  /* Benzin (titoli): font A PAGAMENTO di Supremat — su myfonts.com. Per un sito
+     commerciale serve una licenza webfont; il file caricato è .ttf, quindi la
+     dimensione non è ottimizzata come un .woff2, ma funziona comunque bene.
+     Nimbus Sans L (resto del testo): versione LIBERA/GPL di URW — nessun
+     acquisto necessario, si può usare così com'è.
+     Finché i file non sono in assets/fonts/, font-display: swap fa ricadere
+     il sito su Plus Jakarta Sans / Inter in modo automatico, senza rompere
+     il layout. */
+  @font-face {
+    font-family: 'Benzin';
+    src: url('assets/fonts/benzin-semibold.ttf') format('truetype');
+    font-weight: 500 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Nimbus Sans L';
+    src: url('assets/fonts/NimbusSanL-Reg.otf') format('opentype');
+    font-weight: 400 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
   html { scroll-behavior: smooth; }
   body { background-color: #0a0b0d; }
 
-  ::selection { background: #7c5cff; color: #fff; }
+  ::selection { background: #c6ff2e; color: #0a0b0d; }
 
   ::-webkit-scrollbar { width: 10px; }
   ::-webkit-scrollbar-track { background: #0a0b0d; }
@@ -127,7 +163,7 @@
   ::-webkit-scrollbar-thumb:hover { background: #3a3f52; }
 
   a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-    outline: 2px solid #7c5cff;
+    outline: 2px solid #c6ff2e;
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -524,6 +560,56 @@
           </div>
         </button>
 
+        <!-- Progetto 5 -->
+        <button type="button" data-aos="fade-up"
+          data-project="make-pizza" data-title="Makè Pizza" data-category="Reel · Ristorazione"
+          data-poster="assets/images/portfolio-5.jpg"
+          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden">
+          <div class="relative aspect-video overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+            <img src="assets/images/portfolio-5.jpg" alt="Fermo immagine dai contenuti social di Makè Pizza" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Food Content</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
+            </div>
+            <h3 class="mt-4 font-display font-bold text-xl">Makè Pizza</h3>
+            <p class="text-sm text-white/50 mt-1">Reel · Ristorazione</p>
+          </div>
+        </button>
+
+        <!-- Progetto 6 -->
+        <button type="button" data-aos="fade-up" data-aos-delay="80"
+          data-project="evento-miami" data-title="Evento Miami" data-category="Video Evento"
+          data-poster="assets/images/portfolio-6.jpg"
+          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-12">
+          <div class="relative aspect-video overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+            <img src="assets/images/portfolio-6.jpg" alt="Fermo immagine dalle riprese dell'evento a Miami" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Video Evento</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Multi-camera</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
+            </div>
+            <h3 class="mt-4 font-display font-bold text-xl">Evento Miami</h3>
+            <p class="text-sm text-white/50 mt-1">Video Evento</p>
+          </div>
+        </button>
+
       </div>
     </div>
   </section>
@@ -728,6 +814,13 @@
       'despar': [
         { label: 'Reel 1', type: 'local', src: 'assets/videos/despar-reel-1.mp4' },
         { label: 'Reel 2', type: 'local', src: 'assets/videos/despar-reel-2.mp4' },
+      ],
+      'make-pizza': [
+        { label: 'Reel 1', type: 'local', src: 'assets/videos/make-pizza-reel-1.mp4' },
+        { label: 'Reel 2', type: 'local', src: 'assets/videos/make-pizza-reel-2.mp4' },
+      ],
+      'evento-miami': [
+        { label: 'Highlights Evento', type: 'local', src: 'assets/videos/evento-miami.mp4' },
       ],
     };
 
