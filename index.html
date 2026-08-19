@@ -31,7 +31,7 @@
   │   │   └── evento-miami.mp4
   │   └── logos/
   │       ├── logo.png            <- il TUO logo per la navbar (sostituisce il badge "FG"), sfondo trasparente
-  │       ├── ard-discount.png    <- loghi aziende, sfondo trasparente, qualsiasi colore va bene (il CSS li forza a bianco)
+  │       ├── ard-discount.png    <- loghi aziende, sfondo trasparente — i colori restano quelli originali
   │       ├── brandificio.png
   │       ├── despar.png
   │       ├── studio-meridian.png
@@ -225,7 +225,7 @@
   .portfolio-card:focus-visible .portfolio-play { opacity: 1; transform: scale(1); }
   .portfolio-card { appearance: none; -webkit-appearance: none; font: inherit; cursor: pointer; }
 
-  .logo-fade { filter: brightness(0) invert(1); opacity: .35; transition: opacity .3s ease; }
+  .logo-fade { opacity: .6; transition: opacity .3s ease; }
   .logo-fade:hover { opacity: 1; }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -276,9 +276,10 @@
 
     <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center">
       <h1 data-aos="fade-up" class="font-display font-extrabold tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
-        La tua
-        <span class="text-gradient">storia</span>
-        non raccontarla e&nbsp;basta. Mettila sotto gli occhi di tutti.
+        La tua <span class="text-gradient">storia</span> non<br>
+        raccontarla e&nbsp;basta.<br>
+        Mettila sotto<br>
+        gli occhi di tutti.
       </h1>
 
       <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
