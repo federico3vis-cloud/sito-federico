@@ -30,12 +30,12 @@
   │   │   ├── make-pizza-reel-2.mp4
   │   │   └── evento-miami.mp4
   │   └── logos/
-  │       ├── logo.svg            <- il TUO logo per la navbar (sostituisce il badge "FG")
-  │       ├── ard-discount.svg    <- loghi aziende, qualsiasi colore va bene (il CSS li forza a bianco)
-  │       ├── brandificio.svg
-  │       ├── despar.svg
-  │       ├── studio-meridian.svg
-  │       └── nova-retail.svg
+  │       ├── logo.png            <- il TUO logo per la navbar (sostituisce il badge "FG"), sfondo trasparente
+  │       ├── ard-discount.png    <- loghi aziende, sfondo trasparente, qualsiasi colore va bene (il CSS li forza a bianco)
+  │       ├── brandificio.png
+  │       ├── despar.png
+  │       ├── studio-meridian.png
+  │       └── nova-retail.png
   └── favicon.ico                 <- opzionale, favicon del sito
 
   NOTE:
@@ -250,8 +250,8 @@
       <nav class="mt-3 glass border border-white/10 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
         <a href="#top" aria-label="Federico Gennaro — torna in cima" class="flex items-center gap-2 group">
           <span class="relative flex h-9 w-9 items-center justify-center">
-            <!-- Sostituisci con il tuo logo: assets/logos/logo.svg (o .png) -->
-            <img src="assets/logos/logo.svg" alt="Logo Federico Gennaro" class="h-9 w-9 object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+            <!-- Sostituisci con il tuo logo: assets/logos/logo.png (sfondo trasparente) -->
+            <img src="assets/logos/logo.png" alt="Logo Federico Gennaro" class="h-9 w-9 object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
             <span class="hidden h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
           </span>
         </a>
@@ -274,12 +274,18 @@
     <div class="absolute -top-24 left-1/2 -translate-x-1/2 h-[32rem] w-[32rem] rounded-full bg-acid/25 blur-[120px] blob pointer-events-none"></div>
     <div class="absolute top-40 right-0 h-96 w-96 rounded-full bg-acidDeep/20 blur-[110px] blob blob-delay pointer-events-none"></div>
 
-   <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center">
+    <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center">
       <h1 data-aos="fade-up" class="font-display font-extrabold tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
         La tua
         <span class="text-gradient">storia</span>
-        non raccontarla e basta. Mettila sotto gli occhi di tutti.
+        non raccontarla e&nbsp;basta. Mettila sotto gli occhi di tutti.
       </h1>
+
+      <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+        Sono Federico Gennaro: videomaker e video editor con base a Modica. Produco reel,
+        video matrimoni e contenuti commerciali pensati per fermare lo scroll e restare
+        impressi — dalle riprese al montaggio finale.
+      </p>
 
       <div data-aos="fade-up" data-aos-delay="240" class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#portfolio" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-7 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 transition-opacity">
@@ -320,7 +326,7 @@
       <div data-aos="fade-right" class="lg:col-span-5 relative">
         <div class="relative aspect-[4/5] rounded-3xl bg-gradient-to-br from-acid/25 via-card to-acidDeep/15 border border-white/10 overflow-hidden">
           <img src="assets/images/avatar.jpg" alt="Ritratto di Federico Gennaro" class="absolute inset-0 h-full w-full object-cover" loading="lazy" onerror="this.style.opacity='0'">
-          <div class="absolute inset-0 flex items-center justify-center text-white/25 text-sm"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-white/25 text-sm">Foto profilo</div>
         </div>
         <div class="absolute -bottom-6 -right-4 sm:-right-8 glass border border-white/10 rounded-2xl px-5 py-4 shadow-glow">
           <p class="font-display font-extrabold text-2xl text-white">8+</p>
@@ -430,11 +436,11 @@
           </div>
         </div>
       </div>
- 
+
       <div class="mt-14 relative -mx-5 sm:-mx-8">
         <div class="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-primary to-transparent z-10"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-primary to-transparent z-10"></div>
- 
+
         <div id="portfolio-scroll" class="no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-5 sm:px-8 pb-2">
 
           <!-- Progetto 1 -->
@@ -638,18 +644,18 @@
 
       <div class="flex w-max marquee-track">
         <div class="flex items-center gap-16 pr-16">
-          <div class="logo-fade flex items-center"><img src="assets/logos/ard-discount.svg" alt="ARD Discount" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">ARD Discount</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/brandificio.svg" alt="Brandificio" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Brandificio</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/despar.svg" alt="DESPAR" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">DESPAR</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/studio-meridian.svg" alt="Studio Meridian" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Studio Meridian</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/nova-retail.svg" alt="Nova Retail" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Nova Retail</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/ard-discount.png" alt="ARD Discount" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">ARD Discount</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/brandificio.png" alt="Brandificio" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Brandificio</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/despar.png" alt="DESPAR" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">DESPAR</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/studio-meridian.png" alt="Studio Meridian" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Studio Meridian</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/nova-retail.png" alt="Nova Retail" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Nova Retail</span></div>
         </div>
         <div class="flex items-center gap-16 pr-16" aria-hidden="true">
-          <div class="logo-fade flex items-center"><img src="assets/logos/ard-discount.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">ARD Discount</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/brandificio.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Brandificio</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/despar.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">DESPAR</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/studio-meridian.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Studio Meridian</span></div>
-          <div class="logo-fade flex items-center"><img src="assets/logos/nova-retail.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Nova Retail</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/ard-discount.png" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">ARD Discount</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/brandificio.png" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Brandificio</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/despar.png" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">DESPAR</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/studio-meridian.png" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Studio Meridian</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/nova-retail.png" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Nova Retail</span></div>
         </div>
       </div>
     </div>
