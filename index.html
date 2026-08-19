@@ -31,7 +31,7 @@
   │   │   └── evento-miami.mp4
   │   └── logos/
   │       ├── logo.svg            <- il TUO logo per la navbar (sostituisce il badge "FG")
-  │       ├── ard-discount.svg    <- loghi aziende, preferibilmente SVG monocromatico bianco
+  │       ├── ard-discount.svg    <- loghi aziende, qualsiasi colore va bene (il CSS li forza a bianco)
   │       ├── brandificio.svg
   │       ├── despar.svg
   │       ├── studio-meridian.svg
@@ -225,8 +225,8 @@
   .portfolio-card:focus-visible .portfolio-play { opacity: 1; transform: scale(1); }
   .portfolio-card { appearance: none; -webkit-appearance: none; font: inherit; cursor: pointer; }
 
-  .logo-fade { filter: grayscale(1) brightness(1.6); opacity: .45; transition: opacity .3s ease, filter .3s ease; }
-  .logo-fade:hover { filter: grayscale(0) brightness(1); opacity: 1; }
+  .logo-fade { filter: brightness(0) invert(1); opacity: .35; transition: opacity .3s ease; }
+  .logo-fade:hover { opacity: 1; }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
