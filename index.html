@@ -1,56 +1,843 @@
+<!--
+  ============================================================================
+  FEDERICO GENNARO — Portfolio / Landing Page
+  ============================================================================
+  STRUTTURA CARTELLE CONSIGLIATA PER IL REPOSITORY GITHUB PAGES:
+
+  /
+  ├── index.html                  <- questo file, va nella root del repo
+  ├── assets/
+  │   ├── images/
+  │   │   ├── portfolio-1.jpg     <- copertina progetto 1 (consigliato 1600x900, 16:9)
+  │   │   ├── portfolio-2.jpg
+  │   │   ├── portfolio-3.jpg
+  │   │   ├── portfolio-4.jpg
+  │   │   └── avatar.jpg          <- foto profilo per la sezione "Chi Sono"
+  │   ├── videos/
+  │   │   ├── carmelo-noemi-highlights.mp4
+  │   │   ├── ard-discount-reel-1.mp4
+  │   │   ├── ard-discount-reel-2.mp4
+  │   │   ├── brandificio-spot-1.mp4
+  │   │   ├── brandificio-spot-2.mp4
+  │   │   ├── despar-reel-1.mp4
+  │   │   └── despar-reel-2.mp4
+  │   └── logos/
+  │       ├── logo.svg            <- il TUO logo per la navbar (sostituisce il badge "FG")
+  │       ├── ard-discount.svg    <- loghi aziende, preferibilmente SVG monocromatico bianco
+  │       ├── brandificio.svg
+  │       ├── despar.svg
+  │       ├── studio-meridian.svg
+  │       └── nova-retail.svg
+  └── favicon.ico                 <- opzionale, favicon del sito
+
+  NOTE:
+  - Tutte le immagini mancanti in assets/ non rompono il layout: sono previsti
+    dei placeholder testuali/gradiente che scompaiono automaticamente appena
+    carichi i file reali con lo stesso nome (vedi attributi onerror).
+  - VIDEO PORTFOLIO: cliccando una card del portfolio si apre una finestra
+    modale (lightbox) con il player. I percorsi dei video si modificano
+    nell'oggetto `portfolioVideos` dentro il tag <script> in fondo al file.
+    Se un file video non è ancora presente, la modale mostra un messaggio
+    "Video in arrivo" al posto di un player rotto.
+  - PIÙ VIDEO PER PROGETTO: ogni voce di `portfolioVideos` è un array — basta
+    aggiungere un altro oggetto `{ label: '...', type: 'local', src: '...' }`
+    per far comparire un altro pulsante nella modale (vedi ARD Discount,
+    Brandificio e DESPAR, già impostati con due video ciascuno come esempio).
+    Il matrimonio ha un solo video (Highlights): per i video molto lunghi
+    (es. il film completo di un matrimonio, spesso 20-40 minuti) evita il
+    self-hosting e usa YouTube "non in elenco" con `type: 'youtube'`.
+  - SPECIFICHE VIDEO CONSIGLIATE (self-hosted su GitHub Pages):
+      risoluzione 1280×720 (720p) · durata 30-90 secondi (reel/highlights)
+      H.264 + AAC · bitrate video ~2,5 Mbps → un file da 60-90s pesa
+      circa 15-30 MB. Comando ffmpeg di esempio:
+        ffmpeg -i input.mov -vf scale=1280:-2 -c:v libx264 -crf 23 \
+          -preset slow -c:a aac -b:a 128k -movflags +faststart output.mp4
+  - Per pubblicare: Settings → Pages → Deploy from branch → main / (root).
+  - Il form contatti usa FormSubmit (nessun backend necessario). La prima
+    email inviata richiede una conferma one-time da parte tua sulla casella
+    info@federicogennaro.it.
+  ============================================================================
+-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sito in Manutenzione</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container {
-            text-align: center;
-            max-width: 500px;
-            background: #1e293b;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            border: 1px solid #334155;
-        }
-        .icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-        p {
-            font-size: 16px;
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Federico Gennaro — Videomaker & Video Editor</title>
+<meta name="description" content="Federico Gennaro — riprese, montaggio e color grading per reel, video matrimoni e contenuti commerciali. Con sede a Modica, lavoro con brand in tutta Italia.">
+<meta name="theme-color" content="#0a0b0d">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Federico Gennaro — Videomaker & Video Editor">
+<meta property="og:description" content="Riprese, montaggio e color grading per reel, video matrimoni e contenuti commerciali, curati nei dettagli.">
+<meta property="og:type" content="website">
+
+<!-- favicon (facoltativo, sostituisci con il tuo file) -->
+<link rel="icon" href="data:,">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary:   '#0a0b0d',
+          secondary: '#0f1117',
+          card:      '#161922',
+          line:      '#262936',
+          acid:      '#c6ff2e',
+          acidDeep:  '#7ed321',
+        },
+        fontFamily: {
+          display: ['"Plus Jakarta Sans"', 'sans-serif'],
+          sans: ['"Inter"', 'sans-serif'],
+        },
+        boxShadow: {
+          glow: '0 0 60px -12px rgba(198,255,46,0.45)',
+        },
+      },
+    },
+  };
+</script>
+
+<!-- AOS (Animate On Scroll) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+<!-- Font Awesome (solo per icone brand: Instagram, WhatsApp) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  html { scroll-behavior: smooth; }
+  body { background-color: #0a0b0d; }
+
+  ::selection { background: #7c5cff; color: #fff; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0b0d; }
+  ::-webkit-scrollbar-thumb { background: #262936; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3f52; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #7c5cff;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  .glass { background: rgba(10,11,13,0.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #ffffff 0%, #e4ff9e 30%, #c6ff2e 55%, #7ed321 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-x 7s ease infinite;
+  }
+
+  @keyframes gradient-x { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+  @keyframes float-blob {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50%     { transform: translate(24px,-28px) scale(1.06); }
+  }
+  .blob { animation: float-blob 13s ease-in-out infinite; }
+  .blob-delay { animation-delay: -6s; }
+
+  @keyframes wa-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(198,255,46,0.55); }
+    70%  { box-shadow: 0 0 0 16px rgba(198,255,46,0); }
+    100% { box-shadow: 0 0 0 0 rgba(198,255,46,0); }
+  }
+  .wa-pulse { animation: wa-pulse 2.6s infinite; }
+
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .marquee-track { animation: marquee 32s linear infinite; }
+  .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+
+  .card-hover { transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .4s ease; }
+  .card-hover:hover { transform: translateY(-6px); border-color: rgba(124,92,255,0.5); }
+
+  .portfolio-img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .portfolio-card:hover .portfolio-img { transform: scale(1.06); }
+  .portfolio-play { transition: opacity .3s ease, transform .35s cubic-bezier(.22,1,.36,1); }
+  .portfolio-card:hover .portfolio-play,
+  .portfolio-card:focus-visible .portfolio-play { opacity: 1; transform: scale(1); }
+  .portfolio-card { appearance: none; -webkit-appearance: none; font: inherit; cursor: pointer; }
+
+  .logo-fade { filter: grayscale(1) brightness(1.6); opacity: .45; transition: opacity .3s ease, filter .3s ease; }
+  .logo-fade:hover { filter: grayscale(0) brightness(1); opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
 </head>
-<body>
-    <div class="container">
-        <div class="icon">🎥</div>
-        <h1>Rendering in corso</h1>
-        <p>Sto applicando gli ultimi ritocchi, regolando l'audio ed esportando il nuovo sito. Manca davvero poco.</p>
+
+<body id="top" class="bg-primary text-white font-sans antialiased selection:bg-acid">
+
+  <!-- ================= NAVBAR ================= -->
+  <header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <nav class="mt-3 glass border border-white/10 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
+        <a href="#top" aria-label="Federico Gennaro — torna in cima" class="flex items-center gap-2 group">
+          <span class="relative flex h-9 w-9 items-center justify-center">
+            <!-- Sostituisci con il tuo logo: assets/logos/logo.svg (o .png) -->
+            <img src="assets/logos/logo.svg" alt="Logo Federico Gennaro" class="h-9 w-9 object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+            <span class="hidden h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
+          </span>
+        </a>
+
+        <div class="flex items-center gap-3">
+          <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram di Federico Gennaro" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-white hover:border-acid/60 transition-colors">
+            <i class="fa-brands fa-instagram text-base"></i>
+          </a>
+          <a href="#contatti" class="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-acid to-acidDeep px-4 sm:px-5 py-2.5 text-sm font-semibold text-primary shadow-glow hover:opacity-90 transition-opacity">
+            Parliamo
+          </a>
+        </div>
+      </nav>
     </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="relative pt-40 pb-28 sm:pt-48 sm:pb-36 overflow-hidden scroll-mt-24">
+    <div class="absolute inset-0 bg-grid pointer-events-none"></div>
+    <div class="absolute -top-24 left-1/2 -translate-x-1/2 h-[32rem] w-[32rem] rounded-full bg-acid/25 blur-[120px] blob pointer-events-none"></div>
+    <div class="absolute top-40 right-0 h-96 w-96 rounded-full bg-acidDeep/20 blur-[110px] blob blob-delay pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center">
+      <h1 data-aos="fade-up" class="font-display font-extrabold tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
+        Video che
+        <span class="text-gradient">catturano</span>
+        l'attenzione, dal primo secondo all'ultimo taglio.
+      </h1>
+
+      <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+        Sono Federico Gennaro: videomaker e video editor con base a Modica. Produco reel,
+        video matrimoni e contenuti commerciali pensati per fermare lo scroll e restare
+        impressi — dalle riprese al montaggio finale.
+      </p>
+
+      <div data-aos="fade-up" data-aos-delay="240" class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#portfolio" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-7 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 transition-opacity">
+          Vedi i Lavori
+          <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+        </a>
+        <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20un%20progetto" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-7 py-3.5 font-semibold text-white/90 hover:border-acid/60 hover:text-acid transition-colors">
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          Scrivimi su WhatsApp
+        </a>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="320" class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 border-t border-white/10 pt-10">
+        <div>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">50+</p>
+          <p class="mt-1 text-xs sm:text-sm text-white/50">Progetti completati</p>
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">100%</p>
+          <p class="mt-1 text-xs sm:text-sm text-white/50">Clienti soddisfatti</p>
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">8+</p>
+          <p class="mt-1 text-xs sm:text-sm text-white/50">Anni di esperienza</p>
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">4K</p>
+          <p class="mt-1 text-xs sm:text-sm text-white/50">Qualità di ripresa e montaggio</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CHI SONO ================= -->
+  <section id="about" class="relative py-24 sm:py-32 scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+      <div data-aos="fade-right" class="lg:col-span-5 relative">
+        <div class="relative aspect-[4/5] rounded-3xl bg-gradient-to-br from-acid/25 via-card to-acidDeep/15 border border-white/10 overflow-hidden">
+          <img src="assets/images/avatar.jpg" alt="Ritratto di Federico Gennaro" class="absolute inset-0 h-full w-full object-cover" loading="lazy" onerror="this.style.opacity='0'">
+          <div class="absolute inset-0 flex items-center justify-center text-white/25 text-sm">Foto profilo</div>
+        </div>
+        <div class="absolute -bottom-6 -right-4 sm:-right-8 glass border border-white/10 rounded-2xl px-5 py-4 shadow-glow">
+          <p class="font-display font-extrabold text-2xl text-white">8+</p>
+          <p class="text-xs text-white/60">Anni tra riprese &amp; montaggio</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-left" class="lg:col-span-7">
+        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Chi Sono</span>
+        <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">
+          Un solo occhio dietro la camera, dalla ripresa al montaggio finale.
+        </h2>
+        <p class="mt-5 text-white/60 leading-relaxed">
+          Lavoro con aziende, brand e coppie che vogliono un video che non sembri improvvisato:
+          seguo l'intero percorso, dalle riprese al montaggio, dal color grading alla consegna
+          pronta per i social. Ogni progetto parte da un obiettivo chiaro — più engagement, più
+          prenotazioni, un ricordo che dura nel tempo — e arriva a un video rifinito nei minimi
+          dettagli.
+        </p>
+        <p class="mt-4 text-white/60 leading-relaxed">
+          Il mio approccio è diretto: tempi concordati e rispettati, comunicazione semplice,
+          zero tecnicismi inutili. Il risultato è un contenuto che si guarda fino alla fine e
+          continua a lavorare per te molto dopo la pubblicazione.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-2.5">
+          <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">Riprese 4K</span>
+          <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">Montaggio</span>
+          <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">Color Grading</span>
+          <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">Drone / Aerial</span>
+          <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">Sound Design</span>
+          <span class="rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70">Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVIZI ================= -->
+  <section id="servizi" class="relative py-24 sm:py-32 bg-secondary scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div data-aos="fade-up" class="max-w-2xl">
+        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Cosa Offro</span>
+        <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Servizi pensati per raccontare al meglio ogni momento.</h2>
+        <p class="mt-4 text-white/60">Dalle riprese al montaggio finale, dal matrimonio allo spot commerciale: un percorso unico, senza intermediari.</p>
+      </div>
+
+      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
+            <i data-lucide="heart" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Video Matrimoni</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Ogni matrimonio raccontato con uno sguardo cinematografico, dai preparativi al taglio della torta.</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/60">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Riprese multi-camera</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Drone incluso su richiesta</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Video highlights + film completo</li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acidDeep/15 text-acidDeep">
+            <i data-lucide="smartphone" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Reel &amp; Contenuti Social</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Contenuti verticali pensati per fermare lo scroll e far crescere i tuoi canali.</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/60">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Format ottimizzati per Reels &amp; TikTok</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Storytelling orientato al brand</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Consegna rapida, pronta al post</li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="160" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
+            <i data-lucide="megaphone" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Video Commerciali &amp; Spot</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Video pensati per vendere, non solo per essere visti.</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/60">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Brief e sceneggiatura</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Riprese professionali</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Montaggio orientato alla conversione</li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acidDeep/15 text-acidDeep">
+            <i data-lucide="sliders-horizontal" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Color Grading &amp; Post-produzione</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">La fase che trasforma le riprese in un'esperienza visiva coerente.</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/60">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Correzione colore professionale</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Sound design e mix audio</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Grafiche e sottotitoli</li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-card p-7">
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
+            <i data-lucide="plane" class="h-5 w-5"></i>
+          </div>
+          <h3 class="mt-5 font-display font-bold text-lg">Riprese Drone &amp; Aeree</h3>
+          <p class="mt-2 text-sm text-white/55 leading-relaxed">Inquadrature aeree che aggiungono respiro e scala a ogni produzione.</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/60">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Pilota esperto</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Riprese 4K stabilizzate</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="h-3.5 w-3.5 text-acid shrink-0"></i>Integrazione con le riprese a terra</li>
+          </ul>
+        </div>
+
+        <div data-aos="fade-up" data-aos-delay="160" class="card-hover group rounded-2xl border border-line bg-gradient-to-br from-acid/20 to-acidDeep/10 p-7 flex flex-col justify-between">
+          <div>
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
+              <i data-lucide="message-circle" class="h-5 w-5"></i>
+            </div>
+            <h3 class="mt-5 font-display font-bold text-lg">Non sai da dove iniziare?</h3>
+            <p class="mt-2 text-sm text-white/70 leading-relaxed">Raccontami il tuo progetto: ti dico onestamente cosa serve davvero.</p>
+          </div>
+          <a href="#contatti" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:gap-3 transition-all">
+            Parliamone <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PORTFOLIO ================= -->
+  <section id="portfolio" class="relative py-24 sm:py-32 scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div data-aos="fade-up" class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <div class="max-w-xl">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Portfolio</span>
+          <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Una selezione dei lavori recenti.</h2>
+        </div>
+        <p class="text-sm text-white/50 max-w-xs">Ogni video nasce da un brief diverso: qui trovi un estratto, non il catalogo completo. Clicca una card per guardarlo.</p>
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-2 gap-6 md:gap-8">
+
+        <!-- Progetto 1 -->
+        <button type="button" data-aos="fade-up"
+          data-project="carmelo-noemi" data-title="Carmelo &amp; Noemi" data-category="Wedding Film"
+          data-poster="assets/images/portfolio-1.jpg"
+          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-0">
+          <div class="relative aspect-video overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+            <img src="assets/images/portfolio-1.jpg" alt="Fermo immagine dal video del matrimonio di Carmelo e Noemi" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Video Matrimonio</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
+            </div>
+            <h3 class="mt-4 font-display font-bold text-xl">Carmelo &amp; Noemi</h3>
+            <p class="text-sm text-white/50 mt-1">Wedding Film</p>
+          </div>
+        </button>
+
+        <!-- Progetto 2 -->
+        <button type="button" data-aos="fade-up" data-aos-delay="80"
+          data-project="ard-discount" data-title="ARD Discount" data-category="Campagna Reel · Retail"
+          data-poster="assets/images/portfolio-2.jpg"
+          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-12">
+          <div class="relative aspect-video overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+            <img src="assets/images/portfolio-2.jpg" alt="Fermo immagine dalla campagna reel di ARD Discount" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Social Content</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Copywriting</span>
+            </div>
+            <h3 class="mt-4 font-display font-bold text-xl">ARD Discount</h3>
+            <p class="text-sm text-white/50 mt-1">Campagna Reel · Retail</p>
+          </div>
+        </button>
+
+        <!-- Progetto 3 -->
+        <button type="button" data-aos="fade-up"
+          data-project="brandificio" data-title="Brandificio" data-category="Video Commerciale"
+          data-poster="assets/images/portfolio-3.jpg"
+          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden">
+          <div class="relative aspect-video overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+            <img src="assets/images/portfolio-3.jpg" alt="Fermo immagine dallo spot commerciale di Brandificio" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Spot</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
+            </div>
+            <h3 class="mt-4 font-display font-bold text-xl">Brandificio</h3>
+            <p class="text-sm text-white/50 mt-1">Video Commerciale</p>
+          </div>
+        </button>
+
+        <!-- Progetto 4 -->
+        <button type="button" data-aos="fade-up" data-aos-delay="80"
+          data-project="despar" data-title="DESPAR" data-category="Contenuti Social · GDO"
+          data-poster="assets/images/portfolio-4.jpg"
+          class="portfolio-card group relative w-full text-left rounded-3xl border border-line bg-card overflow-hidden md:mt-12">
+          <div class="relative aspect-video overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+            <img src="assets/images/portfolio-4.jpg" alt="Fermo immagine dai contenuti social di DESPAR" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="flex flex-wrap gap-2">
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Montaggio</span>
+              <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Sound Design</span>
+            </div>
+            <h3 class="mt-4 font-display font-bold text-xl">DESPAR</h3>
+            <p class="text-sm text-white/50 mt-1">Contenuti Social · GDO</p>
+          </div>
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO LIGHTBOX ================= -->
+  <div id="video-lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 sm:p-8" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+    <div id="lightbox-backdrop" class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-3xl">
+      <button id="lightbox-close" type="button" aria-label="Chiudi il video"
+        class="absolute -top-12 right-0 sm:-top-2 sm:-right-12 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white hover:border-acid/60 hover:text-acid transition-colors">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+
+      <div class="rounded-2xl overflow-hidden border border-line bg-black shadow-2xl">
+        <div class="relative aspect-video bg-black">
+          <video id="lightbox-video" class="absolute inset-0 h-full w-full hidden" controls playsinline preload="metadata"></video>
+          <iframe id="lightbox-iframe" class="absolute inset-0 h-full w-full hidden" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video del progetto"></iframe>
+          <div id="lightbox-fallback" class="absolute inset-0 hidden flex-col items-center justify-center gap-3 text-center px-6 text-white/50 text-sm">
+            <i data-lucide="film" class="h-8 w-8 text-white/25"></i>
+            <p>Video in arrivo — carica il file in <code class="text-white/70">assets/videos/</code>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 id="lightbox-title" class="font-display font-bold text-lg text-white"></h3>
+          <p id="lightbox-category" class="text-sm text-white/50"></p>
+        </div>
+        <div id="lightbox-tabs" class="flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CLIENTI / LOGHI ================= -->
+  <section id="clienti" class="relative py-20 sm:py-24 border-y border-white/10 bg-secondary overflow-hidden scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <p data-aos="fade-up" class="text-center text-xs font-semibold uppercase tracking-[0.2em] text-white/40">Con chi ho lavorato</p>
+    </div>
+
+    <div class="marquee-wrap mt-10 relative">
+      <div class="pointer-events-none absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-secondary to-transparent z-10"></div>
+      <div class="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-secondary to-transparent z-10"></div>
+
+      <div class="flex w-max marquee-track">
+        <div class="flex items-center gap-16 pr-16">
+          <div class="logo-fade flex items-center"><img src="assets/logos/ard-discount.svg" alt="ARD Discount" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">ARD Discount</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/brandificio.svg" alt="Brandificio" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Brandificio</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/despar.svg" alt="DESPAR" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">DESPAR</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/studio-meridian.svg" alt="Studio Meridian" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Studio Meridian</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/nova-retail.svg" alt="Nova Retail" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Nova Retail</span></div>
+        </div>
+        <div class="flex items-center gap-16 pr-16" aria-hidden="true">
+          <div class="logo-fade flex items-center"><img src="assets/logos/ard-discount.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">ARD Discount</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/brandificio.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Brandificio</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/despar.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">DESPAR</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/studio-meridian.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Studio Meridian</span></div>
+          <div class="logo-fade flex items-center"><img src="assets/logos/nova-retail.svg" alt="" class="h-6 sm:h-7" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden')"><span class="hidden font-display font-bold text-lg text-white/60 whitespace-nowrap">Nova Retail</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATTI ================= -->
+  <section id="contatti" class="relative py-24 sm:py-32 scroll-mt-24">
+    <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-5 gap-10 lg:gap-16">
+
+        <div data-aos="fade-right" class="lg:col-span-2">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Contatti</span>
+          <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Parliamo del tuo prossimo video.</h2>
+          <p class="mt-4 text-white/60 leading-relaxed">Raccontami cosa ti serve — un matrimonio, un reel, uno spot — e rispondo di solito entro 24-48 ore con una prima idea di percorso.</p>
+
+          <div class="mt-8 space-y-4">
+            <a href="mailto:info@federicogennaro.it" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10"><i data-lucide="mail" class="h-4 w-4"></i></span>
+              info@federicogennaro.it
+            </a>
+            <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20un%20progetto" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10"><i class="fa-brands fa-whatsapp"></i></span>
+              WhatsApp diretto
+            </a>
+            <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
+              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10"><i class="fa-brands fa-instagram"></i></span>
+              @_federicogennaro
+            </a>
+          </div>
+        </div>
+
+        <form data-aos="fade-left" action="https://formsubmit.co/info@federicogennaro.it" method="POST" class="lg:col-span-3 rounded-3xl border border-line bg-card p-6 sm:p-8">
+          <input type="hidden" name="_subject" value="Nuovo messaggio dal sito federicogennaro.it">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-xs font-medium text-white/50 mb-2">Nome</label>
+              <input id="name" name="Nome" type="text" required placeholder="Il tuo nome" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+            </div>
+            <div>
+              <label for="email" class="block text-xs font-medium text-white/50 mb-2">Email</label>
+              <input id="email" name="Email" type="email" required placeholder="nome@esempio.it" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label for="subject" class="block text-xs font-medium text-white/50 mb-2">Oggetto</label>
+            <input id="subject" name="Oggetto" type="text" required placeholder="Di cosa vuoi parlare?" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+          </div>
+
+          <div class="mt-5">
+            <label for="message" class="block text-xs font-medium text-white/50 mb-2">Messaggio</label>
+            <textarea id="message" name="Messaggio" rows="5" required placeholder="Raccontami il tuo progetto..." class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-6 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 active:scale-[0.98] transition-all">
+            Invia il messaggio
+            <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="relative border-t border-white/10 bg-secondary">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <a href="#top" class="flex items-center gap-2">
+          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
+          <span class="font-display font-bold text-white/80">Federico Gennaro</span>
+        </a>
+
+        <div class="flex items-center gap-5 text-white/50">
+          <a href="mailto:info@federicogennaro.it" class="hover:text-white transition-colors text-sm">info@federicogennaro.it</a>
+          <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/393397305267" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+
+        <a href="#top" class="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+          Torna su
+          <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10"><i data-lucide="arrow-up" class="h-3.5 w-3.5"></i></span>
+        </a>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-white/10 text-center sm:text-left text-xs text-white/35">
+        &copy; <span id="year"></span> Federico Gennaro. Tutti i diritti riservati.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= WHATSAPP FLOATING BUTTON ================= -->
+  <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20un%20progetto"
+     target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp"
+     class="wa-pulse fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-acid text-primary shadow-glow hover:scale-110 transition-transform">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+  </a>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Icone Lucide
+    lucide.createIcons();
+
+    // Animazioni allo scroll
+    AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 40 });
+
+    // Anno corrente nel footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar: sfondo più solido dopo lo scroll
+    const header = document.getElementById('site-header');
+    const onScroll = () => {
+      if (window.scrollY > 24) {
+        header.classList.add('shadow-lg', 'shadow-black/20');
+      } else {
+        header.classList.remove('shadow-lg', 'shadow-black/20');
+      }
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ===== Lightbox video portfolio =====
+    // Ogni progetto può avere uno o più video. type 'local' = file in assets/videos/,
+    // type 'youtube' = incorpora un video YouTube (utile per un video insolitamente lungo).
+    const portfolioVideos = {
+      'carmelo-noemi': [
+        { label: 'Video Highlights', type: 'local', src: 'assets/videos/carmelo-noemi-highlights.mp4' },
+      ],
+      'ard-discount': [
+        { label: 'Reel 1', type: 'local', src: 'assets/videos/ard-discount-reel-1.mp4' },
+        { label: 'Reel 2', type: 'local', src: 'assets/videos/ard-discount-reel-2.mp4' },
+      ],
+      'brandificio': [
+        { label: 'Spot 1', type: 'local', src: 'assets/videos/brandificio-spot-1.mp4' },
+        { label: 'Spot 2', type: 'local', src: 'assets/videos/brandificio-spot-2.mp4' },
+      ],
+      'despar': [
+        { label: 'Reel 1', type: 'local', src: 'assets/videos/despar-reel-1.mp4' },
+        { label: 'Reel 2', type: 'local', src: 'assets/videos/despar-reel-2.mp4' },
+      ],
+    };
+
+    const lightbox = document.getElementById('video-lightbox');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const lightboxIframe = document.getElementById('lightbox-iframe');
+    const lightboxFallback = document.getElementById('lightbox-fallback');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    const lightboxTabs = document.getElementById('lightbox-tabs');
+    let lastFocusedEl = null;
+
+    function youTubeEmbedUrl(url) {
+      const match = url.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
+      const id = match ? match[1] : url;
+      return `https://www.youtube.com/embed/${id}?rel=0&autoplay=1`;
+    }
+
+    function showFallback() {
+      lightboxVideo.classList.add('hidden');
+      lightboxIframe.classList.add('hidden');
+      lightboxFallback.classList.remove('hidden');
+      lightboxFallback.classList.add('flex');
+    }
+
+    function playVideoItem(item, posterUrl) {
+      lightboxFallback.classList.add('hidden');
+      lightboxFallback.classList.remove('flex');
+
+      if (item.type === 'youtube') {
+        lightboxVideo.classList.add('hidden');
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute('src');
+        lightboxIframe.src = youTubeEmbedUrl(item.src);
+        lightboxIframe.classList.remove('hidden');
+      } else {
+        lightboxIframe.classList.add('hidden');
+        lightboxIframe.src = '';
+        lightboxVideo.classList.remove('hidden');
+        if (posterUrl) lightboxVideo.setAttribute('poster', posterUrl);
+        lightboxVideo.src = item.src;
+        lightboxVideo.load();
+        lightboxVideo.play().catch(() => { /* riproduzione automatica bloccata dal browser, non è un errore */ });
+      }
+    }
+
+    lightboxVideo.addEventListener('error', showFallback);
+
+    function renderTabs(items, posterUrl, activeIndex) {
+      lightboxTabs.innerHTML = '';
+      if (items.length <= 1) return;
+      items.forEach((item, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = item.label;
+        btn.className = 'rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ' +
+          (i === activeIndex
+            ? 'border-acid text-acid bg-acid/10'
+            : 'border-white/10 text-white/60 hover:text-white hover:border-white/30');
+        btn.addEventListener('click', () => {
+          playVideoItem(item, posterUrl);
+          renderTabs(items, posterUrl, i);
+        });
+        lightboxTabs.appendChild(btn);
+      });
+    }
+
+    function openLightbox(card) {
+      const id = card.dataset.project;
+      const items = portfolioVideos[id];
+      if (!items || !items.length) return;
+
+      lastFocusedEl = card;
+      lightboxTitle.textContent = card.dataset.title || '';
+      lightboxCategory.textContent = card.dataset.category || '';
+      const posterUrl = card.dataset.poster || '';
+
+      renderTabs(items, posterUrl, 0);
+      playVideoItem(items[0], posterUrl);
+
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lightboxVideo.pause();
+      lightboxVideo.removeAttribute('src');
+      lightboxVideo.load();
+      lightboxIframe.src = '';
+      if (lastFocusedEl) lastFocusedEl.focus();
+    }
+
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('click', () => openLightbox(card));
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxBackdrop.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
+    });
+  </script>
+
 </body>
 </html>
