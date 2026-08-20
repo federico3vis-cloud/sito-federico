@@ -22,13 +22,14 @@
   │   │   ├── carmelo-noemi-highlights.mp4
   │   │   ├── ard-discount-reel-1.mp4
   │   │   ├── ard-discount-reel-2.mp4
-  │   │   ├── brandificio-spot-1.mp4
-  │   │   ├── brandificio-spot-2.mp4
+  │   │   ├── ard-discount-reel-3.mp4
+  │   │   ├── zabbatana-spot-1.mp4
+  │   │   ├── zabbatana-spot-2.mp4
   │   │   ├── despar-reel-1.mp4
   │   │   ├── despar-reel-2.mp4
-  │   │   ├── make-pizza-reel-1.mp4
-  │   │   ├── make-pizza-reel-2.mp4
-  │   │   └── evento-miami.mp4
+  │   │   ├── ritratti-in-corso-reel-1.mp4
+  │   │   ├── ritratti-in-corso-reel-2.mp4
+  │   │   └── miami-music-week.mp4
   │   └── logos/
   │       ├── logo.png            <- il TUO logo per la navbar (sostituisce il badge "FG"), sfondo trasparente
   │       ├── ard-discount.png    <- loghi aziende, sfondo trasparente — i colori restano quelli originali
@@ -64,10 +65,11 @@
   - PIÙ VIDEO PER PROGETTO: ogni voce di `portfolioVideos` è un array — basta
     aggiungere un altro oggetto `{ label: '...', type: 'local', src: '...' }`
     per far comparire un altro pulsante nella modale (vedi ARD Discount,
-    Brandificio, DESPAR e Makè Pizza, già impostati con due video ciascuno
-    come esempio). Il matrimonio e l'evento hanno un solo video: per i video
-    molto lunghi (es. il film completo di un matrimonio, spesso 20-40 minuti)
-    evita il self-hosting e usa YouTube "non in elenco" con `type: 'youtube'`.
+    Zabbatana, DESPAR e Ritratti in Corso, già impostati con più video
+    ciascuno come esempio). Il matrimonio e Miami Music Week hanno un solo
+    video: per i video molto lunghi (es. il film completo di un matrimonio,
+    spesso 20-40 minuti) evita il self-hosting e usa YouTube "non in elenco"
+    con `type: 'youtube'`.
   - SPECIFICHE VIDEO CONSIGLIATE (self-hosted su GitHub Pages):
       risoluzione 1280×720 (720p) · durata 30-90 secondi (reel/highlights)
       H.264 + AAC · bitrate video ~2,5 Mbps → un file da 60-90s pesa
@@ -161,8 +163,8 @@
     font-display: swap;
   }
 
-  html { scroll-behavior: smooth; }
-  body { background-color: #0a0b0d; overflow-x: hidden; }
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+  body { background-color: #0a0b0d; overflow-x: hidden; max-width: 100%; }
 
   ::selection { background: #c6ff2e; color: #0a0b0d; }
 
@@ -279,7 +281,7 @@
     <div class="relative max-w-4xl mx-auto px-5 sm:px-8 text-center">
       <h1 data-aos="fade-up" class="font-display font-extrabold tracking-tight text-4xl sm:text-6xl lg:text-7xl leading-[1.05]">
         La tua <span class="text-gradient">storia</span> non<br>
-        <span class="whitespace-nowrap">raccontarla e basta.</span><br>
+        <span class="sm:whitespace-nowrap">raccontarla e basta.</span><br>
         Mettila sotto<br>
         gli occhi di tutti.
       </h1>
@@ -492,12 +494,12 @@
 
           <!-- Progetto 3 -->
           <button type="button" data-aos="fade-up"
-            data-project="brandificio" data-title="Brandificio" data-category="Video Commerciale"
+            data-project="zabbatana" data-title="Zabbatana" data-category="Video Commerciale"
             data-poster="assets/images/portfolio-3.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="assets/images/portfolio-3.jpg" alt="Fermo immagine dallo spot commerciale di Brandificio" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="assets/images/portfolio-3.jpg" alt="Fermo immagine dallo spot commerciale di Zabbatana" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
                   <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
@@ -510,7 +512,7 @@
                 <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
                 <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Color Grading</span>
               </div>
-              <h3 class="mt-4 font-display font-bold text-xl">Brandificio</h3>
+              <h3 class="mt-4 font-display font-bold text-xl">Zabbatana</h3>
               <p class="text-sm text-white/50 mt-1">Video Commerciale</p>
             </div>
           </button>
@@ -542,12 +544,12 @@
 
           <!-- Progetto 5 -->
           <button type="button" data-aos="fade-up"
-            data-project="make-pizza" data-title="Makè Pizza" data-category="Reel · Ristorazione"
+            data-project="ritratti-in-corso" data-title="Ritratti in Corso" data-category="Reel · Documentario"
             data-poster="assets/images/portfolio-5.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="assets/images/portfolio-5.jpg" alt="Fermo immagine dai contenuti social di Makè Pizza" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="assets/images/portfolio-5.jpg" alt="Fermo immagine dal progetto Ritratti in Corso" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
                   <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
@@ -557,22 +559,22 @@
             <div class="p-6">
               <div class="flex flex-wrap gap-2">
                 <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Reel</span>
-                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Food Content</span>
+                <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Documentario</span>
                 <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Regia</span>
               </div>
-              <h3 class="mt-4 font-display font-bold text-xl">Makè Pizza</h3>
-              <p class="text-sm text-white/50 mt-1">Reel · Ristorazione</p>
+              <h3 class="mt-4 font-display font-bold text-xl">Ritratti in Corso</h3>
+              <p class="text-sm text-white/50 mt-1">Reel · Documentario</p>
             </div>
           </button>
 
           <!-- Progetto 6 -->
           <button type="button" data-aos="fade-up"
-            data-project="evento-miami" data-title="Evento Miami" data-category="Video Evento"
+            data-project="miami-music-week" data-title="Miami Music Week" data-category="Video Evento"
             data-poster="assets/images/portfolio-6.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="assets/images/portfolio-6.jpg" alt="Fermo immagine dalle riprese dell'evento a Miami" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="assets/images/portfolio-6.jpg" alt="Fermo immagine dalle riprese di Miami Music Week" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
                   <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
@@ -585,7 +587,7 @@
                 <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Multi-camera</span>
                 <span class="text-[11px] font-medium rounded-full border border-white/10 px-2.5 py-1 text-white/60">Drone</span>
               </div>
-              <h3 class="mt-4 font-display font-bold text-xl">Evento Miami</h3>
+              <h3 class="mt-4 font-display font-bold text-xl">Miami Music Week</h3>
               <p class="text-sm text-white/50 mt-1">Video Evento</p>
             </div>
           </button>
@@ -817,21 +819,22 @@
       'ard-discount': [
         { label: 'Reel 1', type: 'local', src: 'assets/videos/ard-discount-reel-1.mp4' },
         { label: 'Reel 2', type: 'local', src: 'assets/videos/ard-discount-reel-2.mp4' },
+        { label: 'Reel 3', type: 'local', src: 'assets/videos/ard-discount-reel-3.mp4' },
       ],
-      'brandificio': [
-        { label: 'Spot 1', type: 'local', src: 'assets/videos/brandificio-spot-1.mp4' },
-        { label: 'Spot 2', type: 'local', src: 'assets/videos/brandificio-spot-2.mp4' },
+      'zabbatana': [
+        { label: 'Spot 1', type: 'local', src: 'assets/videos/zabbatana-spot-1.mp4' },
+        { label: 'Spot 2', type: 'local', src: 'assets/videos/zabbatana-spot-2.mp4' },
       ],
       'despar': [
         { label: 'Reel 1', type: 'local', src: 'assets/videos/despar-reel-1.mp4' },
         { label: 'Reel 2', type: 'local', src: 'assets/videos/despar-reel-2.mp4' },
       ],
-      'make-pizza': [
-        { label: 'Reel 1', type: 'local', src: 'assets/videos/make-pizza-reel-1.mp4' },
-        { label: 'Reel 2', type: 'local', src: 'assets/videos/make-pizza-reel-2.mp4' },
+      'ritratti-in-corso': [
+        { label: 'Reel 1', type: 'local', src: 'assets/videos/ritratti-in-corso-reel-1.mp4' },
+        { label: 'Reel 2', type: 'local', src: 'assets/videos/ritratti-in-corso-reel-2.mp4' },
       ],
-      'evento-miami': [
-        { label: 'Highlights Evento', type: 'local', src: 'assets/videos/evento-miami.mp4' },
+      'miami-music-week': [
+        { label: 'Highlights Evento', type: 'local', src: 'assets/videos/miami-music-week.mp4' },
       ],
     };
 
