@@ -304,19 +304,19 @@
 
       <div data-aos="fade-up" data-aos-delay="320" class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4 border-t border-white/10 pt-10">
         <div>
-          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">317+</p>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white stat-number" data-count-to="317">0+</p>
           <p class="mt-1 text-xs sm:text-sm text-white/50">Storie raccontate</p>
         </div>
         <div>
-          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">2.400+</p>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white stat-number" data-count-to="2400">0+</p>
           <p class="mt-1 text-xs sm:text-sm text-white/50">B-roll girati "per sicurezza"</p>
         </div>
         <div>
-          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">517+</p>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white stat-number" data-count-to="517">0+</p>
           <p class="mt-1 text-xs sm:text-sm text-white/50">Ctrl-Z al giorno</p>
         </div>
         <div>
-          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white">8345+</p>
+          <p class="font-display font-extrabold text-3xl sm:text-4xl text-white stat-number" data-count-to="8345">0+</p>
           <p class="mt-1 text-xs sm:text-sm text-white/50">Ore di montaggio</p>
         </div>
       </div>
@@ -896,6 +896,38 @@
 
     // Animazioni allo scroll
     AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 40 });
+
+    // Statistiche hero: contatore che sale da 0 al numero finale quando entra in vista
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length) {
+      function animateCount(el, target, duration) {
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          const current = Math.floor(eased * target);
+          el.textContent = current.toLocaleString('it-IT') + '+';
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toLocaleString('it-IT') + '+';
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = parseInt(entry.target.dataset.countTo, 10);
+            animateCount(entry.target, target, 1800);
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      statNumbers.forEach((el) => statsObserver.observe(el));
+    }
 
     // Anno corrente nel footer
     document.getElementById('year').textContent = new Date().getFullYear();
