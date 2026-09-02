@@ -881,28 +881,30 @@
         <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Recensioni</span>
         <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Dicono di me</h2>
       </div>
+    </div>
 
-      <!-- Widget Google Reviews (EmbedSocial). Per modificarlo (numero di recensioni,
-           filtri, stile) accedi al tuo account su embedsocial.com — le modifiche fatte
-           lì si aggiornano qui automaticamente, senza bisogno di toccare questo codice. -->
-      <div data-aos="fade-up" data-aos-delay="80" class="mt-14">
-        <div class="embedsocial-hashtag" data-ref="81db21540c1c183f51c7ad5727b58a4b1520ee98">
-          <a class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding" href="https://embedsocial.com/google-reviews-widget/" target="_blank" title="Embed Google reviews">
-            <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial">
-            <div class="es-widget-branding-text">Embed Google reviews</div>
-          </a>
-        </div>
-        <script>
-          (function(d, s, id) {
-            var js;
-            if (d.getElementById(id)) { return; }
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://embedsocial.com/cdn/ht.js";
-            d.getElementsByTagName("head")[0].appendChild(js);
-          }(document, "script", "EmbedSocialHashtagScript"));
-        </script>
+    <!-- Widget Google Reviews (EmbedSocial). Per modificarlo (numero di recensioni,
+         filtri, stile, colore di sfondo) accedi al tuo account su embedsocial.com —
+         le modifiche fatte lì si aggiornano qui automaticamente, senza bisogno di
+         toccare questo codice. Contenitore più largo delle altre sezioni apposta,
+         per dare più respiro alle card del widget. -->
+    <div data-aos="fade-up" data-aos-delay="80" class="mt-14 max-w-[1600px] mx-auto px-5 sm:px-8">
+      <div class="embedsocial-hashtag" data-ref="81db21540c1c183f51c7ad5727b58a4b1520ee98">
+        <a class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding" href="https://embedsocial.com/google-reviews-widget/" target="_blank" title="Embed Google reviews">
+          <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial">
+          <div class="es-widget-branding-text">Embed Google reviews</div>
+        </a>
       </div>
+      <script>
+        (function(d, s, id) {
+          var js;
+          if (d.getElementById(id)) { return; }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://embedsocial.com/cdn/ht.js";
+          d.getElementsByTagName("head")[0].appendChild(js);
+        }(document, "script", "EmbedSocialHashtagScript"));
+      </script>
     </div>
   </section>
 
