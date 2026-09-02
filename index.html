@@ -293,6 +293,59 @@
     margin-right: auto;
   }
 
+  /* Cursore personalizzato: puntino preciso + anello che segue con un leggero ritardo.
+     Attivo solo su dispositivi con mouse (pointer: fine) — su mobile/tablet resta invariato. */
+  @media (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active input,
+    body.custom-cursor-active textarea {
+      cursor: none;
+    }
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: #c6ff2e;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: opacity .2s ease;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(198,255,46,0.55);
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width .25s ease, height .25s ease, border-color .25s ease,
+                background-color .25s ease, opacity .2s ease;
+  }
+
+  .cursor-ring.cursor-hover {
+    width: 56px;
+    height: 56px;
+    border-color: #c6ff2e;
+    background: rgba(198,255,46,0.08);
+  }
+
+  .cursor-dot.cursor-hidden,
+  .cursor-ring.cursor-hidden {
+    opacity: 0;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
@@ -923,6 +976,59 @@
 
     // Animazioni allo scroll
     AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 40 });
+
+    // Cursore personalizzato: solo su dispositivi con mouse preciso, e solo se l'utente
+    // non ha attivato "riduci movimento" nel sistema operativo.
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (hasFinePointer && !prefersReducedMotion) {
+      const cursorDot = document.createElement('div');
+      cursorDot.className = 'cursor-dot cursor-hidden';
+      const cursorRing = document.createElement('div');
+      cursorRing.className = 'cursor-ring cursor-hidden';
+      document.body.appendChild(cursorDot);
+      document.body.appendChild(cursorRing);
+      document.body.classList.add('custom-cursor-active');
+
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+      let started = false;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        if (!started) {
+          started = true;
+          ringX = mouseX;
+          ringY = mouseY;
+        }
+        cursorDot.classList.remove('cursor-hidden');
+        cursorRing.classList.remove('cursor-hidden');
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      const hoverSelector = 'a, button, .portfolio-card, input, textarea, [role="button"]';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverSelector)) cursorRing.classList.add('cursor-hover');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverSelector)) cursorRing.classList.remove('cursor-hover');
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursorDot.classList.add('cursor-hidden');
+        cursorRing.classList.add('cursor-hidden');
+      });
+    }
 
     // Statistiche hero: contatore che sale da 0 al numero finale quando entra in vista
     const statNumbers = document.querySelectorAll('.stat-number');
