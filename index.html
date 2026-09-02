@@ -542,7 +542,7 @@
         <div class="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-primary to-transparent z-10"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-primary to-transparent z-10"></div>
 
-        <div id="portfolio-scroll" class="no-scrollbar flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth px-5 sm:px-8 pb-2">
+        <div id="portfolio-scroll" class="no-scrollbar flex gap-6 overflow-x-auto snap-x snap-proximity scroll-smooth px-5 sm:px-8 pb-2">
 
           <!-- Progetto 1: Polara -->
           <button type="button" data-aos="fade-up"
@@ -882,22 +882,26 @@
         <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Dicono di me</h2>
       </div>
 
-      <!--
-        QUI VA IL WIDGET DELLE RECENSIONI GOOGLE.
-        Genera il codice su un servizio come embedsocial.com (o Taggbox, RevuKit — stesso
-        principio), collegando la tua scheda Google Business Profile e attivando il filtro
-        "mostra solo recensioni con testo" nelle impostazioni del widget. Poi sostituisci
-        l'intero blocco qui sotto (dal commento "INIZIO PLACEHOLDER" a "FINE PLACEHOLDER")
-        con lo snippet che il servizio ti fornisce.
-      -->
-      <div data-aos="fade-up" data-aos-delay="80" class="mt-14 rounded-3xl border border-dashed border-white/15 bg-card/50 p-10 sm:p-14 text-center">
-        <!-- INIZIO PLACEHOLDER -->
-        <i data-lucide="message-circle" class="h-8 w-8 text-white/25 mx-auto"></i>
-        <p class="mt-4 text-sm text-white/40 max-w-md mx-auto">
-          Qui compariranno le recensioni Google dei tuoi clienti, appena colleghi il widget
-          (vedi il commento nel codice sorgente per le istruzioni).
-        </p>
-        <!-- FINE PLACEHOLDER -->
+      <!-- Widget Google Reviews (EmbedSocial). Per modificarlo (numero di recensioni,
+           filtri, stile) accedi al tuo account su embedsocial.com — le modifiche fatte
+           lì si aggiornano qui automaticamente, senza bisogno di toccare questo codice. -->
+      <div data-aos="fade-up" data-aos-delay="80" class="mt-14">
+        <div class="embedsocial-hashtag" data-ref="81db21540c1c183f51c7ad5727b58a4b1520ee98">
+          <a class="feed-powered-by-es feed-powered-by-es-feed-img es-widget-branding" href="https://embedsocial.com/google-reviews-widget/" target="_blank" title="Embed Google reviews">
+            <img src="https://embedsocial.com/cdn/icon/embedsocial-logo.webp" alt="EmbedSocial">
+            <div class="es-widget-branding-text">Embed Google reviews</div>
+          </a>
+        </div>
+        <script>
+          (function(d, s, id) {
+            var js;
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://embedsocial.com/cdn/ht.js";
+            d.getElementsByTagName("head")[0].appendChild(js);
+          }(document, "script", "EmbedSocialHashtagScript"));
+        </script>
       </div>
     </div>
   </section>
@@ -1135,18 +1139,49 @@
     window.addEventListener('resize', updatePortfolioArrows);
     updatePortfolioArrows();
 
-    // Trascina per scorrere il portfolio con il mouse (click and drag) su desktop
+    // Trascina per scorrere il portfolio con il mouse (click and drag) su desktop,
+    // con inerzia al rilascio: continua a scorrere rallentando gradualmente,
+    // come lo scroll fluido di una rotella del mouse.
     let portfolioIsDragging = false;
     let portfolioDragStartX = 0;
     let portfolioDragScrollStart = 0;
     let portfolioDragMoved = 0;
+    let portfolioLastX = 0;
+    let portfolioLastTime = 0;
+    let portfolioVelocity = 0; // px per ms
+    let portfolioMomentumId = null;
+
+    function stopPortfolioMomentum() {
+      if (portfolioMomentumId) {
+        cancelAnimationFrame(portfolioMomentumId);
+        portfolioMomentumId = null;
+      }
+    }
+
+    function runPortfolioMomentum() {
+      function step() {
+        if (Math.abs(portfolioVelocity) < 0.02) {
+          portfolioMomentumId = null;
+          portfolioScroll.classList.remove('portfolio-dragging');
+          return;
+        }
+        portfolioScroll.scrollLeft -= portfolioVelocity * 16;
+        portfolioVelocity *= 0.94; // decadimento: rallenta gradualmente
+        portfolioMomentumId = requestAnimationFrame(step);
+      }
+      portfolioMomentumId = requestAnimationFrame(step);
+    }
 
     portfolioScroll.addEventListener('mousedown', (e) => {
+      stopPortfolioMomentum();
       portfolioIsDragging = true;
       portfolioDragMoved = 0;
       portfolioDragStartX = e.pageX;
       portfolioDragScrollStart = portfolioScroll.scrollLeft;
-      portfolioScroll.classList.add('portfolio-dragging');
+      portfolioLastX = e.pageX;
+      portfolioLastTime = performance.now();
+      portfolioVelocity = 0;
+      portfolioScroll.classList.add('portfolio-dragging'); // disattiva lo scroll-behavior CSS, che altrimenti va in conflitto con l'aggiornamento diretto e crea l'effetto "a scatti"
       e.preventDefault(); // evita il trascinamento "fantasma" delle immagini
     });
 
@@ -1155,12 +1190,19 @@
       const delta = e.pageX - portfolioDragStartX;
       portfolioDragMoved = Math.max(portfolioDragMoved, Math.abs(delta));
       portfolioScroll.scrollLeft = portfolioDragScrollStart - delta;
+
+      const now = performance.now();
+      const dt = now - portfolioLastTime;
+      if (dt > 0) portfolioVelocity = (e.pageX - portfolioLastX) / dt;
+      portfolioLastX = e.pageX;
+      portfolioLastTime = now;
     });
 
     window.addEventListener('mouseup', () => {
       if (!portfolioIsDragging) return;
       portfolioIsDragging = false;
-      portfolioScroll.classList.remove('portfolio-dragging');
+      // la classe "portfolio-dragging" resta finché dura l'inerzia — la toglie runPortfolioMomentum()
+      runPortfolioMomentum();
     });
 
     // ===== Lightbox video portfolio =====
