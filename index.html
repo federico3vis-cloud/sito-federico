@@ -280,6 +280,10 @@
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+  #portfolio-scroll { cursor: grab; }
+  #portfolio-scroll.portfolio-dragging { cursor: grabbing; scroll-behavior: auto; user-select: none; }
+  #portfolio-scroll.portfolio-dragging .portfolio-card { pointer-events: none; }
+
   /* Lightbox in formato verticale, per i reel — il browser calcola da solo
      la dimensione massima che rispetta il rapporto 9:16 dentro questi limiti. */
   .lightbox-vertical-content { max-width: min(400px, 85vw); }
@@ -870,6 +874,34 @@
     </div>
   </section>
 
+  <!-- ================= DICONO DI ME (RECENSIONI GOOGLE) ================= -->
+  <section id="recensioni" class="relative py-24 sm:py-32 scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div data-aos="fade-up" class="max-w-2xl">
+        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Recensioni</span>
+        <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Dicono di me</h2>
+      </div>
+
+      <!--
+        QUI VA IL WIDGET DELLE RECENSIONI GOOGLE.
+        Genera il codice su un servizio come embedsocial.com (o Taggbox, RevuKit — stesso
+        principio), collegando la tua scheda Google Business Profile e attivando il filtro
+        "mostra solo recensioni con testo" nelle impostazioni del widget. Poi sostituisci
+        l'intero blocco qui sotto (dal commento "INIZIO PLACEHOLDER" a "FINE PLACEHOLDER")
+        con lo snippet che il servizio ti fornisce.
+      -->
+      <div data-aos="fade-up" data-aos-delay="80" class="mt-14 rounded-3xl border border-dashed border-white/15 bg-card/50 p-10 sm:p-14 text-center">
+        <!-- INIZIO PLACEHOLDER -->
+        <i data-lucide="message-circle" class="h-8 w-8 text-white/25 mx-auto"></i>
+        <p class="mt-4 text-sm text-white/40 max-w-md mx-auto">
+          Qui compariranno le recensioni Google dei tuoi clienti, appena colleghi il widget
+          (vedi il commento nel codice sorgente per le istruzioni).
+        </p>
+        <!-- FINE PLACEHOLDER -->
+      </div>
+    </div>
+  </section>
+
   <!-- ================= CONTATTI ================= -->
   <section id="contatti" class="relative py-24 sm:py-32 scroll-mt-24">
     <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
@@ -1103,6 +1135,34 @@
     window.addEventListener('resize', updatePortfolioArrows);
     updatePortfolioArrows();
 
+    // Trascina per scorrere il portfolio con il mouse (click and drag) su desktop
+    let portfolioIsDragging = false;
+    let portfolioDragStartX = 0;
+    let portfolioDragScrollStart = 0;
+    let portfolioDragMoved = 0;
+
+    portfolioScroll.addEventListener('mousedown', (e) => {
+      portfolioIsDragging = true;
+      portfolioDragMoved = 0;
+      portfolioDragStartX = e.pageX;
+      portfolioDragScrollStart = portfolioScroll.scrollLeft;
+      portfolioScroll.classList.add('portfolio-dragging');
+      e.preventDefault(); // evita il trascinamento "fantasma" delle immagini
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!portfolioIsDragging) return;
+      const delta = e.pageX - portfolioDragStartX;
+      portfolioDragMoved = Math.max(portfolioDragMoved, Math.abs(delta));
+      portfolioScroll.scrollLeft = portfolioDragScrollStart - delta;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!portfolioIsDragging) return;
+      portfolioIsDragging = false;
+      portfolioScroll.classList.remove('portfolio-dragging');
+    });
+
     // ===== Lightbox video portfolio =====
     // Ogni progetto può avere uno o più video. Tutti su YouTube: dopo aver
     // caricato ogni video (consigliato: "Non in elenco" + "Consenti
@@ -1273,7 +1333,10 @@
     }
 
     document.querySelectorAll('.portfolio-card').forEach(card => {
-      card.addEventListener('click', () => openLightbox(card));
+      card.addEventListener('click', () => {
+        if (portfolioDragMoved > 6) return; // era un trascinamento, non un click sulla card
+        openLightbox(card);
+      });
     });
     lightboxClose.addEventListener('click', closeLightbox);
     lightboxBackdrop.addEventListener('click', closeLightbox);
