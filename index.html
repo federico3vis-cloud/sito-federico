@@ -1174,7 +1174,18 @@
       portfolioMomentumId = requestAnimationFrame(step);
     }
 
-    portfolioScroll.addEventListener('mousedown', (e) => {
+    // Il trascinamento con il mouse è attivo solo su dispositivi con puntatore
+    // preciso (desktop) — su mobile/touch questi listener non vengono collegati
+    // per niente, così il tap normale continua a funzionare per aprire il video
+    // (altrimenti "preventDefault()" nel mousedown blocca anche il click sintetico
+    // che i browser mobile generano dopo un tap, ed era proprio questo il bug).
+    if (window.matchMedia('(pointer: fine)').matches) {
+      portfolioScroll.addEventListener('mousedown', dragMousedownHandler);
+      window.addEventListener('mousemove', dragMousemoveHandler);
+      window.addEventListener('mouseup', dragMouseupHandler);
+    }
+
+    function dragMousedownHandler(e) {
       stopPortfolioMomentum();
       portfolioIsDragging = true;
       portfolioDragMoved = 0;
@@ -1185,9 +1196,9 @@
       portfolioVelocity = 0;
       portfolioScroll.classList.add('portfolio-dragging'); // disattiva lo scroll-behavior CSS, che altrimenti va in conflitto con l'aggiornamento diretto e crea l'effetto "a scatti"
       e.preventDefault(); // evita il trascinamento "fantasma" delle immagini
-    });
+    }
 
-    window.addEventListener('mousemove', (e) => {
+    function dragMousemoveHandler(e) {
       if (!portfolioIsDragging) return;
       const delta = e.pageX - portfolioDragStartX;
       portfolioDragMoved = Math.max(portfolioDragMoved, Math.abs(delta));
@@ -1198,14 +1209,14 @@
       if (dt > 0) portfolioVelocity = (e.pageX - portfolioLastX) / dt;
       portfolioLastX = e.pageX;
       portfolioLastTime = now;
-    });
+    }
 
-    window.addEventListener('mouseup', () => {
+    function dragMouseupHandler() {
       if (!portfolioIsDragging) return;
       portfolioIsDragging = false;
       // la classe "portfolio-dragging" resta finché dura l'inerzia — la toglie runPortfolioMomentum()
       runPortfolioMomentum();
-    });
+    }
 
     // ===== Lightbox video portfolio =====
     // Ogni progetto può avere uno o più video. Tutti su YouTube: dopo aver
