@@ -287,9 +287,6 @@
     will-change: transform;
   }
 
-  #portfolio-scroll { cursor: grab; }
-  #portfolio-scroll.portfolio-dragging { cursor: grabbing; scroll-behavior: auto; user-select: none; }
-  #portfolio-scroll.portfolio-dragging .portfolio-card { pointer-events: none; }
 
   /* Lightbox in formato verticale, per i reel — il browser calcola da solo
      la dimensione massima che rispetta il rapporto 9:16 dentro questi limiti. */
@@ -1263,88 +1260,6 @@
     window.addEventListener('resize', updatePortfolioArrows);
     updatePortfolioArrows();
 
-    // Trascina per scorrere il portfolio con il mouse (click and drag) su desktop,
-    // con inerzia al rilascio: continua a scorrere rallentando gradualmente,
-    // come lo scroll fluido di una rotella del mouse.
-    let portfolioIsDragging = false;
-    let portfolioDragStartX = 0;
-    let portfolioDragScrollStart = 0;
-    let portfolioDragMoved = 0;
-    let portfolioLastX = 0;
-    let portfolioLastTime = 0;
-    let portfolioVelocity = 0; // px per ms
-    let portfolioMomentumId = null;
-
-    function stopPortfolioMomentum() {
-      if (portfolioMomentumId) {
-        cancelAnimationFrame(portfolioMomentumId);
-        portfolioMomentumId = null;
-      }
-    }
-
-    function runPortfolioMomentum() {
-      function step() {
-        if (Math.abs(portfolioVelocity) < 0.02) {
-          portfolioMomentumId = null;
-          portfolioScroll.classList.remove('portfolio-dragging');
-          return;
-        }
-        portfolioScroll.scrollLeft -= portfolioVelocity * 16;
-        portfolioVelocity *= 0.94; // decadimento: rallenta gradualmente
-        portfolioMomentumId = requestAnimationFrame(step);
-      }
-      portfolioMomentumId = requestAnimationFrame(step);
-    }
-
-    // Il trascinamento con il mouse è attivo solo su dispositivi con puntatore
-    // preciso (desktop) — su mobile/touch questi listener non vengono collegati
-    // per niente, così il tap normale continua a funzionare per aprire il video
-    // (altrimenti "preventDefault()" nel mousedown blocca anche il click sintetico
-    // che i browser mobile generano dopo un tap, ed era proprio questo il bug).
-    if (window.matchMedia('(pointer: fine)').matches) {
-      portfolioScroll.addEventListener('mousedown', dragMousedownHandler);
-      window.addEventListener('mousemove', dragMousemoveHandler);
-      window.addEventListener('mouseup', dragMouseupHandler);
-    }
-
-    function dragMousedownHandler(e) {
-      stopPortfolioMomentum();
-      portfolioIsDragging = true;
-      portfolioDragMoved = 0;
-      portfolioDragStartX = e.pageX;
-      portfolioDragScrollStart = portfolioScroll.scrollLeft;
-      portfolioLastX = e.pageX;
-      portfolioLastTime = performance.now();
-      portfolioVelocity = 0;
-      portfolioScroll.classList.add('portfolio-dragging'); // disattiva lo scroll-behavior CSS, che altrimenti va in conflitto con l'aggiornamento diretto e crea l'effetto "a scatti"
-      // NIENTE preventDefault() qui: chiamarlo su OGNI mousedown (anche un semplice click)
-      // rischia di bloccare in alcuni browser anche il click vero che apre il video.
-      // Lo spostiamo nel mousemove, quando sappiamo per certo che è un trascinamento reale.
-    }
-
-    function dragMousemoveHandler(e) {
-      if (!portfolioIsDragging) return;
-      const delta = e.pageX - portfolioDragStartX;
-      portfolioDragMoved = Math.max(portfolioDragMoved, Math.abs(delta));
-      if (portfolioDragMoved > 3) {
-        e.preventDefault(); // ora è un trascinamento vero: evita il trascinamento "fantasma" delle immagini
-      }
-      portfolioScroll.scrollLeft = portfolioDragScrollStart - delta;
-
-      const now = performance.now();
-      const dt = now - portfolioLastTime;
-      if (dt > 0) portfolioVelocity = (e.pageX - portfolioLastX) / dt;
-      portfolioLastX = e.pageX;
-      portfolioLastTime = now;
-    }
-
-    function dragMouseupHandler() {
-      if (!portfolioIsDragging) return;
-      portfolioIsDragging = false;
-      // la classe "portfolio-dragging" resta finché dura l'inerzia — la toglie runPortfolioMomentum()
-      runPortfolioMomentum();
-    }
-
     // ===== Lightbox video portfolio =====
     // Ogni progetto può avere uno o più video. Tutti su YouTube: dopo aver
     // caricato ogni video (consigliato: "Non in elenco" + "Consenti
@@ -1515,10 +1430,7 @@
     }
 
     document.querySelectorAll('.portfolio-card').forEach(card => {
-      card.addEventListener('click', () => {
-        if (portfolioDragMoved > 6) return; // era un trascinamento, non un click sulla card
-        openLightbox(card);
-      });
+      card.addEventListener('click', () => openLightbox(card));
     });
     lightboxClose.addEventListener('click', closeLightbox);
     lightboxBackdrop.addEventListener('click', closeLightbox);
