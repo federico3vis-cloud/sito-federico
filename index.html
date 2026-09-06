@@ -985,6 +985,17 @@
             <textarea id="message" name="Messaggio" rows="5" required placeholder="Raccontami il tuo progetto..." class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors resize-none"></textarea>
           </div>
 
+          <!-- Checkbox di consenso al trattamento dati. Quando aggiungi l'informativa
+               privacy (pagina o popup), aggiorna il testo qui sotto per includere un
+               link ad essa, es.: 'Ho letto e accetto <a href="#privacy">l'informativa
+               privacy</a>.' -->
+          <div class="mt-5 flex items-start gap-3">
+            <input type="checkbox" id="privacy-consent" name="Consenso Privacy" required class="mt-1 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 accent-acid">
+            <label for="privacy-consent" class="text-xs text-white/50 leading-relaxed">
+              Acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla mia richiesta.
+            </label>
+          </div>
+
           <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-6 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 active:scale-[0.98] transition-all">
             Invia il messaggio
             <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
