@@ -112,13 +112,12 @@
 <!-- AOS (Animate On Scroll) -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@1.62.0/dist/umd/lucide.min.js"></script>
 
-<!-- Font Awesome (solo per icone brand: Instagram, WhatsApp) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+<link rel="preload" href="/assets/fonts/benzin-semibold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/NimbusSanL-Reg.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  .fa-ico{display:inline-block;height:1em;width:auto;vertical-align:-.125em;fill:currentColor;overflow:visible}
   /* Benzin (titoli): font A PAGAMENTO di Supremat — su myfonts.com. Per un sito
      commerciale serve una licenza webfont; il file caricato è .ttf, quindi la
      dimensione non è ottimizzata come un .woff2, ma funziona comunque bene.
@@ -129,14 +128,14 @@
      il layout. */
   @font-face {
     font-family: 'Benzin';
-    src: url('/assets/fonts/benzin-semibold.ttf') format('truetype');
+    src: url('/assets/fonts/benzin-semibold.woff2') format('woff2'), url('/assets/fonts/benzin-semibold.ttf') format('truetype');
     font-weight: 500 800;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
     font-family: 'Nimbus Sans L';
-    src: url('/assets/fonts/NimbusSanL-Reg.otf') format('opentype');
+    src: url('/assets/fonts/NimbusSanL-Reg.woff2') format('woff2'), url('/assets/fonts/NimbusSanL-Reg.otf') format('opentype');
     font-weight: 400 600;
     font-style: normal;
     font-display: swap;
@@ -423,14 +422,14 @@
         <a href="/" aria-label="Federico Gennaro — home" class="flex items-center gap-2 group">
           <span class="relative flex h-9 items-center">
             <!-- Sostituisci con il tuo logo: assets/logos/logo.png (sfondo trasparente) -->
-            <img src="/assets/logos/logo.png" alt="Logo Federico Gennaro" class="h-9 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+            <img src="/assets/logos/logo.webp" alt="Logo Federico Gennaro" class="h-9 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
             <span class="hidden h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
           </span>
         </a>
 
         <div class="flex items-center gap-3">
           <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram di Federico Gennaro" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-white hover:border-acid/60 transition-colors">
-            <i class="fa-brands fa-instagram text-base"></i>
+            <svg class="fa-ico text-base" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
           </a>
           <a href="#contatti" class="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-acid to-acidDeep px-4 sm:px-5 py-2.5 text-sm font-semibold text-primary shadow-glow hover:opacity-90 transition-opacity">
             Parliamo
@@ -443,15 +442,15 @@
   <!-- ================= PAGINA AGENZIE (generata da _tools/genera-pagine.py) ================= -->
   <section class="pg-hero">
     <div class="max-w-7xl mx-auto px-5 sm:px-8">
-      <a href="/" class="pg-back"><i data-lucide="arrow-left" class="h-4 w-4"></i>Home</a>
+      <a href="/" class="pg-back"><svg class="lucide lucide-arrow-left h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Home</a>
       <div class="pg-hero-grid">
         <div data-aos="fade-up">
           <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Per agenzie</span>
           <h1 class="pg-h1">Il video per i tuoi clienti,<br>in buone mani.</h1>
           <p class="pg-sub">Collaboro con agenzie di comunicazione per riprese e montaggio dei loro progetti.</p>
           <div class="pg-ctas">
-            <a href="#contatti" class="pg-btn pg-btn-main">Raccontami il progetto <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
-            <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20scrivo%20da%20un%27agenzia%20di%20comunicazione%20e%20vorrei%20collaborare" target="_blank" rel="noopener" class="pg-btn pg-btn-ghost"><i class="fa-brands fa-whatsapp text-lg"></i>WhatsApp</a>
+            <a href="#contatti" class="pg-btn pg-btn-main">Raccontami il progetto <svg class="lucide lucide-arrow-up-right h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>
+            <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20scrivo%20da%20un%27agenzia%20di%20comunicazione%20e%20vorrei%20collaborare" target="_blank" rel="noopener" class="pg-btn pg-btn-ghost"><svg class="fa-ico text-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>WhatsApp</a>
           </div>
         </div>
       </div>
@@ -466,14 +465,14 @@
         <div id="portfolio-scroll" class="no-scrollbar flex gap-6 overflow-x-auto snap-x snap-proximity scroll-smooth px-5 sm:px-8 pb-2">
           <button type="button"
             data-project="despar" data-title="DESPAR" data-cat="commercial" data-category="Commercial · Social"
-            data-poster="/assets/images/portfolio-despar.jpg"
+            data-poster="/assets/images/portfolio-despar.webp"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="/assets/images/portfolio-despar.jpg" alt="Fermo immagine dai contenuti social di DESPAR" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="/assets/images/portfolio-despar.webp" alt="Fermo immagine dai contenuti social di DESPAR" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                  <svg class="lucide lucide-play h-5 w-5 text-white ml-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
                 </span>
               </div>
             </div>
@@ -484,14 +483,14 @@
           </button>
           <button type="button"
             data-project="ard-discount" data-title="ARD Discount" data-cat="commercial" data-category="Commercial · Campagna"
-            data-poster="/assets/images/portfolio-ard-discount.jpg"
+            data-poster="/assets/images/portfolio-ard-discount.webp"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="/assets/images/portfolio-ard-discount.jpg" alt="Fermo immagine dalla campagna reel di ARD Discount" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="/assets/images/portfolio-ard-discount.webp" alt="Fermo immagine dalla campagna reel di ARD Discount" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                  <svg class="lucide lucide-play h-5 w-5 text-white ml-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
                 </span>
               </div>
             </div>
@@ -502,14 +501,14 @@
           </button>
           <button type="button"
             data-project="polara" data-title="Polara" data-cat="commercial" data-category="Commercial · Reel"
-            data-poster="/assets/images/portfolio-polara.jpg"
+            data-poster="/assets/images/portfolio-polara.webp"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="/assets/images/portfolio-polara.jpg" alt="Fermo immagine dai contenuti social di Polara" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="/assets/images/portfolio-polara.webp" alt="Fermo immagine dai contenuti social di Polara" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                  <svg class="lucide lucide-play h-5 w-5 text-white ml-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
                 </span>
               </div>
             </div>
@@ -520,14 +519,14 @@
           </button>
           <button type="button"
             data-project="euphoria" data-title="EUPHORIA" data-cat="event" data-category="Event · Aftermovie"
-            data-poster="/assets/images/portfolio-euphoria.jpg"
+            data-poster="/assets/images/portfolio-euphoria.webp"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="/assets/images/portfolio-euphoria.jpg" alt="Fermo immagine dalle riprese dell'evento EUPHORIA" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="/assets/images/portfolio-euphoria.webp" alt="Fermo immagine dalle riprese dell'evento EUPHORIA" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                  <svg class="lucide lucide-play h-5 w-5 text-white ml-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
                 </span>
               </div>
             </div>
@@ -538,14 +537,14 @@
           </button>
           <button type="button"
             data-project="tenuta-donna-fina" data-title="Tenuta Donna Fina" data-cat="commercial" data-category="Commercial · Reel"
-            data-poster="/assets/images/portfolio-tenuta-donna-fina.jpg"
+            data-poster="/assets/images/portfolio-tenuta-donna-fina.webp"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="/assets/images/portfolio-tenuta-donna-fina.jpg" alt="Fermo immagine dai contenuti social di Tenuta Donna Fina" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="/assets/images/portfolio-tenuta-donna-fina.webp" alt="Fermo immagine dai contenuti social di Tenuta Donna Fina" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                  <svg class="lucide lucide-play h-5 w-5 text-white ml-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
                 </span>
               </div>
             </div>
@@ -556,14 +555,14 @@
           </button>
           <button type="button"
             data-project="cantina-frasca" data-title="Cantina Frasca" data-cat="commercial" data-category="Commercial · Spot"
-            data-poster="/assets/images/portfolio-cantina-frasca.jpg"
+            data-poster="/assets/images/portfolio-cantina-frasca.webp"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
               <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
-              <img src="/assets/images/portfolio-cantina-frasca.jpg" alt="Fermo immagine dalle riprese di Cantina Frasca" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <img src="/assets/images/portfolio-cantina-frasca.webp" alt="Fermo immagine dalle riprese di Cantina Frasca" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
-                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                  <svg class="lucide lucide-play h-5 w-5 text-white ml-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
                 </span>
               </div>
             </div>
@@ -607,7 +606,7 @@
     <div id="lightbox-content" class="relative w-full max-w-3xl transition-all duration-200">
       <button id="lightbox-close" type="button" aria-label="Chiudi il video"
         class="absolute -top-12 right-0 sm:-top-2 sm:-right-12 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white hover:border-acid/60 hover:text-acid transition-colors">
-        <i data-lucide="x" class="h-5 w-5"></i>
+        <svg class="lucide lucide-x h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
 
       <div class="rounded-2xl overflow-hidden border border-line bg-black shadow-2xl">
@@ -615,7 +614,7 @@
           <video id="lightbox-video" class="absolute inset-0 h-full w-full hidden" controls playsinline preload="metadata"></video>
           <iframe id="lightbox-iframe" class="absolute inset-0 h-full w-full hidden" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video del progetto"></iframe>
           <div id="lightbox-fallback" class="absolute inset-0 hidden flex-col items-center justify-center gap-3 text-center px-6 text-white/50 text-sm">
-            <i data-lucide="film" class="h-8 w-8 text-white/25"></i>
+            <svg class="lucide lucide-film h-8 w-8 text-white/25" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>
             <p>Video in arrivo.</p>
           </div>
         </div>
@@ -643,7 +642,7 @@
         <h3 id="privacy-modal-title" class="font-display font-bold text-lg text-white">Informativa sulla privacy</h3>
         <button id="privacy-close" type="button" aria-label="Chiudi l'informativa"
           class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white hover:border-acid/60 hover:text-acid transition-colors">
-          <i data-lucide="x" class="h-5 w-5"></i>
+          <svg class="lucide lucide-x h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
 
@@ -707,14 +706,14 @@
           <div class="ct-time"><i></i>Rispondo di solito entro 24-48 ore</div>
 
           <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20scrivo%20da%20un%27agenzia%20di%20comunicazione%20e%20vorrei%20collaborare" target="_blank" rel="noopener" class="ct-wa">
-            <span class="ct-wa-icon"><i class="fa-brands fa-whatsapp"></i></span>
+            <span class="ct-wa-icon"><svg class="fa-ico " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></span>
             <span><strong>Scrivimi su WhatsApp</strong><small>La via più veloce</small></span>
-            <i data-lucide="arrow-up-right" class="h-4 w-4 ml-auto"></i>
+            <svg class="lucide lucide-arrow-up-right h-4 w-4 ml-auto" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
           </a>
 
           <div class="ct-links">
-            <a href="mailto:info@federicogennaro.it"><i data-lucide="mail" class="h-4 w-4"></i>info@federicogennaro.it</a>
-            <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i>@_federicogennaro</a>
+            <a href="mailto:info@federicogennaro.it"><svg class="lucide lucide-mail h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>info@federicogennaro.it</a>
+            <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener"><svg class="fa-ico " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>@_federicogennaro</a>
           </div>
         </div>
 
@@ -768,7 +767,7 @@
 
           <button type="submit" id="form-submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-6 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 active:scale-[0.98] transition-all">
             <span class="ct-btn-text">Invia il messaggio</span>
-            <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            <svg class="lucide lucide-arrow-up-right h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
           </button>
         </form>
 
@@ -781,7 +780,7 @@
     <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
         <a href="#top" class="flex items-center gap-2">
-          <img src="/assets/logos/logo.png" alt="Federico Gennaro" class="h-9 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+          <img src="/assets/logos/logo.webp" alt="Federico Gennaro" class="h-9 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
           <span class="hidden items-center gap-2">
             <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
             <span class="font-display font-bold text-white/80">Federico Gennaro</span>
@@ -790,13 +789,13 @@
 
         <div class="flex items-center gap-5 text-white/50">
           <a href="mailto:info@federicogennaro.it" class="hover:text-white transition-colors text-sm">info@federicogennaro.it</a>
-          <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://wa.me/393397305267" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-white transition-colors"><svg class="fa-ico " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+          <a href="https://wa.me/393397305267" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-white transition-colors"><svg class="fa-ico " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg></a>
         </div>
 
         <a href="#top" class="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
           Torna su
-          <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10"><i data-lucide="arrow-up" class="h-3.5 w-3.5"></i></span>
+          <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10"><svg class="lucide lucide-arrow-up h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg></span>
         </a>
       </div>
 
@@ -811,7 +810,7 @@
   <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20scrivo%20da%20un%27agenzia%20di%20comunicazione%20e%20vorrei%20collaborare"
      target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp"
      class="wa-pulse fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-acid text-primary shadow-glow hover:scale-110 transition-transform">
-    <i class="fa-brands fa-whatsapp text-2xl"></i>
+    <svg class="fa-ico text-2xl" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
   </a>
 
   <!-- ================= SCRIPTS ================= -->
@@ -819,9 +818,6 @@
   <script>
     // Icone Lucide e animazioni AOS arrivano da CDN esterni: se uno dei due non si
     // carica, il resto del sito (portfolio, video, form) deve funzionare lo stesso.
-    if (window.lucide) {
-      lucide.createIcons();
-    }
 
     // Animazioni allo scroll (se AOS non è disponibile, mostra subito tutti i contenuti)
     if (window.AOS) {
