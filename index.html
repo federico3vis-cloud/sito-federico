@@ -352,27 +352,53 @@
 <style id="categorie-mix">
   .cat-grid{display:grid;gap:1.25rem;grid-template-columns:1fr}
   @media (min-width:768px){.cat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-  .cat-tile{position:relative;display:block;overflow:hidden;border-radius:1.5rem;border:1px solid #262936;background:#161922;aspect-ratio:4/5;isolation:isolate;transition:border-color .3s}
-  @media (max-width:767px){.cat-tile{aspect-ratio:5/6}}
+  .cat-tile{position:relative;display:block;overflow:hidden;border-radius:1.5rem;border:1px solid #262936;background:#161922;aspect-ratio:16/9;isolation:isolate;transition:border-color .3s}
   .cat-media,.cat-media img,.cat-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .cat-media img{opacity:0;transform:scale(1.04);animation:catFade 12s infinite}
   .cat-media img:nth-child(2){animation-delay:4s}
   .cat-media img:nth-child(3){animation-delay:8s}
   @keyframes catFade{0%{opacity:0;transform:scale(1.04)}6%{opacity:1}33%{opacity:1}40%{opacity:0;transform:scale(1.14)}100%{opacity:0}}
   .cat-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,11,13,.92) 0%,rgba(10,11,13,.35) 45%,rgba(10,11,13,.1) 100%);z-index:1}
-  .cat-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.75rem}
+  .cat-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.25rem 1.5rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+  .cat-num,.cat-desc,.cat-cta-text{display:none}
   .cat-num{font-size:.75rem;letter-spacing:.2em;color:#c6ff2e;font-weight:600}
-  .cat-title{font-family:Benzin,system-ui,sans-serif;font-weight:800;font-size:clamp(1.75rem,3vw,2.5rem);line-height:1;margin-top:.5rem;letter-spacing:-.01em}
+  .cat-title{font-family:Benzin,system-ui,sans-serif;font-weight:800;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1;letter-spacing:-.01em}
   .cat-desc{margin-top:.75rem;color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.5;max-width:22rem}
-  .cat-cta{margin-top:1.25rem;display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.875rem;color:#fff}
-  .cat-cta span{display:flex;height:2.25rem;width:2.25rem;align-items:center;justify-content:center;border-radius:9999px;background:#c6ff2e;color:#0a0b0d;transition:transform .3s}
-  .cat-tile:hover .cat-cta span{transform:scale(1.12)}
+  .cat-cta{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.875rem;color:#fff}
+  .cat-cta>span:first-child{display:flex;height:2.25rem;width:2.25rem;align-items:center;justify-content:center;border-radius:9999px;background:#c6ff2e;color:#0a0b0d;transition:transform .3s}
+  .cat-tile:hover .cat-cta>span:first-child{transform:scale(1.12)}
   .cat-tile:hover{border-color:rgba(198,255,46,.5)}
   .cat-badge{position:absolute;top:1.25rem;left:1.25rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(10,11,13,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);border-radius:9999px;padding:.35rem .75rem}
   .cat-badge i{display:block;width:.45rem;height:.45rem;border-radius:9999px;background:#c6ff2e;animation:catPulse 1.6s infinite}
   .cat-media.has-video img{display:none}
   @keyframes catPulse{50%{opacity:.25}}
   @media (prefers-reduced-motion:reduce){.cat-media img{animation:none}.cat-media img:first-child{opacity:1}}
+</style>
+<style id="portfolio-ordine">
+  .pf-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+  .pf-filter{border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:.55rem 1.1rem;font-size:.875rem;font-weight:600;color:rgba(255,255,255,.7);transition:all .25s}
+  .pf-filter:hover{color:#fff;border-color:rgba(198,255,46,.6)}
+  .pf-filter.is-active{background:#c6ff2e;border-color:#c6ff2e;color:#0a0b0d}
+  .pf-wrap{margin-top:2rem}
+  .portfolio-card{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+  .portfolio-card>.p-6{flex:1}
+  .portfolio-card.is-hidden{display:none}
+  .pf-arrows{display:none!important}
+  @media (max-width:767px){
+    .pf-filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-1.25rem;margin-right:-1.25rem;padding:0 1.25rem}
+    .pf-filters::-webkit-scrollbar{display:none}
+    .pf-filter{flex-shrink:0;padding:.5rem 1rem;font-size:.8125rem}
+    #portfolio-scroll{scroll-padding-left:1.25rem}
+  }
+  @media (min-width:768px){
+    .pf-wrap{margin-left:0!important;margin-right:0!important}
+    .pf-wrap>.pointer-events-none{display:none}
+    #portfolio-scroll{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;overflow:visible;padding:0}
+    #portfolio-scroll .portfolio-card{width:auto}
+  }
+  @media (min-width:1024px){#portfolio-scroll{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .portfolio-card.pf-in{animation:pfIn .45s cubic-bezier(.22,1,.36,1)}
+  @keyframes pfIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 </style>
 </head>
 
@@ -459,39 +485,39 @@
   <!-- ================= CATEGORIE (MIX) ================= -->
   <section id="categorie" class="relative pb-24 sm:pb-32 scroll-mt-24">
     <div class="max-w-7xl mx-auto px-5 sm:px-8">
-      <div data-aos="fade-up" class="max-w-xl" style="margin-bottom:3rem">
+      <div data-aos="fade-up" class="max-w-xl" style="margin-bottom:2rem">
         <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Cosa racconto</span>
         <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Scegli la tua storia</h2>
       </div>
       <div class="cat-grid">
-        <a href="#portfolio" data-aos="fade-up" data-aos-delay="0" data-goto="polara" data-loop="" class="cat-tile group">
+        <a href="#portfolio" data-aos="fade-up" data-aos-delay="0" data-filter="commercial" data-loop="" class="cat-tile group">
           <div class="cat-media"><img src="assets/images/portfolio-polara.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-tenuta-donna-fina.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-despar.jpg" alt="" loading="lazy"></div>
           <span class="cat-badge"><i></i>Showreel</span>
           <div class="cat-body">
             <p class="cat-num">01</p>
             <h3 class="cat-title">Commercial</h3>
             <p class="cat-desc">Spot, reel e contenuti social per brand e aziende che vogliono farsi notare.</p>
-            <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span>Guarda i lavori</p>
+            <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span><span class="cat-cta-text">Guarda i lavori</span></p>
           </div>
         </a>
-        <a href="#portfolio" data-aos="fade-up" data-aos-delay="100" data-goto="carmelo-noemi" data-loop="" class="cat-tile group">
+        <a href="#portfolio" data-aos="fade-up" data-aos-delay="100" data-filter="wedding" data-loop="" class="cat-tile group">
           <div class="cat-media"><img src="assets/images/portfolio-carmelo-noemi.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-vito-alice.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-carmelo-noemi.jpg" alt="" loading="lazy"></div>
           <span class="cat-badge"><i></i>Showreel</span>
           <div class="cat-body">
             <p class="cat-num">02</p>
             <h3 class="cat-title">Wedding</h3>
             <p class="cat-desc">Il vostro giorno raccontato con discrezione, emozione e un montaggio cinematografico.</p>
-            <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span>Guarda i lavori</p>
+            <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span><span class="cat-cta-text">Guarda i lavori</span></p>
           </div>
         </a>
-        <a href="#portfolio" data-aos="fade-up" data-aos-delay="200" data-goto="welcome-2023" data-loop="" class="cat-tile group">
+        <a href="#portfolio" data-aos="fade-up" data-aos-delay="200" data-filter="event" data-loop="" class="cat-tile group">
           <div class="cat-media"><img src="assets/images/portfolio-euphoria.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-miami-music-week.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-welcome-2023.jpg" alt="" loading="lazy"></div>
           <span class="cat-badge"><i></i>Showreel</span>
           <div class="cat-body">
             <p class="cat-num">03</p>
             <h3 class="cat-title">Event</h3>
             <p class="cat-desc">Festival, serate e DJ set: l'energia dell'evento, pronta per i social.</p>
-            <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span>Guarda i lavori</p>
+            <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span><span class="cat-cta-text">Guarda i lavori</span></p>
           </div>
         </a>
       </div>
@@ -533,59 +559,6 @@
     </div>
   </section>
 
-  <!-- ================= SERVIZI ================= -->
-  <section id="servizi" class="relative py-24 sm:py-32 bg-secondary scroll-mt-24">
-    <svg class="parallax-el parallax-rotate absolute top-10 right-[4%] h-20 w-20 hidden sm:block" data-rotate-speed="0.2" viewBox="0 0 100 100" aria-hidden="true">
-      <rect x="8" y="8" width="84" height="84" rx="6" fill="none" stroke="#c6ff2e" stroke-opacity="0.3" stroke-width="1.5"></rect>
-    </svg>
-    <div class="max-w-7xl mx-auto px-5 sm:px-8">
-      <div data-aos="fade-up" class="max-w-2xl">
-        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Cosa Offro</span>
-        <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Servizi pensati per raccontare al meglio ogni momento.</h2>
-      </div>
-
-      <div class="mt-14 grid sm:grid-cols-2 gap-5">
-
-        <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
-            <i data-lucide="smartphone" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Reel &amp; Contenuti Social</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Contenuti verticali che fermano lo scroll e fanno crescere i tuoi canali.</p>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acidDeep/15 text-acidDeep">
-            <i data-lucide="megaphone" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Video Commerciali &amp; Spot</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Video pensati per vendere, non solo per essere visti.</p>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="0" class="card-hover group rounded-2xl border border-line bg-card p-7">
-          <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-acid/15 text-acid">
-            <i data-lucide="heart" class="h-5 w-5"></i>
-          </div>
-          <h3 class="mt-5 font-display font-bold text-lg">Video Matrimoni</h3>
-          <p class="mt-2 text-sm text-white/55 leading-relaxed">Ogni matrimonio raccontato con uno sguardo cinematografico.</p>
-        </div>
-
-        <a href="#contatti" data-aos="fade-up" data-aos-delay="80" class="card-hover group rounded-2xl border border-line bg-gradient-to-br from-acid/20 to-acidDeep/10 p-7 flex flex-col justify-between">
-          <div>
-            <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white">
-              <i data-lucide="message-circle" class="h-5 w-5"></i>
-            </div>
-            <h3 class="mt-5 font-display font-bold text-lg">Non sai da dove iniziare?</h3>
-            <p class="mt-2 text-sm text-white/70 leading-relaxed">Raccontami il tuo progetto: ti dico onestamente cosa serve.</p>
-          </div>
-          <span class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:gap-3 transition-all">
-            Parliamone <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
-          </span>
-        </a>
-
-      </div>
-    </div>
-  </section>
 
   <!-- ================= PORTFOLIO ================= -->
   <section id="portfolio" class="relative py-24 sm:py-32 scroll-mt-24">
@@ -598,7 +571,7 @@
           <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Portfolio</span>
           <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Produzioni selezionate</h2>
         </div>
-        <div class="flex items-center gap-2 shrink-0">
+        <div class="pf-arrows flex items-center gap-2 shrink-0">
           <button type="button" id="portfolio-prev" aria-label="Progetto precedente" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-white hover:border-acid/60 disabled:opacity-30 disabled:hover:border-white/10 disabled:hover:text-white/70 transition-colors">
             <i data-lucide="chevron-left" class="h-4 w-4"></i>
           </button>
@@ -608,7 +581,14 @@
         </div>
       </div>
 
-      <div class="mt-14 relative -mx-5 sm:-mx-8">
+      <div class="pf-filters" role="group" aria-label="Filtra i lavori">
+        <button type="button" class="pf-filter is-active" data-filter="all">Tutti</button>
+        <button type="button" class="pf-filter" data-filter="commercial">Commercial</button>
+        <button type="button" class="pf-filter" data-filter="wedding">Wedding</button>
+        <button type="button" class="pf-filter" data-filter="event">Event</button>
+      </div>
+
+      <div class="pf-wrap relative -mx-5 sm:-mx-8">
         <div class="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-primary to-transparent z-10"></div>
         <div class="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-primary to-transparent z-10"></div>
 
@@ -616,7 +596,7 @@
 
           <!-- Progetto 1: Polara -->
           <button type="button" data-aos="fade-up"
-            data-project="polara" data-title="Polara" data-category="Reel · Social Content"
+            data-project="polara" data-title="Polara" data-cat="commercial" data-category="Commercial · Reel"
             data-poster="assets/images/portfolio-polara.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -630,13 +610,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Polara</h3>
-              <p class="text-sm text-white/50 mt-1">Reel · Social Content</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Reel</p>
             </div>
           </button>
 
           <!-- Progetto 2: Carmelo & Noemi -->
           <button type="button" data-aos="fade-up"
-            data-project="carmelo-noemi" data-title="Carmelo &amp; Noemi" data-category="Wedding Film"
+            data-project="carmelo-noemi" data-title="Carmelo &amp; Noemi" data-cat="wedding" data-category="Wedding · Film"
             data-poster="assets/images/portfolio-carmelo-noemi.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -650,13 +630,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Carmelo &amp; Noemi</h3>
-              <p class="text-sm text-white/50 mt-1">Wedding Film</p>
+              <p class="text-sm text-white/50 mt-1">Wedding · Film</p>
             </div>
           </button>
 
           <!-- Progetto 3: Welcome 2023 -->
           <button type="button" data-aos="fade-up"
-            data-project="welcome-2023" data-title="Welcome 2023" data-category="Video Evento"
+            data-project="welcome-2023" data-title="Welcome 2023" data-cat="event" data-category="Event · Aftermovie"
             data-poster="assets/images/portfolio-welcome-2023.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -670,13 +650,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Welcome 2023</h3>
-              <p class="text-sm text-white/50 mt-1">Video Evento</p>
+              <p class="text-sm text-white/50 mt-1">Event · Aftermovie</p>
             </div>
           </button>
 
           <!-- Progetto 4: EUPHORIA -->
           <button type="button" data-aos="fade-up"
-            data-project="euphoria" data-title="EUPHORIA" data-category="Video Evento"
+            data-project="euphoria" data-title="EUPHORIA" data-cat="event" data-category="Event · Aftermovie"
             data-poster="assets/images/portfolio-euphoria.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -690,13 +670,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">EUPHORIA</h3>
-              <p class="text-sm text-white/50 mt-1">Video Evento</p>
+              <p class="text-sm text-white/50 mt-1">Event · Aftermovie</p>
             </div>
           </button>
 
           <!-- Progetto 5: Tenuta Donna Fina -->
           <button type="button" data-aos="fade-up"
-            data-project="tenuta-donna-fina" data-title="Tenuta Donna Fina" data-category="Reel · Location"
+            data-project="tenuta-donna-fina" data-title="Tenuta Donna Fina" data-cat="commercial" data-category="Commercial · Reel"
             data-poster="assets/images/portfolio-tenuta-donna-fina.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -710,13 +690,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Tenuta Donna Fina</h3>
-              <p class="text-sm text-white/50 mt-1">Reel · Location</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Reel</p>
             </div>
           </button>
 
           <!-- Progetto 6: DESPAR -->
           <button type="button" data-aos="fade-up"
-            data-project="despar" data-title="DESPAR" data-category="Contenuti Social · GDO"
+            data-project="despar" data-title="DESPAR" data-cat="commercial" data-category="Commercial · Social"
             data-poster="assets/images/portfolio-despar.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -730,13 +710,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">DESPAR</h3>
-              <p class="text-sm text-white/50 mt-1">Contenuti Social · GDO</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Social</p>
             </div>
           </button>
 
           <!-- Progetto 7: Miami Music Week & ADE -->
           <button type="button" data-aos="fade-up"
-            data-project="miami-music-week-ade" data-title="Miami Music Week &amp; ADE" data-category="Video Evento"
+            data-project="miami-music-week-ade" data-title="Miami Music Week &amp; ADE" data-cat="event" data-category="Event · Reel"
             data-poster="assets/images/portfolio-miami-music-week.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -750,13 +730,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Miami Music Week &amp; ADE</h3>
-              <p class="text-sm text-white/50 mt-1">Video Evento</p>
+              <p class="text-sm text-white/50 mt-1">Event · Reel</p>
             </div>
           </button>
 
           <!-- Progetto 8: Ritratti in Corso -->
           <button type="button" data-aos="fade-up"
-            data-project="ritratti-in-corso" data-title="Ritratti in Corso" data-category="Reel · Documentario"
+            data-project="ritratti-in-corso" data-title="Ritratti in Corso" data-cat="commercial" data-category="Commercial · Documentario"
             data-poster="assets/images/portfolio-ritratti-in-corso.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -770,13 +750,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Ritratti in Corso</h3>
-              <p class="text-sm text-white/50 mt-1">Reel · Documentario</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Documentario</p>
             </div>
           </button>
 
           <!-- Progetto 9: ARD Discount -->
           <button type="button" data-aos="fade-up"
-            data-project="ard-discount" data-title="ARD Discount" data-category="Campagna Reel · Retail"
+            data-project="ard-discount" data-title="ARD Discount" data-cat="commercial" data-category="Commercial · Campagna"
             data-poster="assets/images/portfolio-ard-discount.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -790,13 +770,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">ARD Discount</h3>
-              <p class="text-sm text-white/50 mt-1">Campagna Reel · Retail</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Campagna</p>
             </div>
           </button>
 
           <!-- Progetto 10: Cantina Frasca -->
           <button type="button" data-aos="fade-up"
-            data-project="cantina-frasca" data-title="Cantina Frasca" data-category="Video Commerciale"
+            data-project="cantina-frasca" data-title="Cantina Frasca" data-cat="commercial" data-category="Commercial · Spot"
             data-poster="assets/images/portfolio-cantina-frasca.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -810,13 +790,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Cantina Frasca</h3>
-              <p class="text-sm text-white/50 mt-1">Video Commerciale</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Spot</p>
             </div>
           </button>
 
           <!-- Progetto 11: Ottica Moncada -->
           <button type="button" data-aos="fade-up"
-            data-project="ottica-moncada" data-title="Ottica Moncada" data-category="Reel · Retail"
+            data-project="ottica-moncada" data-title="Ottica Moncada" data-cat="commercial" data-category="Commercial · Reel"
             data-poster="assets/images/portfolio-ottica-moncada.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -830,13 +810,13 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Ottica Moncada</h3>
-              <p class="text-sm text-white/50 mt-1">Reel · Retail</p>
+              <p class="text-sm text-white/50 mt-1">Commercial · Reel</p>
             </div>
           </button>
 
           <!-- Progetto 12: Vito & Alice -->
           <button type="button" data-aos="fade-up"
-            data-project="vito-alice" data-title="Vito &amp; Alice" data-category="Wedding Film"
+            data-project="vito-alice" data-title="Vito &amp; Alice" data-cat="wedding" data-category="Wedding · Film"
             data-poster="assets/images/portfolio-vito-alice.jpg"
             class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
             <div class="relative aspect-video overflow-hidden">
@@ -850,7 +830,7 @@
             </div>
             <div class="p-6">
               <h3 class="font-display font-bold text-xl">Vito &amp; Alice</h3>
-              <p class="text-sm text-white/50 mt-1">Wedding Film</p>
+              <p class="text-sm text-white/50 mt-1">Wedding · Film</p>
             </div>
           </button>
 
@@ -1551,13 +1531,11 @@
     const tiles = document.querySelectorAll('.cat-tile');
     tiles.forEach(tile => {
       tile.addEventListener('click', e => {
-        const slug = tile.dataset.goto;
-        const card = slug && document.querySelector('.portfolio-card[data-project="' + slug + '"]');
-        const scroller = document.getElementById('portfolio-scroll');
-        if (!card || !scroller) return;
+        const f = tile.dataset.filter;
+        if (!f || !window.setPortfolioFilter) return;
         e.preventDefault();
+        window.setPortfolioFilter(f);
         document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
-        scroller.scrollTo({ left: card.offsetLeft - scroller.offsetLeft - 20, behavior: 'smooth' });
       });
       const src = tile.dataset.loop;
       if (!src || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -1572,6 +1550,28 @@
         else v.pause();
       }, { threshold: 0.25 }).observe(tile);
     });
+  })();
+</script>
+
+<script>
+  // Filtri portfolio (Tutti / Commercial / Wedding / Event)
+  (function () {
+    const btns = document.querySelectorAll('.pf-filter');
+    const cards = document.querySelectorAll('#portfolio-scroll .portfolio-card');
+    const scroller = document.getElementById('portfolio-scroll');
+    function setFilter(f) {
+      btns.forEach(b => b.classList.toggle('is-active', b.dataset.filter === f));
+      cards.forEach(c => {
+        const show = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('is-hidden', !show);
+        c.classList.remove('pf-in');
+        if (show) { void c.offsetWidth; c.classList.add('pf-in'); }
+      });
+      if (scroller) scroller.scrollLeft = 0;
+      scroller && scroller.dispatchEvent(new Event('scroll'));
+    }
+    btns.forEach(b => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+    window.setPortfolioFilter = setFilter;
   })();
 </script>
 </body>
