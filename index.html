@@ -371,6 +371,13 @@
   .cat-badge{position:absolute;top:1.25rem;left:1.25rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(10,11,13,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);border-radius:9999px;padding:.35rem .75rem}
   .cat-badge i{display:block;width:.45rem;height:.45rem;border-radius:9999px;background:#c6ff2e;animation:catPulse 1.6s infinite}
   .cat-media.has-video img{display:none}
+  .ag-banner{margin-top:1.25rem;display:flex;align-items:center;gap:1rem;border:1px solid #262936;background:#161922;border-radius:1.25rem;padding:1rem 1.25rem;transition:border-color .25s}
+  .ag-banner:hover{border-color:rgba(198,255,46,.5)}
+  .ag-k{flex-shrink:0;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:#0a0b0d;background:#c6ff2e;border-radius:9999px;padding:.3rem .7rem}
+  .ag-t{font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.4}
+  .ag-go{margin-left:auto;flex-shrink:0;display:flex;height:2.25rem;width:2.25rem;align-items:center;justify-content:center;border-radius:9999px;border:1px solid rgba(255,255,255,.15);transition:all .25s}
+  .ag-banner:hover .ag-go{background:#c6ff2e;color:#0a0b0d;border-color:#c6ff2e}
+  @media (max-width:639px){.ag-banner{flex-wrap:wrap}.ag-go{display:none}}
   @keyframes catPulse{50%{opacity:.25}}
   @media (prefers-reduced-motion:reduce){.cat-media img{animation:none}.cat-media img:first-child{opacity:1}}
 </style>
@@ -518,7 +525,7 @@
         <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Scegli la tua storia</h2>
       </div>
       <div class="cat-grid">
-        <a href="#portfolio" data-aos="fade-up" data-aos-delay="0" data-filter="commercial" data-loop="" class="cat-tile group">
+        <a href="/commercial/" data-aos="fade-up" data-aos-delay="0" data-loop="" class="cat-tile group">
           <div class="cat-media"><img src="assets/images/portfolio-polara.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-tenuta-donna-fina.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-despar.jpg" alt="" loading="lazy"></div>
           <span class="cat-badge"><i></i>Showreel</span>
           <div class="cat-body">
@@ -528,7 +535,7 @@
             <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span><span class="cat-cta-text">Guarda i lavori</span></p>
           </div>
         </a>
-        <a href="#portfolio" data-aos="fade-up" data-aos-delay="100" data-filter="wedding" data-loop="" class="cat-tile group">
+        <a href="/wedding/" data-aos="fade-up" data-aos-delay="100" data-loop="" class="cat-tile group">
           <div class="cat-media"><img src="assets/images/portfolio-carmelo-noemi.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-vito-alice.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-carmelo-noemi.jpg" alt="" loading="lazy"></div>
           <span class="cat-badge"><i></i>Showreel</span>
           <div class="cat-body">
@@ -538,7 +545,7 @@
             <p class="cat-cta"><span><i data-lucide="play" class="h-4 w-4 ml-0.5"></i></span><span class="cat-cta-text">Guarda i lavori</span></p>
           </div>
         </a>
-        <a href="#portfolio" data-aos="fade-up" data-aos-delay="200" data-filter="event" data-loop="" class="cat-tile group">
+        <a href="/event/" data-aos="fade-up" data-aos-delay="200" data-loop="" class="cat-tile group">
           <div class="cat-media"><img src="assets/images/portfolio-euphoria.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-miami-music-week.jpg" alt="" loading="lazy"><img src="assets/images/portfolio-welcome-2023.jpg" alt="" loading="lazy"></div>
           <span class="cat-badge"><i></i>Showreel</span>
           <div class="cat-body">
@@ -549,6 +556,12 @@
           </div>
         </a>
       </div>
+
+      <a href="/agenzie/" data-aos="fade-up" class="ag-banner">
+        <span class="ag-k">Per agenzie</span>
+        <span class="ag-t">Lavori in un'agenzia di comunicazione? Collaboriamo sui video dei tuoi clienti.</span>
+        <span class="ag-go"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span>
+      </a>
     </div>
   </section>
 

@@ -1,0 +1,1216 @@
+<!--
+  ============================================================================
+  FEDERICO GENNARO — Portfolio / Landing Page
+  ============================================================================
+  STRUTTURA CARTELLE CONSIGLIATA PER IL REPOSITORY GITHUB PAGES:
+
+  /
+  ├── index.html                  <- questo file, va nella root del repo
+  ├── assets/
+  │   ├── fonts/
+  │   │   ├── benzin-semibold.ttf      <- font A PAGAMENTO per uso commerciale (Supremat)
+  │   │   └── NimbusSanL-Reg.otf       <- font LIBERO/GPL (URW) — nessuna licenza da comprare
+  │   ├── images/       (copertine progetto, consigliato 1600x900 16:9 — elenco nell'ordine in cui compaiono sul sito)
+  │   │   ├── portfolio-polara.jpg
+  │   │   ├── portfolio-carmelo-noemi.jpg
+  │   │   ├── portfolio-welcome-2023.jpg
+  │   │   ├── portfolio-euphoria.jpg
+  │   │   ├── portfolio-tenuta-donna-fina.jpg
+  │   │   ├── portfolio-despar.jpg
+  │   │   ├── portfolio-miami-music-week.jpg
+  │   │   ├── portfolio-ritratti-in-corso.jpg
+  │   │   ├── portfolio-ard-discount.jpg
+  │   │   ├── portfolio-cantina-frasca.jpg
+  │   │   ├── portfolio-ottica-moncada.jpg
+  │   │   ├── portfolio-vito-alice.jpg
+  │   │   ├── og-cover.jpg        <- immagine di anteprima quando condividi il link (1200x630)
+  │   │   └── avatar.jpg          <- foto profilo per la sezione "Chi Sono"
+  │   └── logos/
+  │       ├── logo.png            <- il TUO logo per la navbar (sostituisce il badge "FG"), sfondo trasparente
+  │       ├── ard-discount.png    <- loghi aziende, sfondo trasparente — i colori restano quelli originali
+  │       ├── brandificio.png
+  │       ├── cean.png
+  │       ├── despar.png
+  │       ├── kasarreda.png
+  │       ├── polara.png
+  │       └── tenutadonnafina.png
+  └── favicon.ico                 <- opzionale, favicon del sito
+
+  NOTE:
+  - FONT: i titoli usano Benzin Semibold (a pagamento, serve licenza per uso
+    commerciale — vedi il commento nel tag <style>), il resto del testo usa
+    Nimbus Sans L Regular, che è libero/GPL: nessun acquisto necessario.
+    Finché i file non sono in assets/fonts/, il sito mostra automaticamente
+    un font di sistema senza rotture di layout.
+  - Tutte le immagini mancanti in assets/ non rompono il layout: sono previsti
+    dei placeholder testuali/gradiente che scompaiono automaticamente appena
+    carichi i file reali con lo stesso nome (vedi attributi onerror).
+  - VIDEO PORTFOLIO: cliccando una card del portfolio si apre una finestra
+    modale (lightbox) con il player. Tutti i video sono su YouTube: carica
+    ogni video come "Non in elenco" (con "Consenti incorporamento" attivo),
+    poi nell'oggetto `portfolioVideos` dentro il tag <script> in fondo al
+    file sostituisci ogni `src: 'INSERISCI-ID-...'` con l'ID a 11 caratteri
+    del video (da youtube.com/watch?v=ABC123XYZ90 l'ID è "ABC123XYZ90").
+    Finché il placeholder non è sostituito, la modale mostra "Video in
+    arrivo" al posto di un player rotto.
+  - ORIENTAMENTO REEL VERTICALI: ogni video ha un campo `orientation` —
+    `'vertical'` fa aprire la modale in formato stretto e alto (adatto ai
+    reel per i social), `'horizontal'` (o il campo assente) usa il formato
+    classico 16:9. Impostalo in base al formato reale del video che carichi.
+  - AGGIUNGERE PROGETTI AL PORTFOLIO: la sezione scorre in orizzontale come
+    un carosello (swipe su mobile, frecce su desktop) — basta copiare uno dei
+    blocchi <button class="portfolio-card"...> dentro #portfolio-scroll e
+    cambiare data-project/data-title/data-category/data-poster, l'immagine e
+    i tag. Non serve bilanciare colonne o righe: puoi aggiungerne quanti ne
+    vuoi, il carosello si allunga da solo. Aggiungi anche la voce
+    corrispondente in `portfolioVideos` per collegare il video.
+  - PIÙ VIDEO PER PROGETTO: ogni voce di `portfolioVideos` è un array — basta
+    aggiungere un altro oggetto `{ label: '...', type: 'youtube',
+    orientation: 'vertical'|'horizontal', src: 'ID-YOUTUBE' }` per far
+    comparire un altro pulsante nella modale (vedi ARD Discount, Miami Music Week &amp; ADE,
+    DESPAR e Ritratti in Corso, già impostati con più video ciascuno come
+    esempio).
+  - Per pubblicare: Settings → Pages → Deploy from branch → main / (root).
+  - Il form contatti usa FormSubmit (nessun backend necessario). La prima
+    email inviata richiede una conferma one-time da parte tua sulla casella
+    info@federicogennaro.it.
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Eventi e Aftermovie in Sicilia — Federico Gennaro, Videomaker</title>
+<meta name="description" content="Aftermovie, reel e contenuti per festival, serate, DJ set ed eventi aziendali. Videomaker a Modica (Ragusa), disponibile in tutta la Sicilia.">
+<meta name="theme-color" content="#0a0b0d">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Video Eventi e Aftermovie in Sicilia — Federico Gennaro, Videomaker">
+<meta property="og:description" content="Aftermovie, reel e contenuti per festival, serate, DJ set ed eventi aziendali. Videomaker a Modica (Ragusa), disponibile in tutta la Sicilia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://federicogennaro.it/event/">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Federico Gennaro">
+<!-- Immagine mostrata quando il link viene condiviso (WhatsApp, Instagram, ecc.): 1200x630 -->
+<meta property="og:image" content="https://federicogennaro.it/assets/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Federico Gennaro — Videomaker & Video Editor">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://federicogennaro.it/event/">
+
+<!-- Dati strutturati (Schema.org) — aiutano Google a capire chi sei, cosa offri e dove operi.
+     Non modificano l'aspetto del sito: sono invisibili ai visitatori. Se cambi indirizzo,
+     telefono o servizi, aggiorna anche qui per restare coerente col resto della pagina. -->
+
+<!-- favicon (facoltativo, sostituisci con il tuo file) -->
+<link rel="icon" href="/favicon.ico" sizes="any">
+
+<!-- Tailwind CSS: compilato e incluso più sotto (niente più CDN, pagina più veloce) -->
+
+<!-- AOS (Animate On Scroll) -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@1.62.0/dist/umd/lucide.min.js"></script>
+
+<!-- Font Awesome (solo per icone brand: Instagram, WhatsApp) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  /* Benzin (titoli): font A PAGAMENTO di Supremat — su myfonts.com. Per un sito
+     commerciale serve una licenza webfont; il file caricato è .ttf, quindi la
+     dimensione non è ottimizzata come un .woff2, ma funziona comunque bene.
+     Nimbus Sans L (resto del testo): versione LIBERA/GPL di URW — nessun
+     acquisto necessario, si può usare così com'è.
+     Finché i file non sono in assets/fonts/, font-display: swap fa ricadere
+     il sito su un font di sistema in modo automatico, senza rompere
+     il layout. */
+  @font-face {
+    font-family: 'Benzin';
+    src: url('/assets/fonts/benzin-semibold.ttf') format('truetype');
+    font-weight: 500 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Nimbus Sans L';
+    src: url('/assets/fonts/NimbusSanL-Reg.otf') format('opentype');
+    font-weight: 400 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+  body { background-color: #0a0b0d; overflow-x: hidden; max-width: 100%; }
+
+  ::selection { background: #c6ff2e; color: #0a0b0d; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0b0d; }
+  ::-webkit-scrollbar-thumb { background: #262936; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3f52; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid #c6ff2e;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
+  }
+
+  .glass { background: rgba(10,11,13,0.55); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #ffffff 0%, #e4ff9e 30%, #c6ff2e 55%, #7ed321 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-x 7s ease infinite;
+  }
+
+  @keyframes gradient-x { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+  @keyframes float-blob {
+    0%,100% { transform: translate(0,0) scale(1); }
+    50%     { transform: translate(24px,-28px) scale(1.06); }
+  }
+  .blob { animation: float-blob 13s ease-in-out infinite; }
+  .blob-delay { animation-delay: -6s; }
+
+  @keyframes wa-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(198,255,46,0.55); }
+    70%  { box-shadow: 0 0 0 16px rgba(198,255,46,0); }
+    100% { box-shadow: 0 0 0 0 rgba(198,255,46,0); }
+  }
+  .wa-pulse { animation: wa-pulse 2.6s infinite; }
+
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-25%); } }
+  .marquee-track { animation: marquee 32s linear infinite; }
+  .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+
+  .card-hover { transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .4s ease; }
+  .card-hover:hover { transform: translateY(-6px); border-color: rgba(124,92,255,0.5); }
+
+  .portfolio-img { transition: transform .7s cubic-bezier(.22,1,.36,1); }
+  .portfolio-card:hover .portfolio-img { transform: scale(1.06); }
+  .portfolio-play { transition: opacity .3s ease, transform .35s cubic-bezier(.22,1,.36,1); }
+  .portfolio-card:hover .portfolio-play,
+  .portfolio-card:focus-visible .portfolio-play { opacity: 1; transform: scale(1); }
+  .portfolio-card { appearance: none; -webkit-appearance: none; font: inherit; cursor: pointer; }
+
+  .logo-fade { opacity: .6; transition: opacity .3s ease; }
+  .logo-fade:hover { opacity: 1; }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Elementi decorativi di sfondo (cerchi/triangoli) che si muovono leggermente
+     con lo scroll — puramente estetici, non interattivi. */
+  .parallax-el {
+    pointer-events: none;
+    will-change: transform;
+  }
+
+
+  /* Lightbox in formato verticale, per i reel — il browser calcola da solo
+     la dimensione massima che rispetta il rapporto 9:16 dentro questi limiti. */
+  .lightbox-vertical-content { max-width: min(400px, 85vw); }
+  .lightbox-vertical-frame {
+    aspect-ratio: 9 / 16;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 78vh;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Cursore personalizzato: puntino preciso + anello che segue con un leggero ritardo.
+     Attivo solo su dispositivi con mouse (pointer: fine) — su mobile/tablet resta invariato. */
+  @media (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active a,
+    body.custom-cursor-active button,
+    body.custom-cursor-active input,
+    body.custom-cursor-active textarea {
+      cursor: none;
+    }
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: #c6ff2e;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: opacity .2s ease;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid rgba(198,255,46,0.55);
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width .25s ease, height .25s ease, border-color .25s ease,
+                background-color .25s ease, opacity .2s ease;
+  }
+
+  .cursor-ring.cursor-hover {
+    width: 56px;
+    height: 56px;
+    border-color: #c6ff2e;
+    background: rgba(198,255,46,0.08);
+  }
+
+  .cursor-dot.cursor-hidden,
+  .cursor-ring.cursor-hidden {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+
+<!-- Tailwind CSS compilato (v3.4.19) con le sole classi usate in questa pagina.
+     ATTENZIONE: se in futuro aggiungi classi Tailwind NUOVE, mai usate altrove nel file,
+     questo blocco va rigenerato, altrimenti quelle classi non avranno effetto. -->
+<style id="tailwind-compilato">*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:Nimbus Sans L,Helvetica Neue,Arial,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.inset-x-0{left:0;right:0}.inset-y-0{top:0;bottom:0}.-bottom-6{bottom:-1.5rem}.-right-4{right:-1rem}.-top-12{top:-3rem}.-top-24{top:-6rem}.bottom-10{bottom:2.5rem}.bottom-16{bottom:4rem}.bottom-5{bottom:1.25rem}.left-0{left:0}.left-1\/2{left:50%}.left-\[6\%\]{left:6%}.right-0{right:0}.right-5{right:1.25rem}.right-\[3\%\]{right:3%}.right-\[4\%\]{right:4%}.right-\[6\%\]{right:6%}.right-\[8\%\]{right:8%}.top-0{top:0}.top-10{top:2.5rem}.top-32{top:8rem}.top-40{top:10rem}.top-6{top:1.5rem}.z-10{z-index:10}.z-50{z-index:50}.z-\[60\]{z-index:60}.-mx-5{margin-left:-1.25rem;margin-right:-1.25rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-6{margin-bottom:1.5rem}.ml-0\.5{margin-left:.125rem}.mt-1{margin-top:.25rem}.mt-10{margin-top:2.5rem}.mt-14{margin-top:3.5rem}.mt-16{margin-top:4rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.mt-9{margin-top:2.25rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.aspect-\[4\/5\]{aspect-ratio:4/5}.aspect-video{aspect-ratio:16/9}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-14{height:3.5rem}.h-20{height:5rem}.h-24{height:6rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-96{height:24rem}.h-\[32rem\]{height:32rem}.h-full{height:100%}.max-h-\[85vh\]{max-height:85vh}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-14{width:3.5rem}.w-20{width:5rem}.w-24{width:6rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-96{width:24rem}.w-\[300px\]{width:300px}.w-\[32rem\]{width:32rem}.w-auto{width:auto}.w-full{width:100%}.w-max{width:-moz-max-content;width:max-content}.w-px{width:1px}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}.max-w-\[1600px\]{max-width:1600px}.max-w-xl{max-width:36rem}.shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%}.-translate-x-1\/2,.scale-75{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-75{--tw-scale-x:.75;--tw-scale-y:.75}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize-none{resize:none}.resize{resize:both}.snap-x{scroll-snap-type:x var(--tw-scroll-snap-strictness)}.snap-proximity{--tw-scroll-snap-strictness:proximity}.snap-start{scroll-snap-align:start}.scroll-mt-24{scroll-margin-top:6rem}.list-disc{list-style-type:disc}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:.375rem}.gap-10{gap:2.5rem}.gap-12{gap:3rem}.gap-16{gap:4rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.scroll-smooth{scroll-behavior:smooth}.whitespace-nowrap{white-space:nowrap}.rounded{border-radius:.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:.75rem}.border{border-width:1px}.border-y{border-top-width:1px}.border-b,.border-y{border-bottom-width:1px}.border-t{border-top-width:1px}.border-acid{--tw-border-opacity:1;border-color:rgb(198 255 46/var(--tw-border-opacity,1))}.border-acid\/40{border-color:rgba(198,255,46,.4)}.border-line{--tw-border-opacity:1;border-color:rgb(38 41 54/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.border-white\/15{border-color:hsla(0,0%,100%,.15)}.border-white\/20{border-color:hsla(0,0%,100%,.2)}.border-white\/30{border-color:hsla(0,0%,100%,.3)}.bg-acid{--tw-bg-opacity:1;background-color:rgb(198 255 46/var(--tw-bg-opacity,1))}.bg-acid\/10{background-color:rgba(198,255,46,.1)}.bg-acid\/15{background-color:rgba(198,255,46,.15)}.bg-acid\/25{background-color:rgba(198,255,46,.25)}.bg-acidDeep\/15{background-color:rgba(126,211,33,.15)}.bg-acidDeep\/20{background-color:rgba(126,211,33,.2)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-black\/85{background-color:rgba(0,0,0,.85)}.bg-card{--tw-bg-opacity:1;background-color:rgb(22 25 34/var(--tw-bg-opacity,1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(10 11 13/var(--tw-bg-opacity,1))}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(15 17 23/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-white\/15{background-color:hsla(0,0%,100%,.15)}.bg-white\/5{background-color:hsla(0,0%,100%,.05)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right,var(--tw-gradient-stops))}.bg-gradient-to-l{background-image:linear-gradient(to left,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.from-acid{--tw-gradient-from:#c6ff2e var(--tw-gradient-from-position);--tw-gradient-to:rgba(198,255,46,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-acid\/20{--tw-gradient-from:rgba(198,255,46,.2) var(--tw-gradient-from-position);--tw-gradient-to:rgba(198,255,46,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-acid\/25{--tw-gradient-from:rgba(198,255,46,.25) var(--tw-gradient-from-position);--tw-gradient-to:rgba(198,255,46,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-acid\/30{--tw-gradient-from:rgba(198,255,46,.3) var(--tw-gradient-from-position);--tw-gradient-to:rgba(198,255,46,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-acidDeep\/30{--tw-gradient-from:rgba(126,211,33,.3) var(--tw-gradient-from-position);--tw-gradient-to:rgba(126,211,33,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-primary{--tw-gradient-from:#0a0b0d var(--tw-gradient-from-position);--tw-gradient-to:rgba(10,11,13,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-secondary{--tw-gradient-from:#0f1117 var(--tw-gradient-from-position);--tw-gradient-to:rgba(15,17,23,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-card{--tw-gradient-to:rgba(22,25,34,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#161922 var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-acid\/10{--tw-gradient-to:rgba(198,255,46,.1) var(--tw-gradient-to-position)}.to-acidDeep{--tw-gradient-to:#7ed321 var(--tw-gradient-to-position)}.to-acidDeep\/10{--tw-gradient-to:rgba(126,211,33,.1) var(--tw-gradient-to-position)}.to-acidDeep\/15{--tw-gradient-to:rgba(126,211,33,.15) var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-contain{-o-object-fit:contain;object-fit:contain}.object-cover{-o-object-fit:cover;object-fit:cover}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-7{padding:1.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-7{padding-left:1.75rem;padding-right:1.75rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-24{padding-top:6rem;padding-bottom:6rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.pb-2{padding-bottom:.5rem}.pb-28{padding-bottom:7rem}.pl-5{padding-left:1.25rem}.pr-16{padding-right:4rem}.pt-10{padding-top:2.5rem}.pt-2{padding-top:.5rem}.pt-40{padding-top:10rem}.pt-6{padding-top:1.5rem}.text-left{text-align:left}.text-center{text-align:center}.font-display{font-family:Benzin,system-ui,sans-serif}.font-sans{font-family:Nimbus Sans L,Helvetica Neue,Arial,sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-\[1\.05\]{line-height:1.05}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-\[0\.2em\]{letter-spacing:.2em}.tracking-tight{letter-spacing:-.025em}.text-acid{--tw-text-opacity:1;color:rgb(198 255 46/var(--tw-text-opacity,1))}.text-acidDeep{--tw-text-opacity:1;color:rgb(126 211 33/var(--tw-text-opacity,1))}.text-primary{--tw-text-opacity:1;color:rgb(10 11 13/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/25{color:hsla(0,0%,100%,.25)}.text-white\/35{color:hsla(0,0%,100%,.35)}.text-white\/40{color:hsla(0,0%,100%,.4)}.text-white\/50{color:hsla(0,0%,100%,.5)}.text-white\/55{color:hsla(0,0%,100%,.55)}.text-white\/60{color:hsla(0,0%,100%,.6)}.text-white\/70{color:hsla(0,0%,100%,.7)}.text-white\/80{color:hsla(0,0%,100%,.8)}.text-white\/90{color:hsla(0,0%,100%,.9)}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-white\/30::-moz-placeholder{color:hsla(0,0%,100%,.3)}.placeholder-white\/30::placeholder{color:hsla(0,0%,100%,.3)}.accent-acid{accent-color:#c6ff2e}.opacity-0{opacity:0}.opacity-60{opacity:.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-glow{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-glow{--tw-shadow:0 0 60px -12px rgba(198,255,46,.45);--tw-shadow-colored:0 0 60px -12px var(--tw-shadow-color)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-black\/20{--tw-shadow-color:rgba(0,0,0,.2);--tw-shadow:var(--tw-shadow-colored)}.outline{outline-style:solid}.blur{--tw-blur:blur(8px)}.blur,.blur-\[110px\]{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.blur-\[110px\]{--tw-blur:blur(110px)}.blur-\[120px\]{--tw-blur:blur(120px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur{--tw-backdrop-blur:blur(8px)}.backdrop-blur,.backdrop-blur-sm{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px)}.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-200{transition-duration:.2s}.duration-300{transition-duration:.3s}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}.selection\:bg-acid ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(198 255 46/var(--tw-bg-opacity,1))}.selection\:bg-acid ::selection{--tw-bg-opacity:1;background-color:rgb(198 255 46/var(--tw-bg-opacity,1))}.selection\:bg-acid::-moz-selection{--tw-bg-opacity:1;background-color:rgb(198 255 46/var(--tw-bg-opacity,1))}.selection\:bg-acid::selection{--tw-bg-opacity:1;background-color:rgb(198 255 46/var(--tw-bg-opacity,1))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-acid\/60:hover{border-color:rgba(198,255,46,.6)}.hover\:border-white\/30:hover{border-color:hsla(0,0%,100%,.3)}.hover\:text-acid:hover{--tw-text-opacity:1;color:rgb(198 255 46/var(--tw-text-opacity,1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.hover\:text-white\/60:hover{color:hsla(0,0%,100%,.6)}.hover\:underline:hover{text-decoration-line:underline}.hover\:opacity-90:hover{opacity:.9}.focus\:border-acid\/60:focus{border-color:rgba(198,255,46,.6)}.active\:scale-\[0\.98\]:active{--tw-scale-x:0.98;--tw-scale-y:0.98;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.disabled\:opacity-30:disabled{opacity:.3}.disabled\:hover\:border-white\/10:hover:disabled{border-color:hsla(0,0%,100%,.1)}.disabled\:hover\:text-white\/70:hover:disabled{color:hsla(0,0%,100%,.7)}.group:hover .group-hover\:gap-3{gap:.75rem}@media (min-width:640px){.sm\:-right-12{right:-3rem}.sm\:-right-8{right:-2rem}.sm\:-top-2{top:-.5rem}.sm\:bottom-7{bottom:1.75rem}.sm\:right-7{right:1.75rem}.sm\:-mx-8{margin-left:-2rem;margin-right:-2rem}.sm\:block{display:block}.sm\:h-9{height:2.25rem}.sm\:w-16{width:4rem}.sm\:w-2{width:.5rem}.sm\:w-40{width:10rem}.sm\:w-\[360px\]{width:360px}.sm\:w-auto{width:auto}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-end{align-items:flex-end}.sm\:items-center{align-items:center}.sm\:justify-between{justify-content:space-between}.sm\:gap-4{gap:1rem}.sm\:whitespace-nowrap{white-space:nowrap}.sm\:p-8{padding:2rem}.sm\:px-5{padding-left:1.25rem;padding-right:1.25rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:px-8{padding-left:2rem;padding-right:2rem}.sm\:py-24{padding-top:6rem;padding-bottom:6rem}.sm\:py-32{padding-top:8rem;padding-bottom:8rem}.sm\:pb-36{padding-bottom:9rem}.sm\:pt-48{padding-top:12rem}.sm\:text-left{text-align:left}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-6xl{font-size:3.75rem;line-height:1}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}}@media (min-width:768px){.md\:block{display:block}}@media (min-width:1024px){.lg\:col-span-2{grid-column:span 2/span 2}.lg\:col-span-3{grid-column:span 3/span 3}.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-7{grid-column:span 7/span 7}.lg\:block{display:block}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.lg\:gap-16{gap:4rem}.lg\:gap-8{gap:2rem}.lg\:text-7xl{font-size:4.5rem;line-height:1}}</style>
+<style id="categorie-mix">
+  .cat-grid{display:grid;gap:1.25rem;grid-template-columns:1fr}
+  @media (min-width:768px){.cat-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .cat-tile{position:relative;display:block;overflow:hidden;border-radius:1.5rem;border:1px solid #262936;background:#161922;aspect-ratio:16/9;isolation:isolate;transition:border-color .3s}
+  .cat-media,.cat-media img,.cat-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .cat-media img{opacity:0;transform:scale(1.04);animation:catFade 12s infinite}
+  .cat-media img:nth-child(2){animation-delay:4s}
+  .cat-media img:nth-child(3){animation-delay:8s}
+  @keyframes catFade{0%{opacity:0;transform:scale(1.04)}6%{opacity:1}33%{opacity:1}40%{opacity:0;transform:scale(1.14)}100%{opacity:0}}
+  .cat-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,11,13,.92) 0%,rgba(10,11,13,.35) 45%,rgba(10,11,13,.1) 100%);z-index:1}
+  .cat-body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.25rem 1.5rem;display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}
+  .cat-num,.cat-desc,.cat-cta-text{display:none}
+  .cat-num{font-size:.75rem;letter-spacing:.2em;color:#c6ff2e;font-weight:600}
+  .cat-title{font-family:Benzin,system-ui,sans-serif;font-weight:800;font-size:clamp(1.5rem,2.2vw,2rem);line-height:1;letter-spacing:-.01em}
+  .cat-desc{margin-top:.75rem;color:rgba(255,255,255,.65);font-size:.95rem;line-height:1.5;max-width:22rem}
+  .cat-cta{flex-shrink:0;display:inline-flex;align-items:center;gap:.6rem;font-weight:600;font-size:.875rem;color:#fff}
+  .cat-cta>span:first-child{display:flex;height:2.25rem;width:2.25rem;align-items:center;justify-content:center;border-radius:9999px;background:#c6ff2e;color:#0a0b0d;transition:transform .3s}
+  .cat-tile:hover .cat-cta>span:first-child{transform:scale(1.12)}
+  .cat-tile:hover{border-color:rgba(198,255,46,.5)}
+  .cat-badge{position:absolute;top:1.25rem;left:1.25rem;z-index:2;display:inline-flex;align-items:center;gap:.45rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.85);background:rgba(10,11,13,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);border-radius:9999px;padding:.35rem .75rem}
+  .cat-badge i{display:block;width:.45rem;height:.45rem;border-radius:9999px;background:#c6ff2e;animation:catPulse 1.6s infinite}
+  .cat-media.has-video img{display:none}
+  .ag-banner{margin-top:1.25rem;display:flex;align-items:center;gap:1rem;border:1px solid #262936;background:#161922;border-radius:1.25rem;padding:1rem 1.25rem;transition:border-color .25s}
+  .ag-banner:hover{border-color:rgba(198,255,46,.5)}
+  .ag-k{flex-shrink:0;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:#0a0b0d;background:#c6ff2e;border-radius:9999px;padding:.3rem .7rem}
+  .ag-t{font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.4}
+  .ag-go{margin-left:auto;flex-shrink:0;display:flex;height:2.25rem;width:2.25rem;align-items:center;justify-content:center;border-radius:9999px;border:1px solid rgba(255,255,255,.15);transition:all .25s}
+  .ag-banner:hover .ag-go{background:#c6ff2e;color:#0a0b0d;border-color:#c6ff2e}
+  @media (max-width:639px){.ag-banner{flex-wrap:wrap}.ag-go{display:none}}
+  @keyframes catPulse{50%{opacity:.25}}
+  @media (prefers-reduced-motion:reduce){.cat-media img{animation:none}.cat-media img:first-child{opacity:1}}
+</style>
+<style id="portfolio-ordine">
+  .pf-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+  .pf-filter{border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:.55rem 1.1rem;font-size:.875rem;font-weight:600;color:rgba(255,255,255,.7);transition:all .25s}
+  .pf-filter:hover{color:#fff;border-color:rgba(198,255,46,.6)}
+  .pf-filter.is-active{background:#c6ff2e;border-color:#c6ff2e;color:#0a0b0d}
+  .pf-wrap{margin-top:2rem}
+  .portfolio-card{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+  .portfolio-card>.p-6{flex:1}
+  .portfolio-card.is-hidden{display:none}
+  .pf-arrows{display:none!important}
+  @media (max-width:767px){
+    .pf-filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-left:-1.25rem;margin-right:-1.25rem;padding:0 1.25rem}
+    .pf-filters::-webkit-scrollbar{display:none}
+    .pf-filter{flex-shrink:0;padding:.5rem 1rem;font-size:.8125rem}
+    #portfolio-scroll{scroll-padding-left:1.25rem}
+  }
+  @media (min-width:768px){
+    .pf-wrap{margin-left:0!important;margin-right:0!important}
+    .pf-wrap>.pointer-events-none{display:none}
+    #portfolio-scroll{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;overflow:visible;padding:0}
+    #portfolio-scroll .portfolio-card{width:auto}
+  }
+  @media (min-width:1024px){#portfolio-scroll{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .portfolio-card.pf-in{animation:pfIn .45s cubic-bezier(.22,1,.36,1)}
+  @keyframes pfIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+<style id="contatti-v2">
+  .ct-time{margin-top:1.75rem;display:inline-flex;align-items:center;gap:.6rem;font-size:.8rem;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:.45rem .9rem}
+  .ct-time i{width:.5rem;height:.5rem;border-radius:9999px;background:#c6ff2e;box-shadow:0 0 0 0 rgba(198,255,46,.6);animation:ctPing 2s infinite}
+  @keyframes ctPing{70%{box-shadow:0 0 0 8px rgba(198,255,46,0)}100%{box-shadow:0 0 0 0 rgba(198,255,46,0)}}
+  .ct-wa{margin-top:1.25rem;display:flex;align-items:center;gap:.9rem;border-radius:1.25rem;border:1px solid rgba(198,255,46,.35);background:linear-gradient(135deg,rgba(198,255,46,.14),rgba(126,211,33,.05));padding:1rem 1.25rem;transition:border-color .25s,transform .25s}
+  .ct-wa:hover{border-color:#c6ff2e;transform:translateY(-2px)}
+  .ct-wa-icon{display:flex;height:2.75rem;width:2.75rem;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:#c6ff2e;color:#0a0b0d;font-size:1.35rem}
+  .ct-wa strong{display:block;font-family:Benzin,system-ui,sans-serif;font-size:.95rem}
+  .ct-wa small{display:block;font-size:.8rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+  .ct-links{margin-top:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+  .ct-links a{display:inline-flex;align-items:center;gap:.65rem;font-size:.875rem;color:rgba(255,255,255,.6);transition:color .2s}
+  .ct-links a:hover{color:#c6ff2e}
+  .ct-links a i{width:1rem;text-align:center}
+  .ct-label{font-size:.75rem;font-weight:500;color:rgba(255,255,255,.5);margin-bottom:.6rem}
+  .ct-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+  .ct-chips label{cursor:pointer;position:relative}
+  .ct-chips input{position:absolute;opacity:0;width:1px;height:1px}
+  .ct-chips span{display:inline-block;border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:.55rem 1.05rem;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.7);transition:all .2s}
+  .ct-chips label:hover span{border-color:rgba(198,255,46,.6);color:#fff}
+  .ct-chips input:checked+span{background:#c6ff2e;border-color:#c6ff2e;color:#0a0b0d}
+  .ct-chips input:focus-visible+span{outline:2px solid #c6ff2e;outline-offset:2px}
+  .ct-check{appearance:none;-webkit-appearance:none;margin-top:.15rem;height:1.15rem;width:1.15rem;flex-shrink:0;border-radius:.35rem;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);cursor:pointer;display:grid;place-content:center;transition:all .2s}
+  .ct-check:checked{background:#c6ff2e;border-color:#c6ff2e}
+  .ct-check:checked::after{content:"";width:.35rem;height:.65rem;border:solid #0a0b0d;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+  .ct-check:focus-visible{outline:2px solid #c6ff2e;outline-offset:2px}
+  @media (max-width:639px){.ct-chips{gap:.35rem;flex-wrap:nowrap}.ct-chips span{padding:.5rem .7rem;font-size:.78rem;white-space:nowrap}}
+  #form-submit.is-sending{opacity:.7;pointer-events:none}
+</style>
+<style id="pagine-categoria">
+  .pg-hero{position:relative;padding:8rem 0 4rem}
+  @media (min-width:640px){.pg-hero{padding:9.5rem 0 5rem}}
+  .pg-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:1.5rem;transition:color .2s}
+  .pg-back:hover{color:#c6ff2e}
+  .pg-hero-grid{display:grid;gap:2rem;align-items:center}
+  @media (min-width:1024px){.pg-hero-grid{grid-template-columns:5fr 7fr;gap:3rem}}
+  .pg-h1{margin-top:1rem;font-family:Benzin,system-ui,sans-serif;font-weight:800;font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.05;letter-spacing:-.02em}
+  .pg-sub{margin-top:1rem;color:rgba(255,255,255,.6);font-size:1.05rem;line-height:1.55;max-width:30rem}
+  .pg-ctas{margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:.75rem}
+  .pg-btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:9999px;padding:.85rem 1.4rem;font-weight:600;font-size:.95rem;transition:all .25s}
+  .pg-btn-main{background:linear-gradient(to right,#c6ff2e,#7ed321);color:#0a0b0d;box-shadow:0 0 60px -12px rgba(198,255,46,.45)}
+  .pg-btn-main:hover{opacity:.9}
+  .pg-btn-ghost{border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
+  .pg-btn-ghost:hover{border-color:rgba(198,255,46,.6);color:#c6ff2e}
+  .pg-reel{cursor:default}
+  .pg-reel::after{background:linear-gradient(to top,rgba(10,11,13,.35),rgba(10,11,13,0) 50%)}
+  .pg-sec{padding-bottom:4.5rem}
+  @media (min-width:640px){.pg-sec{padding-bottom:6rem}}
+  .pg-steps{margin-top:1.75rem;display:grid;gap:1rem}
+  @media (min-width:768px){.pg-steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}}
+  .pg-step{border:1px solid #262936;background:#161922;border-radius:1.25rem;padding:1.5rem}
+  .pg-step-n{font-size:.75rem;letter-spacing:.2em;font-weight:600;color:#c6ff2e}
+  .pg-step h3{margin-top:.6rem;font-family:Benzin,system-ui,sans-serif;font-weight:700;font-size:1.1rem}
+  .pg-step p{margin-top:.5rem;font-size:.9rem;line-height:1.55;color:rgba(255,255,255,.55)}
+</style>
+</head>
+
+<body id="top" class="bg-primary text-white font-sans antialiased selection:bg-acid">
+
+  <!-- ================= NAVBAR ================= -->
+  <header id="site-header" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <nav class="mt-3 glass border border-white/10 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
+        <a href="/" aria-label="Federico Gennaro — home" class="flex items-center gap-2 group">
+          <span class="relative flex h-9 items-center">
+            <!-- Sostituisci con il tuo logo: assets/logos/logo.png (sfondo trasparente) -->
+            <img src="/assets/logos/logo.png" alt="Logo Federico Gennaro" class="h-9 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+            <span class="hidden h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
+          </span>
+        </a>
+
+        <div class="flex items-center gap-3">
+          <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram di Federico Gennaro" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/70 hover:text-white hover:border-acid/60 transition-colors">
+            <i class="fa-brands fa-instagram text-base"></i>
+          </a>
+          <a href="#contatti" class="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-acid to-acidDeep px-4 sm:px-5 py-2.5 text-sm font-semibold text-primary shadow-glow hover:opacity-90 transition-opacity">
+            Parliamo
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ================= PAGINA EVENT (generata da _tools/genera-pagine.py) ================= -->
+  <section class="pg-hero">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <a href="/" class="pg-back"><i data-lucide="arrow-left" class="h-4 w-4"></i>Home</a>
+      <div class="pg-hero-grid">
+        <div data-aos="fade-up">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acid">Event</span>
+          <h1 class="pg-h1">L'energia del tuo evento,<br>pronta per i social.</h1>
+          <p class="pg-sub">Aftermovie e reel per festival, serate, DJ set ed eventi aziendali.</p>
+          <div class="pg-ctas">
+            <a href="#contatti" class="pg-btn pg-btn-main">Raccontami il progetto <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20il%20video%20di%20un%20evento" target="_blank" rel="noopener" class="pg-btn pg-btn-ghost"><i class="fa-brands fa-whatsapp text-lg"></i>WhatsApp</a>
+          </div>
+        </div>
+        <div class="cat-tile pg-reel" data-loop="" data-aos="fade-up" data-aos-delay="120">
+          <div class="cat-media"><img src="/assets/images/portfolio-euphoria.jpg" alt="" loading="eager"><img src="/assets/images/portfolio-miami-music-week.jpg" alt="" loading="eager"><img src="/assets/images/portfolio-welcome-2023.jpg" alt="" loading="eager"></div>
+          <span class="cat-badge"><i></i>Showreel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio" class="pg-sec relative scroll-mt-24">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl" data-aos="fade-up">Lavori</h2>
+      <div class="pf-wrap relative -mx-5 sm:-mx-8">
+        <div class="pf-arrows hidden"><button type="button" id="portfolio-prev"></button><button type="button" id="portfolio-next"></button></div>
+        <div id="portfolio-scroll" class="no-scrollbar flex gap-6 overflow-x-auto snap-x snap-proximity scroll-smooth px-5 sm:px-8 pb-2">
+          <button type="button"
+            data-project="welcome-2023" data-title="Welcome 2023" data-cat="event" data-category="Event · Aftermovie"
+            data-poster="/assets/images/portfolio-welcome-2023.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="/assets/images/portfolio-welcome-2023.jpg" alt="Fermo immagine dalle riprese di Welcome 2023" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-xl">Welcome 2023</h3>
+              <p class="text-sm text-white/50 mt-1">Event · Aftermovie</p>
+            </div>
+          </button>
+          <button type="button"
+            data-project="euphoria" data-title="EUPHORIA" data-cat="event" data-category="Event · Aftermovie"
+            data-poster="/assets/images/portfolio-euphoria.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acidDeep/30 to-acid/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="/assets/images/portfolio-euphoria.jpg" alt="Fermo immagine dalle riprese dell'evento EUPHORIA" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-xl">EUPHORIA</h3>
+              <p class="text-sm text-white/50 mt-1">Event · Aftermovie</p>
+            </div>
+          </button>
+          <button type="button"
+            data-project="miami-music-week-ade" data-title="Miami Music Week &amp; ADE" data-cat="event" data-category="Event · Reel"
+            data-poster="/assets/images/portfolio-miami-music-week.jpg"
+            class="portfolio-card group relative w-[300px] sm:w-[360px] shrink-0 snap-start text-left rounded-3xl border border-line bg-card overflow-hidden">
+            <div class="relative aspect-video overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br from-acid/30 to-acidDeep/10 flex items-center justify-center text-white/25 text-sm">Anteprima video</div>
+              <img src="/assets/images/portfolio-miami-music-week.jpg" alt="Fermo immagine dalle riprese di Miami Music Week &amp; ADE" loading="lazy" class="portfolio-img absolute inset-0 h-full w-full object-cover" onerror="this.style.opacity='0'">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="portfolio-play flex h-14 w-14 items-center justify-center rounded-full bg-white/15 backdrop-blur border border-white/30 opacity-0 scale-75">
+                  <i data-lucide="play" class="h-5 w-5 text-white ml-0.5"></i>
+                </span>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="font-display font-bold text-xl">Miami Music Week &amp; ADE</h3>
+              <p class="text-sm text-white/50 mt-1">Event · Reel</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-sec relative">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <h2 class="font-display font-bold text-2xl sm:text-3xl" data-aos="fade-up">Come lavoro</h2>
+      <div class="pg-steps">
+        <div class="pg-step" data-aos="fade-up" data-aos-delay="0">
+          <span class="pg-step-n">01</span>
+          <h3>Prima</h3>
+          <p>Definiamo momenti chiave e contenuti da pubblicare.</p>
+        </div>
+        <div class="pg-step" data-aos="fade-up" data-aos-delay="80">
+          <span class="pg-step-n">02</span>
+          <h3>Durante</h3>
+          <p>Palco, pubblico, dettagli: tutta l'atmosfera della serata.</p>
+        </div>
+        <div class="pg-step" data-aos="fade-up" data-aos-delay="160">
+          <span class="pg-step-n">03</span>
+          <h3>Dopo</h3>
+          <p>Aftermovie e reel pronti da pubblicare mentre se ne parla ancora.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIDEO LIGHTBOX ================= -->
+  <div id="video-lightbox" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 sm:p-8" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+    <div id="lightbox-backdrop" class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
+
+    <div id="lightbox-content" class="relative w-full max-w-3xl transition-all duration-200">
+      <button id="lightbox-close" type="button" aria-label="Chiudi il video"
+        class="absolute -top-12 right-0 sm:-top-2 sm:-right-12 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white hover:border-acid/60 hover:text-acid transition-colors">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+
+      <div class="rounded-2xl overflow-hidden border border-line bg-black shadow-2xl">
+        <div id="lightbox-frame" class="relative aspect-video w-full bg-black mx-auto">
+          <video id="lightbox-video" class="absolute inset-0 h-full w-full hidden" controls playsinline preload="metadata"></video>
+          <iframe id="lightbox-iframe" class="absolute inset-0 h-full w-full hidden" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video del progetto"></iframe>
+          <div id="lightbox-fallback" class="absolute inset-0 hidden flex-col items-center justify-center gap-3 text-center px-6 text-white/50 text-sm">
+            <i data-lucide="film" class="h-8 w-8 text-white/25"></i>
+            <p>Video in arrivo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h3 id="lightbox-title" class="font-display font-bold text-lg text-white"></h3>
+          <p id="lightbox-category" class="text-sm text-white/50"></p>
+        </div>
+        <div id="lightbox-tabs" class="flex flex-wrap gap-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= INFORMATIVA PRIVACY (POPUP) =================
+       Bozza di base, non sostituisce una consulenza legale/privacy vera e propria.
+       Prima di considerarla definitiva, fatti controllare il testo da un commercialista
+       o consulente privacy — specialmente se in futuro raccogli molti dati di clienti. -->
+  <div id="privacy-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 sm:p-8" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacy-modal-title">
+    <div id="privacy-backdrop" class="absolute inset-0 bg-black/85 backdrop-blur-sm"></div>
+
+    <div class="relative w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl border border-line bg-card shadow-2xl">
+      <div class="flex items-center justify-between gap-4 border-b border-white/10 px-6 sm:px-8 py-5 shrink-0">
+        <h3 id="privacy-modal-title" class="font-display font-bold text-lg text-white">Informativa sulla privacy</h3>
+        <button id="privacy-close" type="button" aria-label="Chiudi l'informativa"
+          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white hover:border-acid/60 hover:text-acid transition-colors">
+          <i data-lucide="x" class="h-5 w-5"></i>
+        </button>
+      </div>
+
+      <div class="overflow-y-auto px-6 sm:px-8 py-6 text-sm text-white/60 leading-relaxed space-y-5">
+        <p>
+          <strong class="text-white/80">Titolare del trattamento:</strong> Federico Gennaro —
+          contatto: <a href="mailto:info@federicogennaro.it" class="text-acid hover:underline">info@federicogennaro.it</a>
+        </p>
+
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Quali dati raccogliamo</h4>
+          <p>Quando compili il modulo di contatto raccogliamo nome, indirizzo email, numero di cellulare, tipo di progetto e contenuto del messaggio che scegli di inviare.</p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Perché li raccogliamo</h4>
+          <p>Utilizziamo questi dati esclusivamente per risponderti e gestire la tua richiesta (es. informazioni, preventivi). Non li usiamo per finalità di marketing né li cediamo a terzi.</p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Come vengono trattati</h4>
+          <p class="mb-2">Il modulo di contatto è gestito tramite il servizio esterno FormSubmit, che riceve e inoltra il messaggio alla nostra casella email. Il sito utilizza inoltre:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Librerie tecniche caricate da CDN (unpkg, cdnjs), necessarie al funzionamento della pagina</li>
+            <li>YouTube, per l'incorporamento dei video del portfolio (in modalità privacy avanzata: nessun cookie finché non avvii un video)</li>
+            <li>EmbedSocial, per mostrare le recensioni Google</li>
+          </ul>
+          <p class="mt-2">Questi servizi terzi possono raccogliere dati tecnici (es. indirizzo IP) secondo le proprie informative privacy.</p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">Conservazione dei dati</h4>
+          <p>Conserviamo i dati ricevuti tramite il modulo di contatto solo per il tempo necessario a gestire la tua richiesta, salvo diversi obblighi di legge.</p>
+        </div>
+
+        <div>
+          <h4 class="font-display font-bold text-white mb-1.5">I tuoi diritti</h4>
+          <p>Hai diritto di accedere ai tuoi dati, richiederne la rettifica o la cancellazione, opporti al trattamento o richiederne la limitazione. Per esercitare questi diritti scrivi a
+            <a href="mailto:info@federicogennaro.it" class="text-acid hover:underline">info@federicogennaro.it</a>.
+          </p>
+        </div>
+
+        <p class="text-xs text-white/40 pt-2 border-t border-white/10">Ultimo aggiornamento: novembre 2026.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONTATTI ================= -->
+  <section id="contatti" class="relative py-24 sm:py-32 scroll-mt-24">
+    <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+    <svg class="parallax-el parallax-rotate absolute bottom-10 right-[6%] h-20 w-20 hidden sm:block" data-rotate-speed="0.15" viewBox="0 0 100 100" aria-hidden="true">
+      <rect x="8" y="8" width="84" height="84" rx="6" fill="none" stroke="#c6ff2e" stroke-opacity="0.3" stroke-width="1.5"></rect>
+    </svg>
+    <div class="relative max-w-5xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-5 gap-10 lg:gap-16">
+
+        <div data-aos="fade-right" class="lg:col-span-2">
+          <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Contatti</span>
+          <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Parliamo del tuo prossimo video.</h2>
+          <p class="mt-4 text-white/60 leading-relaxed">Raccontami cosa ti serve — un matrimonio, un reel, uno spot — e ti propongo una prima idea di percorso.</p>
+
+          <div class="ct-time"><i></i>Rispondo di solito entro 24-48 ore</div>
+
+          <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20il%20video%20di%20un%20evento" target="_blank" rel="noopener" class="ct-wa">
+            <span class="ct-wa-icon"><i class="fa-brands fa-whatsapp"></i></span>
+            <span><strong>Scrivimi su WhatsApp</strong><small>La via più veloce</small></span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4 ml-auto"></i>
+          </a>
+
+          <div class="ct-links">
+            <a href="mailto:info@federicogennaro.it"><i data-lucide="mail" class="h-4 w-4"></i>info@federicogennaro.it</a>
+            <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i>@_federicogennaro</a>
+          </div>
+        </div>
+
+        <form data-aos="fade-left" action="https://formsubmit.co/info@federicogennaro.it" method="POST" class="lg:col-span-3 rounded-3xl border border-line bg-card p-6 sm:p-8">
+          <input type="hidden" name="_subject" value="Nuovo messaggio dal sito federicogennaro.it — pagina Event">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://federicogennaro.it/event/?inviato=1#contatti">
+
+          <div id="form-success" role="status" class="hidden mb-6 rounded-2xl border border-acid/40 bg-acid/10 px-5 py-4 text-sm text-white">
+            <strong class="font-display">Messaggio inviato, grazie!</strong>
+            <span class="block mt-1 text-white/70">Ti rispondo di solito entro 24-48 ore.</span>
+          </div>
+          <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
+
+          <p class="ct-label">Che tipo di progetto hai in mente?</p>
+          <div class="ct-chips" role="radiogroup" aria-label="Tipo di progetto">
+            <label><input type="radio" name="Tipo di progetto" value="Commercial" required><span>Commercial</span></label>
+            <label><input type="radio" name="Tipo di progetto" value="Wedding"><span>Wedding</span></label>
+            <label><input type="radio" name="Tipo di progetto" value="Event" checked><span>Event</span></label>
+            <label><input type="radio" name="Tipo di progetto" value="Altro"><span>Altro</span></label>
+          </div>
+
+          <div class="mt-5">
+            <label for="name" class="block text-xs font-medium text-white/50 mb-2">Nome</label>
+            <input id="name" name="Nome" type="text" required autocomplete="name" placeholder="Il tuo nome" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+          </div>
+
+          <div class="mt-5 grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="email" class="block text-xs font-medium text-white/50 mb-2">Email</label>
+              <input id="email" name="Email" type="email" required autocomplete="email" placeholder="nome@esempio.it" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+            </div>
+            <div>
+              <label for="phone" class="block text-xs font-medium text-white/50 mb-2">Cellulare</label>
+              <input id="phone" name="Cellulare" type="tel" required autocomplete="tel" placeholder="+39 333 1234567" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label for="message" class="block text-xs font-medium text-white/50 mb-2">Messaggio</label>
+            <textarea id="message" name="Messaggio" rows="4" required placeholder="Raccontami il tuo progetto: cosa ti serve, dove e quando…" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors resize-none"></textarea>
+          </div>
+
+          <div class="mt-5 flex items-start gap-3">
+            <input type="checkbox" id="privacy-consent" name="Consenso Privacy" required class="ct-check">
+            <label for="privacy-consent" class="text-xs text-white/50 leading-relaxed">
+              Ho letto e accetto <button type="button" id="privacy-open" class="underline text-white/70 hover:text-acid transition-colors">l'informativa sulla privacy</button> e acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla mia richiesta.
+            </label>
+          </div>
+
+          <button type="submit" id="form-submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-6 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 active:scale-[0.98] transition-all">
+            <span class="ct-btn-text">Invia il messaggio</span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="relative border-t border-white/10 bg-secondary">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <a href="#top" class="flex items-center gap-2">
+          <img src="/assets/logos/logo.png" alt="Federico Gennaro" class="h-9 w-auto object-contain" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden'); this.nextElementSibling.classList.add('flex');">
+          <span class="hidden items-center gap-2">
+            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-acid to-acidDeep text-primary font-display font-extrabold text-sm">FG</span>
+            <span class="font-display font-bold text-white/80">Federico Gennaro</span>
+          </span>
+        </a>
+
+        <div class="flex items-center gap-5 text-white/50">
+          <a href="mailto:info@federicogennaro.it" class="hover:text-white transition-colors text-sm">info@federicogennaro.it</a>
+          <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" aria-label="Instagram" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/393397305267" target="_blank" rel="noopener" aria-label="WhatsApp" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+
+        <a href="#top" class="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+          Torna su
+          <span class="flex h-8 w-8 items-center justify-center rounded-full border border-white/10"><i data-lucide="arrow-up" class="h-3.5 w-3.5"></i></span>
+        </a>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs text-white/35">
+        <span>&copy; <span id="year"></span> Federico Gennaro. Tutti i diritti riservati.</span>
+        <button type="button" id="privacy-open-footer" class="hover:text-white/60 transition-colors underline">Informativa sulla privacy</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= WHATSAPP FLOATING BUTTON ================= -->
+  <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20il%20video%20di%20un%20evento"
+     target="_blank" rel="noopener" aria-label="Scrivimi su WhatsApp"
+     class="wa-pulse fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-acid text-primary shadow-glow hover:scale-110 transition-transform">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+  </a>
+
+  <!-- ================= SCRIPTS ================= -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Icone Lucide e animazioni AOS arrivano da CDN esterni: se uno dei due non si
+    // carica, il resto del sito (portfolio, video, form) deve funzionare lo stesso.
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    // Animazioni allo scroll (se AOS non è disponibile, mostra subito tutti i contenuti)
+    if (window.AOS) {
+      AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 40 });
+    } else {
+      document.querySelectorAll('[data-aos]').forEach((el) => el.classList.add('aos-animate'));
+    }
+
+    // Cursore personalizzato: solo su dispositivi con mouse preciso, e solo se l'utente
+    // non ha attivato "riduci movimento" nel sistema operativo.
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (hasFinePointer && !prefersReducedMotion) {
+      const cursorDot = document.createElement('div');
+      cursorDot.className = 'cursor-dot cursor-hidden';
+      const cursorRing = document.createElement('div');
+      cursorRing.className = 'cursor-ring cursor-hidden';
+      document.body.appendChild(cursorDot);
+      document.body.appendChild(cursorRing);
+      document.body.classList.add('custom-cursor-active');
+
+      let mouseX = 0, mouseY = 0;
+      let ringX = 0, ringY = 0;
+      let started = false;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+        if (!started) {
+          started = true;
+          ringX = mouseX;
+          ringY = mouseY;
+        }
+        cursorDot.classList.remove('cursor-hidden');
+        cursorRing.classList.remove('cursor-hidden');
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+        cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      const hoverSelector = 'a, button, .portfolio-card, input, textarea, [role="button"]';
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(hoverSelector)) cursorRing.classList.add('cursor-hover');
+      });
+      document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(hoverSelector)) cursorRing.classList.remove('cursor-hover');
+      });
+
+      document.addEventListener('mouseleave', () => {
+        cursorDot.classList.add('cursor-hidden');
+        cursorRing.classList.add('cursor-hidden');
+      });
+    }
+
+    // Elementi decorativi (cerchi/triangoli): si muovono leggermente con lo scroll,
+    // per un effetto di profondità. Rispetta "riduci movimento" — se attivo, restano fermi.
+    const parallaxFloatEls = document.querySelectorAll('.parallax-float');
+    const parallaxRotateEls = document.querySelectorAll('.parallax-rotate');
+
+    if ((parallaxFloatEls.length || parallaxRotateEls.length) && !prefersReducedMotion) {
+      let parallaxTicking = false;
+
+      function updateParallax() {
+        const scrollY = window.scrollY;
+        parallaxFloatEls.forEach((el) => {
+          const speed = parseFloat(el.dataset.floatSpeed) || 0.15;
+          el.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+        parallaxRotateEls.forEach((el) => {
+          const speed = parseFloat(el.dataset.rotateSpeed) || 0.05;
+          el.style.transform = `rotate(${scrollY * speed}deg)`;
+        });
+        parallaxTicking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if (!parallaxTicking) {
+          requestAnimationFrame(updateParallax);
+          parallaxTicking = true;
+        }
+      }, { passive: true });
+
+      updateParallax();
+    }
+
+    // Statistiche hero: contatore che sale da 0 al numero finale quando entra in vista
+    const statNumbers = document.querySelectorAll('.stat-number');
+    if (statNumbers.length) {
+      function animateCount(el, target, duration) {
+        const start = performance.now();
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+          const current = Math.floor(eased * target);
+          el.textContent = current.toLocaleString('it-IT') + '+';
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target.toLocaleString('it-IT') + '+';
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = parseInt(entry.target.dataset.countTo, 10);
+            animateCount(entry.target, target, 1800);
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      statNumbers.forEach((el) => statsObserver.observe(el));
+    }
+
+    // Messaggio di conferma dopo l'invio del form (FormSubmit riporta qui con ?inviato=1)
+    if (new URLSearchParams(window.location.search).has('inviato')) {
+      document.getElementById('form-success').classList.remove('hidden');
+      history.replaceState(null, '', window.location.pathname + '#contatti');
+    }
+
+    // Anno corrente nel footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar: sfondo più solido dopo lo scroll
+    const header = document.getElementById('site-header');
+    const onScroll = () => {
+      if (window.scrollY > 24) {
+        header.classList.add('shadow-lg', 'shadow-black/20');
+      } else {
+        header.classList.remove('shadow-lg', 'shadow-black/20');
+      }
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ===== Carosello portfolio (scorrimento orizzontale) =====
+    const portfolioScroll = document.getElementById('portfolio-scroll');
+    const portfolioPrev = document.getElementById('portfolio-prev');
+    const portfolioNext = document.getElementById('portfolio-next');
+
+    function updatePortfolioArrows() {
+      const maxScroll = portfolioScroll.scrollWidth - portfolioScroll.clientWidth - 1;
+      portfolioPrev.disabled = portfolioScroll.scrollLeft <= 0;
+      portfolioNext.disabled = portfolioScroll.scrollLeft >= maxScroll;
+    }
+
+    function scrollPortfolioBy(direction) {
+      const card = portfolioScroll.querySelector('.portfolio-card');
+      const step = card ? card.offsetWidth + 24 : 320; // larghezza card + gap
+      portfolioScroll.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+
+    portfolioPrev.addEventListener('click', () => scrollPortfolioBy(-1));
+    portfolioNext.addEventListener('click', () => scrollPortfolioBy(1));
+    portfolioScroll.addEventListener('scroll', updatePortfolioArrows, { passive: true });
+    window.addEventListener('resize', updatePortfolioArrows);
+    updatePortfolioArrows();
+
+    // ===== Lightbox video portfolio =====
+    // Ogni progetto può avere uno o più video. Tutti su YouTube: dopo aver
+    // caricato ogni video (consigliato: "Non in elenco" + "Consenti
+    // incorporamento" attivo), sostituisci il testo 'INSERISCI-ID-...' con
+    // l'ID a 11 caratteri preso dal link (es. da youtube.com/watch?v=ABC123
+    // l'ID è "ABC123"). orientation: 'vertical' per i reel verticali,
+    // 'horizontal' (o assente) per i video orizzontali/cinematografici.
+    const portfolioVideos = {
+      'carmelo-noemi': [
+        { label: 'Video Highlights', type: 'youtube', orientation: 'horizontal', src: '9n4kKQ21tic' },
+      ],
+      'ard-discount': [
+        { label: 'Reel 1', type: 'youtube', orientation: 'horizontal', src: 't44h3L9Gai4' },
+        { label: 'Reel 2', type: 'youtube', orientation: 'horizontal', src: 'ywdh21hVz14' },
+      ],
+      'welcome-2023': [
+        { label: 'Video', type: 'youtube', orientation: 'horizontal', src: 'Xcj13WPx1CQ' },
+      ],
+      'despar': [
+        { label: 'Reel 1', type: 'youtube', orientation: 'horizontal', src: 'KtNIQRyXdjE' },
+        { label: 'Reel 2', type: 'youtube', orientation: 'horizontal', src: 'BdF40H-Ohok' },
+      ],
+      'ritratti-in-corso': [
+        { label: 'Video', type: 'youtube', orientation: 'horizontal', src: 'dGYduYhh0fo' },
+      ],
+      'miami-music-week-ade': [
+        { label: 'Video 1', type: 'youtube', orientation: 'horizontal', src: 'ldwDBv55QVg' },
+        { label: 'Reel 2', type: 'youtube', orientation: 'vertical', src: 'TW5Ofjpwt48' },
+        { label: 'Reel 3', type: 'youtube', orientation: 'vertical', src: 'r0Aig6orTO8' },
+      ],
+      'euphoria': [
+        { label: 'Video', type: 'youtube', orientation: 'horizontal', src: 'oQ36HhKAPis' },
+      ],
+      'tenuta-donna-fina': [
+        { label: 'Reel 1', type: 'youtube', orientation: 'vertical', src: 'X5YqAcRQu4g' },
+        { label: 'Reel 2', type: 'youtube', orientation: 'vertical', src: 'UIycPpu_Y5Q' },
+        { label: 'Reel 3', type: 'youtube', orientation: 'vertical', src: 'Q4xaNKxejeo' },
+      ],
+      'cantina-frasca': [
+        { label: 'Video', type: 'youtube', orientation: 'horizontal', src: 'fWIfdQhEo2U' },
+      ],
+      'ottica-moncada': [
+        { label: 'Reel 1', type: 'youtube', orientation: 'vertical', src: 'W9mEoyPxPrk' },
+        { label: 'Reel 2', type: 'youtube', orientation: 'vertical', src: 'HY_KPE0JBRI' },
+        { label: 'Reel 3', type: 'youtube', orientation: 'vertical', src: '9Gcax_qreAU' },
+      ],
+      'polara': [
+        { label: 'Reel', type: 'youtube', orientation: 'vertical', src: 'IuM3fi2puoA' },
+      ],
+      'vito-alice': [
+        { label: 'Video Highlights', type: 'youtube', orientation: 'horizontal', src: '2ElXidtJ64s' },
+      ],
+    };
+
+    const lightbox = document.getElementById('video-lightbox');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const lightboxFrame = document.getElementById('lightbox-frame');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const lightboxIframe = document.getElementById('lightbox-iframe');
+    const lightboxFallback = document.getElementById('lightbox-fallback');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    const lightboxTabs = document.getElementById('lightbox-tabs');
+    let lastFocusedEl = null;
+
+    function youTubeEmbedUrl(url) {
+      const match = url.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);
+      const id = match ? match[1] : url;
+      return `https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1`;
+    }
+
+    function showFallback() {
+      lightboxVideo.classList.add('hidden');
+      lightboxIframe.classList.add('hidden');
+      lightboxFallback.classList.remove('hidden');
+      lightboxFallback.classList.add('flex');
+    }
+
+    function applyOrientation(orientation) {
+      if (orientation === 'vertical') {
+        lightboxContent.classList.remove('max-w-3xl');
+        lightboxContent.classList.add('lightbox-vertical-content');
+        lightboxFrame.classList.remove('aspect-video', 'w-full');
+        lightboxFrame.classList.add('lightbox-vertical-frame');
+      } else {
+        lightboxContent.classList.remove('lightbox-vertical-content');
+        lightboxContent.classList.add('max-w-3xl');
+        lightboxFrame.classList.remove('lightbox-vertical-frame');
+        lightboxFrame.classList.add('aspect-video', 'w-full');
+      }
+    }
+
+    function playVideoItem(item, posterUrl) {
+      lightboxFallback.classList.add('hidden');
+      lightboxFallback.classList.remove('flex');
+      applyOrientation(item.orientation);
+
+      if (item.type === 'youtube') {
+        lightboxVideo.classList.add('hidden');
+        lightboxVideo.pause();
+        lightboxVideo.removeAttribute('src');
+        lightboxIframe.src = youTubeEmbedUrl(item.src);
+        lightboxIframe.classList.remove('hidden');
+      } else {
+        lightboxIframe.classList.add('hidden');
+        lightboxIframe.src = '';
+        lightboxVideo.classList.remove('hidden');
+        if (posterUrl) lightboxVideo.setAttribute('poster', posterUrl);
+        lightboxVideo.src = item.src;
+        lightboxVideo.load();
+        lightboxVideo.play().catch(() => { /* riproduzione automatica bloccata dal browser, non è un errore */ });
+      }
+    }
+
+    lightboxVideo.addEventListener('error', showFallback);
+
+    function renderTabs(items, posterUrl, activeIndex) {
+      lightboxTabs.innerHTML = '';
+      if (items.length <= 1) return;
+      items.forEach((item, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = item.label;
+        btn.className = 'rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ' +
+          (i === activeIndex
+            ? 'border-acid text-acid bg-acid/10'
+            : 'border-white/10 text-white/60 hover:text-white hover:border-white/30');
+        btn.addEventListener('click', () => {
+          playVideoItem(item, posterUrl);
+          renderTabs(items, posterUrl, i);
+        });
+        lightboxTabs.appendChild(btn);
+      });
+    }
+
+    function openLightbox(card) {
+      const id = card.dataset.project;
+      const items = portfolioVideos[id];
+      if (!items || !items.length) return;
+
+      lastFocusedEl = card;
+      lightboxTitle.textContent = card.dataset.title || '';
+      lightboxCategory.textContent = card.dataset.category || '';
+      const posterUrl = card.dataset.poster || '';
+
+      renderTabs(items, posterUrl, 0);
+      playVideoItem(items[0], posterUrl);
+
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      lightboxVideo.pause();
+      lightboxVideo.removeAttribute('src');
+      lightboxVideo.load();
+      lightboxIframe.src = '';
+      if (lastFocusedEl) lastFocusedEl.focus();
+    }
+
+    document.querySelectorAll('.portfolio-card').forEach(card => {
+      card.addEventListener('click', () => openLightbox(card));
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxBackdrop.addEventListener('click', closeLightbox);
+
+    // Popup informativa privacy
+    const privacyModal = document.getElementById('privacy-modal');
+    const privacyBackdrop = document.getElementById('privacy-backdrop');
+    const privacyOpenBtn = document.getElementById('privacy-open');
+    const privacyOpenFooterBtn = document.getElementById('privacy-open-footer');
+    const privacyCloseBtn = document.getElementById('privacy-close');
+
+    function openPrivacyModal() {
+      privacyModal.classList.remove('hidden');
+      privacyModal.classList.add('flex');
+      privacyModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePrivacyModal() {
+      privacyModal.classList.add('hidden');
+      privacyModal.classList.remove('flex');
+      privacyModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    privacyOpenBtn.addEventListener('click', openPrivacyModal);
+    privacyOpenFooterBtn.addEventListener('click', openPrivacyModal);
+    privacyCloseBtn.addEventListener('click', closePrivacyModal);
+    privacyBackdrop.addEventListener('click', closePrivacyModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (!lightbox.classList.contains('hidden')) closeLightbox();
+      if (!privacyModal.classList.contains('hidden')) closePrivacyModal();
+    });
+  </script>
+
+
+<script>
+  // Sezione "Scegli la tua storia": clic = vai al primo lavoro della categoria nel portfolio.
+  // Quando ci saranno i mix: data-loop="assets/videos/mix-xxx.mp4" fa partire il video muto in loop.
+  (function () {
+    const tiles = document.querySelectorAll('.cat-tile');
+    tiles.forEach(tile => {
+      tile.addEventListener('click', e => {
+        const f = tile.dataset.filter;
+        if (!f || !window.setPortfolioFilter) return;
+        e.preventDefault();
+        window.setPortfolioFilter(f);
+        document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' });
+      });
+      const src = tile.dataset.loop;
+      if (!src || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const media = tile.querySelector('.cat-media');
+      const v = document.createElement('video');
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'none';
+      v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+      v.src = src;
+      media.appendChild(v);
+      new IntersectionObserver(([en]) => {
+        if (en.isIntersecting) { v.play().then(() => media.classList.add('has-video')).catch(() => {}); }
+        else v.pause();
+      }, { threshold: 0.25 }).observe(tile);
+    });
+  })();
+</script>
+
+<script>
+  // Filtri portfolio (Tutti / Commercial / Wedding / Event)
+  (function () {
+    const btns = document.querySelectorAll('.pf-filter');
+    const cards = document.querySelectorAll('#portfolio-scroll .portfolio-card');
+    const scroller = document.getElementById('portfolio-scroll');
+    function setFilter(f) {
+      btns.forEach(b => b.classList.toggle('is-active', b.dataset.filter === f));
+      cards.forEach(c => {
+        const show = f === 'all' || c.dataset.cat === f;
+        c.classList.toggle('is-hidden', !show);
+        c.classList.remove('pf-in');
+        if (show) { void c.offsetWidth; c.classList.add('pf-in'); }
+      });
+      if (scroller) scroller.scrollLeft = 0;
+      scroller && scroller.dispatchEvent(new Event('scroll'));
+    }
+    btns.forEach(b => b.addEventListener('click', () => setFilter(b.dataset.filter)));
+    window.setPortfolioFilter = setFilter;
+  })();
+</script>
+
+<script>
+  // Form contatti: stato "invio in corso" per evitare doppi invii
+  (function () {
+    const f = document.querySelector('#contatti form'), btn = document.getElementById('form-submit');
+    if (!f || !btn) return;
+    f.addEventListener('submit', () => {
+      btn.classList.add('is-sending');
+      const t = btn.querySelector('.ct-btn-text'); if (t) t.textContent = 'Invio in corso…';
+    });
+  })();
+</script>
+</body>
+</html>
