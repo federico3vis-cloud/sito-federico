@@ -987,6 +987,7 @@
     const portfolioNext = document.getElementById('portfolio-next');
 
     function updatePortfolioArrows() {
+      if (!portfolioScroll || !portfolioPrev || !portfolioNext) return;
       const maxScroll = portfolioScroll.scrollWidth - portfolioScroll.clientWidth - 1;
       portfolioPrev.disabled = portfolioScroll.scrollLeft <= 0;
       portfolioNext.disabled = portfolioScroll.scrollLeft >= maxScroll;
@@ -998,9 +999,11 @@
       portfolioScroll.scrollBy({ left: direction * step, behavior: 'smooth' });
     }
 
-    portfolioPrev.addEventListener('click', () => scrollPortfolioBy(-1));
-    portfolioNext.addEventListener('click', () => scrollPortfolioBy(1));
-    portfolioScroll.addEventListener('scroll', updatePortfolioArrows, { passive: true });
+    if (portfolioScroll && portfolioPrev && portfolioNext) {
+      portfolioPrev.addEventListener('click', () => scrollPortfolioBy(-1));
+      portfolioNext.addEventListener('click', () => scrollPortfolioBy(1));
+      portfolioScroll.addEventListener('scroll', updatePortfolioArrows, { passive: true });
+    }
     window.addEventListener('resize', updatePortfolioArrows);
     updatePortfolioArrows();
 

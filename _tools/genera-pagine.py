@@ -7,6 +7,7 @@ così restano sempre uguali. Rilanciare questo script dopo ogni modifica alla ho
 import os, re, html
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
+CARDS = open(os.path.join(ROOT, '_tools', 'card-lavori.html'), encoding='utf-8').read()
 BASE = 'https://federicogennaro.it'
 WA = 'https://wa.me/393397305267?text='
 
@@ -26,11 +27,11 @@ def cut(s, start, end):
     return s[:a] + s[b:]
 
 def card(slug):
-    """Copia la card del portfolio della home."""
-    i = SRC.index(f'data-project="{slug}"')
-    a = SRC.rindex('<button', 0, i)
-    b = SRC.index('</button>', i) + len('</button>')
-    c = SRC[a:b].replace(' data-aos="fade-up"', '')
+    """Copia la card del lavoro da _tools/card-lavori.html."""
+    i = CARDS.index(f'data-project="{slug}"')
+    a = CARDS.rindex('<button', 0, i)
+    b = CARDS.index('</button>', i) + len('</button>')
+    c = CARDS[a:b].replace(' data-aos="fade-up"', '')
     return '          ' + c
 
 PAGES = {
