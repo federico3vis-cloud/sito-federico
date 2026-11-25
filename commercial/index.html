@@ -394,7 +394,7 @@
   .pg-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:1.5rem;transition:color .2s}
   .pg-back:hover{color:#c6ff2e}
   .pg-hero-grid{display:grid;gap:2rem;align-items:center}
-  @media (min-width:1024px){.pg-hero-grid{grid-template-columns:5fr 7fr;gap:3rem}}
+  .pg-hero-grid{max-width:46rem}
   .pg-h1{margin-top:1rem;font-family:Benzin,system-ui,sans-serif;font-weight:800;font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.05;letter-spacing:-.02em}
   .pg-sub{margin-top:1rem;color:rgba(255,255,255,.6);font-size:1.05rem;line-height:1.55;max-width:30rem}
   .pg-ctas{margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:.75rem}
@@ -403,8 +403,6 @@
   .pg-btn-main:hover{opacity:.9}
   .pg-btn-ghost{border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
   .pg-btn-ghost:hover{border-color:rgba(198,255,46,.6);color:#c6ff2e}
-  .pg-reel{cursor:default}
-  .pg-reel::after{background:linear-gradient(to top,rgba(10,11,13,.35),rgba(10,11,13,0) 50%)}
   .pg-sec{padding-bottom:4.5rem}
   @media (min-width:640px){.pg-sec{padding-bottom:6rem}}
   .pg-steps{margin-top:1.75rem;display:grid;gap:1rem}
@@ -455,10 +453,6 @@
             <a href="#contatti" class="pg-btn pg-btn-main">Raccontami il progetto <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
             <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20un%20video%20commercial" target="_blank" rel="noopener" class="pg-btn pg-btn-ghost"><i class="fa-brands fa-whatsapp text-lg"></i>WhatsApp</a>
           </div>
-        </div>
-        <div class="cat-tile pg-reel" data-loop="" data-aos="fade-up" data-aos-delay="120">
-          <div class="cat-media"><img src="/assets/images/portfolio-polara.jpg" alt="" loading="eager"><img src="/assets/images/portfolio-tenuta-donna-fina.jpg" alt="" loading="eager"><img src="/assets/images/portfolio-despar.jpg" alt="" loading="eager"></div>
-          <span class="cat-badge"><i></i>Showreel</span>
         </div>
       </div>
     </div>
@@ -727,7 +721,6 @@
         <div data-aos="fade-right" class="lg:col-span-2">
           <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Contatti</span>
           <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Parliamo del tuo prossimo video.</h2>
-          <p class="mt-4 text-white/60 leading-relaxed">Raccontami cosa ti serve — un matrimonio, un reel, uno spot — e ti propongo una prima idea di percorso.</p>
 
           <div class="ct-time"><i></i>Rispondo di solito entro 24-48 ore</div>
 

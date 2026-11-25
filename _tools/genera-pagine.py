@@ -85,7 +85,6 @@ def build(slug, p):
     s = cut(s, '  <!-- ================= HERO ================= -->', '  <!-- ================= VIDEO LIGHTBOX ================= -->')
     s = cut(s, '  <!-- ================= CLIENTI / LOGHI ================= -->', '  <!-- ================= CONTATTI ================= -->')
     # --- contenuto della pagina
-    imgs = ''.join(f'<img src="/assets/images/{i}" alt="" loading="eager">' for i in p['imgs'])
     cards = '\n'.join(card(w) for w in p['works'])
     steps = ''.join(f'''
         <div class="pg-step" data-aos="fade-up" data-aos-delay="{n*80}">
@@ -107,10 +106,6 @@ def build(slug, p):
             <a href="#contatti" class="pg-btn pg-btn-main">Raccontami il progetto <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
             <a href="{wa}" target="_blank" rel="noopener" class="pg-btn pg-btn-ghost"><i class="fa-brands fa-whatsapp text-lg"></i>WhatsApp</a>
           </div>
-        </div>
-        <div class="cat-tile pg-reel" data-loop="" data-aos="fade-up" data-aos-delay="120">
-          <div class="cat-media">{imgs}</div>
-          <span class="cat-badge"><i></i>Showreel</span>
         </div>
       </div>
     </div>
@@ -159,7 +154,7 @@ CSS = '''<style id="pagine-categoria">
   .pg-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:rgba(255,255,255,.55);margin-bottom:1.5rem;transition:color .2s}
   .pg-back:hover{color:#c6ff2e}
   .pg-hero-grid{display:grid;gap:2rem;align-items:center}
-  @media (min-width:1024px){.pg-hero-grid{grid-template-columns:5fr 7fr;gap:3rem}}
+  .pg-hero-grid{max-width:46rem}
   .pg-h1{margin-top:1rem;font-family:Benzin,system-ui,sans-serif;font-weight:800;font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.05;letter-spacing:-.02em}
   .pg-sub{margin-top:1rem;color:rgba(255,255,255,.6);font-size:1.05rem;line-height:1.55;max-width:30rem}
   .pg-ctas{margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:.75rem}
@@ -168,8 +163,6 @@ CSS = '''<style id="pagine-categoria">
   .pg-btn-main:hover{opacity:.9}
   .pg-btn-ghost{border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
   .pg-btn-ghost:hover{border-color:rgba(198,255,46,.6);color:#c6ff2e}
-  .pg-reel{cursor:default}
-  .pg-reel::after{background:linear-gradient(to top,rgba(10,11,13,.35),rgba(10,11,13,0) 50%)}
   .pg-sec{padding-bottom:4.5rem}
   @media (min-width:640px){.pg-sec{padding-bottom:6rem}}
   .pg-steps{margin-top:1.75rem;display:grid;gap:1rem}
