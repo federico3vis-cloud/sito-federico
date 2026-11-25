@@ -400,6 +400,34 @@
   .portfolio-card.pf-in{animation:pfIn .45s cubic-bezier(.22,1,.36,1)}
   @keyframes pfIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 </style>
+<style id="contatti-v2">
+  .ct-time{margin-top:1.75rem;display:inline-flex;align-items:center;gap:.6rem;font-size:.8rem;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:.45rem .9rem}
+  .ct-time i{width:.5rem;height:.5rem;border-radius:9999px;background:#c6ff2e;box-shadow:0 0 0 0 rgba(198,255,46,.6);animation:ctPing 2s infinite}
+  @keyframes ctPing{70%{box-shadow:0 0 0 8px rgba(198,255,46,0)}100%{box-shadow:0 0 0 0 rgba(198,255,46,0)}}
+  .ct-wa{margin-top:1.25rem;display:flex;align-items:center;gap:.9rem;border-radius:1.25rem;border:1px solid rgba(198,255,46,.35);background:linear-gradient(135deg,rgba(198,255,46,.14),rgba(126,211,33,.05));padding:1rem 1.25rem;transition:border-color .25s,transform .25s}
+  .ct-wa:hover{border-color:#c6ff2e;transform:translateY(-2px)}
+  .ct-wa-icon{display:flex;height:2.75rem;width:2.75rem;flex-shrink:0;align-items:center;justify-content:center;border-radius:9999px;background:#c6ff2e;color:#0a0b0d;font-size:1.35rem}
+  .ct-wa strong{display:block;font-family:Benzin,system-ui,sans-serif;font-size:.95rem}
+  .ct-wa small{display:block;font-size:.8rem;color:rgba(255,255,255,.55);margin-top:.15rem}
+  .ct-links{margin-top:1.25rem;display:flex;flex-direction:column;gap:.75rem}
+  .ct-links a{display:inline-flex;align-items:center;gap:.65rem;font-size:.875rem;color:rgba(255,255,255,.6);transition:color .2s}
+  .ct-links a:hover{color:#c6ff2e}
+  .ct-links a i{width:1rem;text-align:center}
+  .ct-label{font-size:.75rem;font-weight:500;color:rgba(255,255,255,.5);margin-bottom:.6rem}
+  .ct-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+  .ct-chips label{cursor:pointer;position:relative}
+  .ct-chips input{position:absolute;opacity:0;width:1px;height:1px}
+  .ct-chips span{display:inline-block;border:1px solid rgba(255,255,255,.12);border-radius:9999px;padding:.55rem 1.05rem;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.7);transition:all .2s}
+  .ct-chips label:hover span{border-color:rgba(198,255,46,.6);color:#fff}
+  .ct-chips input:checked+span{background:#c6ff2e;border-color:#c6ff2e;color:#0a0b0d}
+  .ct-chips input:focus-visible+span{outline:2px solid #c6ff2e;outline-offset:2px}
+  .ct-check{appearance:none;-webkit-appearance:none;margin-top:.15rem;height:1.15rem;width:1.15rem;flex-shrink:0;border-radius:.35rem;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);cursor:pointer;display:grid;place-content:center;transition:all .2s}
+  .ct-check:checked{background:#c6ff2e;border-color:#c6ff2e}
+  .ct-check:checked::after{content:"";width:.35rem;height:.65rem;border:solid #0a0b0d;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+  .ct-check:focus-visible{outline:2px solid #c6ff2e;outline-offset:2px}
+  @media (max-width:639px){.ct-chips{gap:.35rem;flex-wrap:nowrap}.ct-chips span{padding:.5rem .7rem;font-size:.78rem;white-space:nowrap}}
+  #form-submit.is-sending{opacity:.7;pointer-events:none}
+</style>
 </head>
 
 <body id="top" class="bg-primary text-white font-sans antialiased selection:bg-acid">
@@ -897,7 +925,7 @@
 
         <div>
           <h4 class="font-display font-bold text-white mb-1.5">Quali dati raccogliamo</h4>
-          <p>Quando compili il modulo di contatto raccogliamo nome, indirizzo email, numero di cellulare, oggetto e contenuto del messaggio che scegli di inviare.</p>
+          <p>Quando compili il modulo di contatto raccogliamo nome, indirizzo email, numero di cellulare, tipo di progetto e contenuto del messaggio che scegli di inviare.</p>
         </div>
 
         <div>
@@ -1030,21 +1058,19 @@
         <div data-aos="fade-right" class="lg:col-span-2">
           <span class="text-xs font-semibold uppercase tracking-[0.2em] text-acidDeep">Contatti</span>
           <h2 class="mt-4 font-display font-bold text-3xl sm:text-4xl leading-tight">Parliamo del tuo prossimo video.</h2>
-          <p class="mt-4 text-white/60 leading-relaxed">Raccontami cosa ti serve — un matrimonio, un reel, uno spot — e rispondo di solito entro 24-48 ore con una prima idea di percorso.</p>
+          <p class="mt-4 text-white/60 leading-relaxed">Raccontami cosa ti serve — un matrimonio, un reel, uno spot — e ti propongo una prima idea di percorso.</p>
 
-          <div class="mt-8 space-y-4">
-            <a href="mailto:info@federicogennaro.it" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10"><i data-lucide="mail" class="h-4 w-4"></i></span>
-              info@federicogennaro.it
-            </a>
-            <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20un%20progetto" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10"><i class="fa-brands fa-whatsapp"></i></span>
-              WhatsApp diretto
-            </a>
-            <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors">
-              <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10"><i class="fa-brands fa-instagram"></i></span>
-              @_federicogennaro
-            </a>
+          <div class="ct-time"><i></i>Rispondo di solito entro 24-48 ore</div>
+
+          <a href="https://wa.me/393397305267?text=Ciao%20Federico%2C%20vorrei%20informazioni%20per%20un%20progetto" target="_blank" rel="noopener" class="ct-wa">
+            <span class="ct-wa-icon"><i class="fa-brands fa-whatsapp"></i></span>
+            <span><strong>Scrivimi su WhatsApp</strong><small>La via più veloce</small></span>
+            <i data-lucide="arrow-up-right" class="h-4 w-4 ml-auto"></i>
+          </a>
+
+          <div class="ct-links">
+            <a href="mailto:info@federicogennaro.it"><i data-lucide="mail" class="h-4 w-4"></i>info@federicogennaro.it</a>
+            <a href="https://instagram.com/_federicogennaro" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i>@_federicogennaro</a>
           </div>
         </div>
 
@@ -1060,41 +1086,44 @@
           </div>
           <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
 
-          <div class="grid sm:grid-cols-2 gap-5">
-            <div>
-              <label for="name" class="block text-xs font-medium text-white/50 mb-2">Nome</label>
-              <input id="name" name="Nome" type="text" required placeholder="Il tuo nome" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
-            </div>
+          <p class="ct-label">Che tipo di progetto hai in mente?</p>
+          <div class="ct-chips" role="radiogroup" aria-label="Tipo di progetto">
+            <label><input type="radio" name="Tipo di progetto" value="Commercial" required><span>Commercial</span></label>
+            <label><input type="radio" name="Tipo di progetto" value="Wedding"><span>Wedding</span></label>
+            <label><input type="radio" name="Tipo di progetto" value="Event"><span>Event</span></label>
+            <label><input type="radio" name="Tipo di progetto" value="Altro"><span>Altro</span></label>
+          </div>
+
+          <div class="mt-5">
+            <label for="name" class="block text-xs font-medium text-white/50 mb-2">Nome</label>
+            <input id="name" name="Nome" type="text" required autocomplete="name" placeholder="Il tuo nome" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+          </div>
+
+          <div class="mt-5 grid sm:grid-cols-2 gap-5">
             <div>
               <label for="email" class="block text-xs font-medium text-white/50 mb-2">Email</label>
-              <input id="email" name="Email" type="email" required placeholder="nome@esempio.it" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+              <input id="email" name="Email" type="email" required autocomplete="email" placeholder="nome@esempio.it" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
             </div>
-          </div>
-
-          <div class="mt-5">
-            <label for="phone" class="block text-xs font-medium text-white/50 mb-2">Cellulare</label>
-            <input id="phone" name="Cellulare" type="tel" required placeholder="+39 333 1234567" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
-          </div>
-
-          <div class="mt-5">
-            <label for="subject" class="block text-xs font-medium text-white/50 mb-2">Oggetto</label>
-            <input id="subject" name="Oggetto" type="text" required placeholder="Di cosa vuoi parlare?" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+            <div>
+              <label for="phone" class="block text-xs font-medium text-white/50 mb-2">Cellulare</label>
+              <input id="phone" name="Cellulare" type="tel" required autocomplete="tel" placeholder="+39 333 1234567" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors">
+            </div>
           </div>
 
           <div class="mt-5">
             <label for="message" class="block text-xs font-medium text-white/50 mb-2">Messaggio</label>
-            <textarea id="message" name="Messaggio" rows="5" required placeholder="Raccontami il tuo progetto..." class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors resize-none"></textarea>
+            <textarea id="message" name="Messaggio" rows="4" required placeholder="Raccontami il tuo progetto: cosa ti serve, dove e quando…" class="w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-acid/60 transition-colors resize-none"></textarea>
           </div>
 
           <div class="mt-5 flex items-start gap-3">
-            <input type="checkbox" id="privacy-consent" name="Consenso Privacy" required class="mt-1 h-4 w-4 shrink-0 rounded border-white/20 bg-white/5 accent-acid">
+            <input type="checkbox" id="privacy-consent" name="Consenso Privacy" required class="ct-check">
             <label for="privacy-consent" class="text-xs text-white/50 leading-relaxed">
               Ho letto e accetto <button type="button" id="privacy-open" class="underline text-white/70 hover:text-acid transition-colors">l'informativa sulla privacy</button> e acconsento al trattamento dei miei dati personali per essere ricontattato in merito alla mia richiesta.
             </label>
           </div>
 
-          <button type="submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-6 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 active:scale-[0.98] transition-all">
-            Invia il messaggio
+          <button type="submit" id="form-submit" class="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-acid to-acidDeep px-6 py-3.5 font-semibold text-primary shadow-glow hover:opacity-90 active:scale-[0.98] transition-all">
+            <span class="ct-btn-text">Invia il messaggio</span>
             <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
           </button>
         </form>
@@ -1572,6 +1601,18 @@
     }
     btns.forEach(b => b.addEventListener('click', () => setFilter(b.dataset.filter)));
     window.setPortfolioFilter = setFilter;
+  })();
+</script>
+
+<script>
+  // Form contatti: stato "invio in corso" per evitare doppi invii
+  (function () {
+    const f = document.querySelector('#contatti form'), btn = document.getElementById('form-submit');
+    if (!f || !btn) return;
+    f.addEventListener('submit', () => {
+      btn.classList.add('is-sending');
+      const t = btn.querySelector('.ct-btn-text'); if (t) t.textContent = 'Invio in corso…';
+    });
   })();
 </script>
 </body>
